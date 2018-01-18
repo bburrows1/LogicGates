@@ -1,0 +1,11 @@
+Development Log
+
+18/12/17 - 9 hours - UI
+19/12/17 - 4 hours - UI Finished - Add new gates
+20/12/17 - 4 hours - Inheritance
+21/12/17 - 1 hour  - Inheritance
+24/12/17 - 6 hours - Drawing Lines
+26/12/17 - 3 hours - Connections
+28/12/17 - 5 hours - Remove Connections
+
+Total: 32 hours
