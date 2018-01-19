@@ -230,7 +230,9 @@ namespace LogicGateProject
             }
         }
     }
-
+    /// <summary>
+    /// asdasd
+    /// </summary>
     public partial class Input : LogicGates
     {
         public void SetLocations()

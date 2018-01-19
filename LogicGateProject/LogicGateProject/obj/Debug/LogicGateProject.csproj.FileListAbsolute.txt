@@ -19,3 +19,25 @@ E:\Users\Ben\Documents\Homework\Warwick homework\AComputing\C# Programs\LogicGat
 E:\Users\Ben\Documents\Homework\Warwick homework\AComputing\C# Programs\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.Output.resources
 E:\Users\Ben\Documents\Homework\Warwick homework\AComputing\C# Programs\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.Input.resources
 E:\Users\Ben\Documents\Homework\Warwick homework\AComputing\C# Programs\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.ORGate.resources
+N:\B.Burrows\My Documents\Applications\LogicGates\LogicGateProject\LogicGateProject\bin\Debug\LogicGateProject.exe.config
+N:\B.Burrows\My Documents\Applications\LogicGates\LogicGateProject\LogicGateProject\bin\Debug\LogicGateProject.exe
+N:\B.Burrows\My Documents\Applications\LogicGates\LogicGateProject\LogicGateProject\bin\Debug\LogicGateProject.pdb
+N:\B.Burrows\My Documents\Applications\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.csprojResolveAssemblyReference.cache
+N:\B.Burrows\My Documents\Applications\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.ANDGate.resources
+N:\B.Burrows\My Documents\Applications\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.Simulator.resources
+N:\B.Burrows\My Documents\Applications\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.GCSEConvert.resources
+N:\B.Burrows\My Documents\Applications\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.Input.resources
+N:\B.Burrows\My Documents\Applications\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.Menu1.resources
+N:\B.Burrows\My Documents\Applications\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.Menu2.resources
+N:\B.Burrows\My Documents\Applications\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.NANDGate.resources
+N:\B.Burrows\My Documents\Applications\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.NORGate.resources
+N:\B.Burrows\My Documents\Applications\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.NOTGate.resources
+N:\B.Burrows\My Documents\Applications\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.ORGate.resources
+N:\B.Burrows\My Documents\Applications\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.Output.resources
+N:\B.Burrows\My Documents\Applications\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.Properties.Resources.resources
+N:\B.Burrows\My Documents\Applications\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.Quiz.resources
+N:\B.Burrows\My Documents\Applications\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.XORGate.resources
+N:\B.Burrows\My Documents\Applications\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.csproj.GenerateResource.Cache
+N:\B.Burrows\My Documents\Applications\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.csproj.CoreCompileInputs.cache
+N:\B.Burrows\My Documents\Applications\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.exe
+N:\B.Burrows\My Documents\Applications\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.pdb
