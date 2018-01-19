@@ -23,9 +23,7 @@ namespace LogicGateProject
         protected Point OutLocation;
         private List<int> OutConnectionIndex = new List<int>();
         private Point MouseDownLocation;
-        /// <summary>
-        /// test
-        /// </summary>
+
         public void SetGateID()
         {
             GateID = PublicVariables.Gates.Count;
@@ -110,7 +108,7 @@ namespace LogicGateProject
             }
             else
             {
-                PublicVariables.InputPoint = Location;
+                PublicVariables.InputPoint = new Point (Location.X + this.Location.X, Location.Y + this.Location.Y);
                 PublicVariables.InputGate = this;
             }
 
@@ -167,7 +165,7 @@ namespace LogicGateProject
             }
             else
             {
-                PublicVariables.OutputPoint = Location;
+                PublicVariables.OutputPoint = new Point(Location.X + this.Location.X, Location.Y + this.Location.Y);
                 PublicVariables.OutputGate = this;
             }
 
