@@ -1,0 +1,6 @@
+E:\Users\Ben\Documents\Homework\Warwick homework\AComputing\C# Programs\BinaryConverter\BinaryConverter\bin\Debug\BinaryConverter.exe.config
+E:\Users\Ben\Documents\Homework\Warwick homework\AComputing\C# Programs\BinaryConverter\BinaryConverter\bin\Debug\BinaryConverter.exe
+E:\Users\Ben\Documents\Homework\Warwick homework\AComputing\C# Programs\BinaryConverter\BinaryConverter\bin\Debug\BinaryConverter.pdb
+E:\Users\Ben\Documents\Homework\Warwick homework\AComputing\C# Programs\BinaryConverter\BinaryConverter\obj\Debug\BinaryConverter.csprojResolveAssemblyReference.cache
+E:\Users\Ben\Documents\Homework\Warwick homework\AComputing\C# Programs\BinaryConverter\BinaryConverter\obj\Debug\BinaryConverter.exe
+E:\Users\Ben\Documents\Homework\Warwick homework\AComputing\C# Programs\BinaryConverter\BinaryConverter\obj\Debug\BinaryConverter.pdb

@@ -1,0 +1,16 @@
+N:\B.Burrows\My Documents\AWork\AComputing\A-Level\C# Programs\NoughtsandCrosses\NoughtsandCrosses\bin\Debug\NoughtsandCrosses.exe.config
+N:\B.Burrows\My Documents\AWork\AComputing\A-Level\C# Programs\NoughtsandCrosses\NoughtsandCrosses\bin\Debug\NoughtsandCrosses.exe
+N:\B.Burrows\My Documents\AWork\AComputing\A-Level\C# Programs\NoughtsandCrosses\NoughtsandCrosses\bin\Debug\NoughtsandCrosses.pdb
+N:\B.Burrows\My Documents\AWork\AComputing\A-Level\C# Programs\NoughtsandCrosses\NoughtsandCrosses\bin\Debug\IOUtils.dll
+N:\B.Burrows\My Documents\AWork\AComputing\A-Level\C# Programs\NoughtsandCrosses\NoughtsandCrosses\bin\Debug\IOUtils.pdb
+N:\B.Burrows\My Documents\AWork\AComputing\A-Level\C# Programs\NoughtsandCrosses\NoughtsandCrosses\obj\Debug\NoughtsandCrosses.csprojResolveAssemblyReference.cache
+N:\B.Burrows\My Documents\AWork\AComputing\A-Level\C# Programs\NoughtsandCrosses\NoughtsandCrosses\obj\Debug\NoughtsandCrosses.exe
+N:\B.Burrows\My Documents\AWork\AComputing\A-Level\C# Programs\NoughtsandCrosses\NoughtsandCrosses\obj\Debug\NoughtsandCrosses.pdb
+E:\Users\Ben\Documents\Homework\Warwick homework\AComputing\Programs\NoughtsandCrosses\NoughtsandCrosses\bin\Debug\NoughtsandCrosses.exe.config
+E:\Users\Ben\Documents\Homework\Warwick homework\AComputing\Programs\NoughtsandCrosses\NoughtsandCrosses\obj\Debug\NoughtsandCrosses.exe
+E:\Users\Ben\Documents\Homework\Warwick homework\AComputing\Programs\NoughtsandCrosses\NoughtsandCrosses\obj\Debug\NoughtsandCrosses.pdb
+E:\Users\Ben\Documents\Homework\Warwick homework\AComputing\Programs\NoughtsandCrosses\NoughtsandCrosses\bin\Debug\NoughtsandCrosses.exe
+E:\Users\Ben\Documents\Homework\Warwick homework\AComputing\Programs\NoughtsandCrosses\NoughtsandCrosses\bin\Debug\NoughtsandCrosses.pdb
+E:\Users\Ben\Documents\Homework\Warwick homework\AComputing\Programs\NoughtsandCrosses\NoughtsandCrosses\bin\Debug\IOUtils.dll
+E:\Users\Ben\Documents\Homework\Warwick homework\AComputing\Programs\NoughtsandCrosses\NoughtsandCrosses\bin\Debug\IOUtils.pdb
+E:\Users\Ben\Documents\Homework\Warwick homework\AComputing\Programs\NoughtsandCrosses\NoughtsandCrosses\obj\Debug\NoughtsandCrosses.csprojResolveAssemblyReference.cache
