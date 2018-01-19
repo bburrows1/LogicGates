@@ -45,4 +45,5 @@ namespace LogicGateProject
         public static List<Point> InputPoints = new List<Point>();
         public static List<Point> OutputPoints = new List<Point>();
     }
+    ///hometest
 }
