@@ -23,7 +23,9 @@ namespace LogicGateProject
         protected Point OutLocation;
         private List<int> OutConnectionIndex = new List<int>();
         private Point MouseDownLocation;
-
+        /// <summary>
+        /// test
+        /// </summary>
         public void SetGateID()
         {
             GateID = PublicVariables.Gates.Count;
@@ -230,9 +232,7 @@ namespace LogicGateProject
             }
         }
     }
-    /// <summary>
-    /// asdasd
-    /// </summary>
+
     public partial class Input : LogicGates
     {
         public void SetLocations()
