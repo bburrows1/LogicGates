@@ -1,6 +1,0 @@
-E:\Users\Ben\Documents\Homework\Warwick homework\AComputing\C# Programs\Fizz Buzz\Fizz Buzz\bin\Debug\Fizz Buzz.exe.config
-E:\Users\Ben\Documents\Homework\Warwick homework\AComputing\C# Programs\Fizz Buzz\Fizz Buzz\bin\Debug\Fizz Buzz.exe
-E:\Users\Ben\Documents\Homework\Warwick homework\AComputing\C# Programs\Fizz Buzz\Fizz Buzz\bin\Debug\Fizz Buzz.pdb
-E:\Users\Ben\Documents\Homework\Warwick homework\AComputing\C# Programs\Fizz Buzz\Fizz Buzz\obj\Debug\Fizz Buzz.csprojResolveAssemblyReference.cache
-E:\Users\Ben\Documents\Homework\Warwick homework\AComputing\C# Programs\Fizz Buzz\Fizz Buzz\obj\Debug\Fizz Buzz.exe
-E:\Users\Ben\Documents\Homework\Warwick homework\AComputing\C# Programs\Fizz Buzz\Fizz Buzz\obj\Debug\Fizz Buzz.pdb

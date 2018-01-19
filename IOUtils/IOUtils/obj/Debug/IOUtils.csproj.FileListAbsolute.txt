@@ -1,5 +1,0 @@
-N:\B.Burrows\My Documents\AWork\AComputing\A-Level\C# Programs\IOUtils\IOUtils\bin\Debug\IOUtils.dll
-N:\B.Burrows\My Documents\AWork\AComputing\A-Level\C# Programs\IOUtils\IOUtils\bin\Debug\IOUtils.pdb
-N:\B.Burrows\My Documents\AWork\AComputing\A-Level\C# Programs\IOUtils\IOUtils\obj\Debug\IOUtils.csprojResolveAssemblyReference.cache
-N:\B.Burrows\My Documents\AWork\AComputing\A-Level\C# Programs\IOUtils\IOUtils\obj\Debug\IOUtils.dll
-N:\B.Burrows\My Documents\AWork\AComputing\A-Level\C# Programs\IOUtils\IOUtils\obj\Debug\IOUtils.pdb

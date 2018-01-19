@@ -1,6 +1,0 @@
-E:\Users\Ben\Documents\Homework\Warwick homework\AComputing\C# Programs\Euler Project\4\4\bin\Debug\4.exe.config
-E:\Users\Ben\Documents\Homework\Warwick homework\AComputing\C# Programs\Euler Project\4\4\bin\Debug\4.exe
-E:\Users\Ben\Documents\Homework\Warwick homework\AComputing\C# Programs\Euler Project\4\4\bin\Debug\4.pdb
-E:\Users\Ben\Documents\Homework\Warwick homework\AComputing\C# Programs\Euler Project\4\4\obj\Debug\4.csprojResolveAssemblyReference.cache
-E:\Users\Ben\Documents\Homework\Warwick homework\AComputing\C# Programs\Euler Project\4\4\obj\Debug\4.exe
-E:\Users\Ben\Documents\Homework\Warwick homework\AComputing\C# Programs\Euler Project\4\4\obj\Debug\4.pdb
