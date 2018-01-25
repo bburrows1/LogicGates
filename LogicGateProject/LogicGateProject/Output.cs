@@ -33,7 +33,7 @@ namespace LogicGateProject
         private void In_Click(object sender, EventArgs e)
         {
             PublicVariables.IsTop = true;
-            InputClick(sender, e, TopInLocation, true);
+            InputClick(sender, e);
         }
     }
 }

@@ -134,6 +134,18 @@ namespace LogicGateProject
 
         private void DesignerPanel_Paint(object sender, PaintEventArgs e)
         {
+            PublicVariables.InputPoints.Clear();
+
+            foreach (LogicGates Gate in PublicVariables.Gates)
+            {
+                if (!Gate.Traversed)
+                    Gate.Traverse();
+            }
+            foreach (LogicGates Gate in PublicVariables.Gates)
+            {
+                Gate.Traversed = false;
+            }
+
             for (int i = 0; i < PublicVariables.InputPoints.Count; i++)
             {
                 int MidPoint = (PublicVariables.InputPoints[i].X + PublicVariables.OutputPoints[i].X) / 2;

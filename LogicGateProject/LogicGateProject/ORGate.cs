@@ -38,19 +38,19 @@ namespace LogicGateProject
 
         private void Out_Click(object sender, EventArgs e)
         {
-            OutputClick(sender, e, OutLocation);
+            OutputClick(sender, e);
         }
 
         private void TopButton_Click(object sender, EventArgs e)
         {
             PublicVariables.IsTop = true;
-            InputClick(sender, e, TopInLocation, true);
+            InputClick(sender, e);
         }
 
         private void BottomButton_Click(object sender, EventArgs e)
         {
             PublicVariables.IsTop = false;
-            InputClick(sender, e, BotInLocation, false);
+            InputClick(sender, e);
         }
     }
 }

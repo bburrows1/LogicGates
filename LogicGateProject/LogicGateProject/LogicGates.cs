@@ -23,6 +23,7 @@ namespace LogicGateProject
         protected Point OutLocation;
         private List<int> OutConnectionIndex = new List<int>();
         private Point MouseDownLocation;
+        public bool Traversed;
 
         public void SetGateID()
         {
@@ -48,6 +49,7 @@ namespace LogicGateProject
                 if ((e.X + this.Left - MouseDownLocation.X) >= 0 && (e.X + this.Left - MouseDownLocation.X) <= 1009)
                 {
                     this.Left += e.X - MouseDownLocation.X;
+                    /*
                     if (TopInConnection != null)
                     {
                         Point Point = PublicVariables.InputPoints[TopInConnectionIndex];
@@ -69,10 +71,12 @@ namespace LogicGateProject
                             PublicVariables.OutputPoints[Index] = Point;
                         }
                     }
+                    */
                 }
                 if ((e.Y + this.Top - MouseDownLocation.Y) >= 0 && (e.Y + this.Top - MouseDownLocation.Y) <= 719)
                 {
                     this.Top += e.Y - MouseDownLocation.Y;
+                    /*
                     if (TopInConnection != null)
                     {
                         Point Point = PublicVariables.InputPoints[TopInConnectionIndex];
@@ -94,23 +98,74 @@ namespace LogicGateProject
                             PublicVariables.OutputPoints[Index] = Point;
                         }
                     }
+                    */
                 }
                 PublicVariables.Simulator.Invalidate();
             }
         }
 
-        public void InputClick(object sender, EventArgs e, Point Location, bool IsTop)
+        public void UpdateLocations()
         {
-            if (PublicVariables.InputGate == this)
+            TopInLocation = new Point(this.Location.X + TopInLocation.X, this.Location.Y + TopInLocation.Y);
+            BotInLocation = new Point(this.Location.X + BotInLocation.X, this.Location.Y + BotInLocation.Y);
+            TopInLocation = new Point(this.Location.X + TopInLocation.X, this.Location.Y + TopInLocation.Y);
+        }
+
+        public bool IsValidInput(LogicGates Input, LogicGates Output, bool IsTop)
+        {
+            if (Output != null && Input != Output)
+            {
+                if (IsTop)
+                {
+                    if (Input.TopInConnection != Output)
+                    {
+                        return true;
+                    }
+                }
+                else
+                {
+                    if (Input.BotInConnection != Output)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        public void InputClick(object sender, EventArgs e)
+        {
+            if (PublicVariables.InputGate != this)
+            {
+                PublicVariables.InputGate = this;
+            }
+            else
             {
                 PublicVariables.InputGate = null;
                 return;
             }
-            else
+            if (IsValidInput(PublicVariables.InputGate, PublicVariables.OutputGate, PublicVariables.IsTop))
             {
-                PublicVariables.InputPoint = new Point (Location.X + this.Location.X, Location.Y + this.Location.Y);
-                PublicVariables.InputGate = this;
+                PublicVariables.InputGate.RemoveConnection(PublicVariables.InputGate, PublicVariables.IsTop);
+                PublicVariables.InputGate.CreateConnection(PublicVariables.InputGate, PublicVariables.OutputGate, PublicVariables.IsTop);
+                PublicVariables.Simulator.Invalidate();
             }
+
+            /*
+            if (thisclick)
+            {
+                if (PublicVariables.InputGate == this)
+                {
+                    PublicVariables.InputGate = null;
+                    return;
+                }
+                else
+                {
+                    PublicVariables.InputPoint = new Point (Location.X + this.Location.X, Location.Y + this.Location.Y);
+                    PublicVariables.InputGate = this;
+                }
+            }
+
 
             if (PublicVariables.OutputGate != null && PublicVariables.InputGate != PublicVariables.OutputGate)
             {
@@ -119,6 +174,7 @@ namespace LogicGateProject
                 {
                     if (TopInConnection != null)
                     {
+                        TopInConnection.OutConnectionIndex.Remove(TopInConnectionIndex);
                         RemoveConnection(TopInConnectionIndex);
                         TopInConnection.OutConnection.Remove(this);
                         TopInConnection = null;
@@ -128,6 +184,7 @@ namespace LogicGateProject
                 {
                     if (BotInConnection != null)
                     {
+                        BotInConnection.OutConnectionIndex.Remove(BotInConnectionIndex);
                         RemoveConnection(BotInConnectionIndex);
                         BotInConnection.OutConnection.Remove(this);
                         BotInConnection = null;
@@ -154,10 +211,40 @@ namespace LogicGateProject
                 PublicVariables.OutputGate = null;
                 PublicVariables.Simulator.Invalidate();
             }
+            */
         }
 
-        public void OutputClick(object sender, EventArgs e, Point Location)
+        public bool IsValidOutput(LogicGates Input, LogicGates Output)
         {
+            if (Input != null && Input != Output)
+            {
+                if(!Output.OutConnection.Contains(Input))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public void OutputClick(object sender, EventArgs e)
+        {
+            if (PublicVariables.OutputGate != this)
+            {
+                PublicVariables.OutputGate = this;
+            }
+            else
+            {
+                PublicVariables.OutputGate = null;
+                return;
+            }
+            if (IsValidOutput(PublicVariables.InputGate, PublicVariables.OutputGate))
+            {
+                PublicVariables.InputGate.RemoveConnection(PublicVariables.InputGate, PublicVariables.IsTop);
+                PublicVariables.InputGate.CreateConnection(PublicVariables.InputGate, PublicVariables.OutputGate, PublicVariables.IsTop);
+                PublicVariables.Simulator.Invalidate();
+            }
+
+            /*
             if (PublicVariables.OutputGate == this)
             {
                 PublicVariables.OutputGate = null;
@@ -172,7 +259,7 @@ namespace LogicGateProject
             if (PublicVariables.InputGate != null && PublicVariables.InputGate != PublicVariables.OutputGate)
             {
                 //Delete old connection
-                if (PublicVariables.IsTop)
+                if (PublicVariables.InputGate.)
                 {
                     if (PublicVariables.InputGate.TopInConnection != null)
                     {
@@ -210,8 +297,43 @@ namespace LogicGateProject
                 PublicVariables.OutputGate = null;
                 PublicVariables.Simulator.Invalidate();
             }
+            */
         }
 
+
+        public void RemoveConnection(LogicGates Input, bool IsTop)
+        {
+            if (IsTop)
+            {
+                if (Input.TopInConnection != null)
+                {
+                    Input.TopInConnection.OutConnection.Remove(Input);
+                    Input.TopInConnection = null;
+                }
+            }
+            else
+            {
+                if (Input.BotInConnection != null)
+                {
+                    Input.BotInConnection.OutConnection.Remove(Input);
+                    Input.BotInConnection = null;
+                }
+            }
+        }
+
+        public void CreateConnection(LogicGates Input, LogicGates Output, bool IsTop)
+        {
+            if (IsTop)
+            {
+                Input.TopInConnection = Output;
+            }
+            else
+            {
+                Input.BotInConnection = Output;
+            }
+            Output.OutConnection.Add(Input);
+        }
+        /*
         public void RemoveConnection(int Index)
         {
             PublicVariables.InputPoints.RemoveAt(Index);
@@ -229,13 +351,37 @@ namespace LogicGateProject
                     Gate.BotInConnectionIndex--;
             }
         }
+        */
+        public void Traverse()
+        {
+            this.UpdateLocations();
+            Traversed = true;
+            if (TopInConnection != null)
+            {
+                if (!TopInConnection.Traversed)
+                    TopInConnection.Traverse();
+                PublicVariables.InputPoints.Add(TopInLocation);
+            }
+            if (BotInConnection != null)
+            {
+                if (!BotInConnection.Traversed)
+                    BotInConnection.Traverse();
+                PublicVariables.InputPoints.Add(BotInLocation);
+            }
+            foreach (LogicGates Output in OutConnection)
+            {
+                if (!Output.Traversed)
+                    Output.Traverse();
+                PublicVariables.OutputPoints.Add(OutLocation);
+            }
+        }
     }
 
     public partial class Input : LogicGates
     {
         public void SetLocations()
         {
-            OutLocation = new Point(this.Location.X + 130, this.Location.Y + 37);
+            OutLocation = new Point(130, 37);
         }
     }
 
@@ -243,7 +389,7 @@ namespace LogicGateProject
     {
         public void SetLocations()
         {
-            TopInLocation = new Point(this.Location.X + 5, this.Location.Y + 37);
+            TopInLocation = new Point(5, 37);
         }
     }
 
@@ -251,9 +397,9 @@ namespace LogicGateProject
     {
         public void SetLocations()
         {
-            TopInLocation = new Point(this.Location.X + 5, this.Location.Y + 25);
-            BotInLocation = new Point(this.Location.X + 5, this.Location.Y + 64);
-            OutLocation = new Point(this.Location.X + 125, this.Location.Y + 45);
+            TopInLocation = new Point(5, 25);
+            BotInLocation = new Point(5, 64);
+            OutLocation = new Point(125, 45);
         }
     }
 
@@ -261,9 +407,9 @@ namespace LogicGateProject
     {
         public void SetLocations()
         {
-            TopInLocation = new Point(this.Location.X + 5, this.Location.Y + 25);
-            BotInLocation = new Point(this.Location.X + 5, this.Location.Y + 64);
-            OutLocation = new Point(this.Location.X + 125, this.Location.Y + 45);
+            TopInLocation = new Point(5, 25);
+            BotInLocation = new Point(5, 64);
+            OutLocation = new Point(125, 45);
         }
     }
 
@@ -271,8 +417,8 @@ namespace LogicGateProject
     {
         public void SetLocations()
         {
-            TopInLocation = new Point(this.Location.X + 5, this.Location.Y + 25);
-            OutLocation = new Point(this.Location.X + 125, this.Location.Y + 45);
+            TopInLocation = new Point(5, 25);
+            OutLocation = new Point(125, 45);
         }
     }
 
@@ -280,9 +426,9 @@ namespace LogicGateProject
     {
         public void SetLocations()
         {
-            TopInLocation = new Point(this.Location.X + 5, this.Location.Y + 24);
-            BotInLocation = new Point(this.Location.X + 5, this.Location.Y + 62);
-            OutLocation = new Point(this.Location.X + 125, this.Location.Y + 43);
+            TopInLocation = new Point(5, 24);
+            BotInLocation = new Point(5, 62);
+            OutLocation = new Point(125, 43);
         }
     }
 
@@ -290,9 +436,9 @@ namespace LogicGateProject
     {
         public void SetLocations()
         {
-            TopInLocation = new Point(this.Location.X + 5, this.Location.Y + 25);
-            BotInLocation = new Point(this.Location.X + 5, this.Location.Y + 64);
-            OutLocation = new Point(this.Location.X + 125, this.Location.Y + 45);
+            TopInLocation = new Point(5, 25);
+            BotInLocation = new Point(5, 64);
+            OutLocation = new Point(125, 45);
         }
     }
 
@@ -300,9 +446,9 @@ namespace LogicGateProject
     {
         public void SetLocations()
         {
-            TopInLocation = new Point(this.Location.X + 5, this.Location.Y + 25);
-            BotInLocation = new Point(this.Location.X + 5, this.Location.Y + 64);
-            OutLocation = new Point(this.Location.X + 125, this.Location.Y + 45);
+            TopInLocation = new Point(5, 25);
+            BotInLocation = new Point(5, 64);
+            OutLocation = new Point(125, 45);
         }
     }
 }

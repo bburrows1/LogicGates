@@ -32,7 +32,7 @@ namespace LogicGateProject
 
         private void Out_Click(object sender, EventArgs e)
         {
-            OutputClick(sender, e, OutLocation);
+            OutputClick(sender, e);
         }
     }
 }
