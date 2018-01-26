@@ -177,6 +177,7 @@ namespace LogicGateProject
                         TopInConnection.OutConnectionIndex.Remove(TopInConnectionIndex);
                         RemoveConnection(TopInConnectionIndex);
                         TopInConnection.OutConnection.Remove(this);
+                        TopInConnection.OutConnectionIndex.Remove(TopInConnectionIndex);
                         TopInConnection = null;
                     }
                 }
@@ -187,6 +188,7 @@ namespace LogicGateProject
                         BotInConnection.OutConnectionIndex.Remove(BotInConnectionIndex);
                         RemoveConnection(BotInConnectionIndex);
                         BotInConnection.OutConnection.Remove(this);
+                        BotInConnection.OutConnectionIndex.Remove(BotInConnectionIndex);
                         BotInConnection = null;
                     }
                 }
