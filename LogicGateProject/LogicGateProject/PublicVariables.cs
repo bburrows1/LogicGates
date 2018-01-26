@@ -35,12 +35,9 @@ namespace LogicGateProject
         //Stores connections between gates
         public static LogicGates InputGate = null;
         public static LogicGates OutputGate = null;
-        public static List<bool> IsTopList = new List<bool>();
         public static bool IsTop;
 
         //Stores points for joining lines and Pen
-//        public static Point InputPoint;
-//        public static Point OutputPoint;
         public static Pen Linepen = new Pen(Color.Black, 4);
         public static List<Point> InputPoints = new List<Point>();
         public static List<Point> OutputPoints = new List<Point>();

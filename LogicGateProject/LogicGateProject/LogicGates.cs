@@ -12,25 +12,20 @@ namespace LogicGateProject
 {
     public class LogicGates : UserControl
     {
-        private int GateID;
         private LogicGates TopInConnection;
         private LogicGates BotInConnection;
         private List<LogicGates> OutConnection = new List<LogicGates>();
-        private int TopInConnectionIndex = -1;
-        private int BotInConnectionIndex = -1;
         private Point TopInLocation;
         private Point BotInLocation;
         private Point OutLocation;
         protected Point TopInMarker;
         protected Point BotInMarker;
         protected Point OutMarker;
-        private List<int> OutConnectionIndex = new List<int>();
         private Point MouseDownLocation;
         public bool Traversed;
 
         public void SetGateID()
         {
-            GateID = PublicVariables.Gates.Count;
             PublicVariables.Gates.Add(this);
             BackColor = System.Drawing.Color.Transparent;
             Location = new System.Drawing.Point(0, 0);
@@ -54,57 +49,11 @@ namespace LogicGateProject
                 {
                     this.Left += e.X - MouseDownLocation.X;
                     this.UpdateLocations();
-                    /*
-                    if (TopInConnection != null)
-                    {
-                        Point Point = PublicVariables.InputPoints[TopInConnectionIndex];
-                        Point.X += e.X - MouseDownLocation.X;
-                        PublicVariables.InputPoints[TopInConnectionIndex] = Point;
-                    }
-                    if (BotInConnection != null)
-                    {
-                        Point Point = PublicVariables.InputPoints[BotInConnectionIndex];
-                        Point.X += e.X - MouseDownLocation.X;
-                        PublicVariables.InputPoints[BotInConnectionIndex] = Point;
-                    }
-                    if (OutConnection != null)
-                    {
-                        foreach (int Index in OutConnectionIndex)
-                        {
-                            Point Point = PublicVariables.OutputPoints[Index];
-                            Point.X += e.X - MouseDownLocation.X;
-                            PublicVariables.OutputPoints[Index] = Point;
-                        }
-                    }
-                    */
                 }
                 if ((e.Y + this.Top - MouseDownLocation.Y) >= 0 && (e.Y + this.Top - MouseDownLocation.Y) <= 719)
                 {
                     this.Top += e.Y - MouseDownLocation.Y;
                     this.UpdateLocations();
-                    /*
-                    if (TopInConnection != null)
-                    {
-                        Point Point = PublicVariables.InputPoints[TopInConnectionIndex];
-                        Point.Y += e.Y - MouseDownLocation.Y;
-                        PublicVariables.InputPoints[TopInConnectionIndex] = Point;
-                    }
-                    if (BotInConnection != null)
-                    {
-                        Point Point = PublicVariables.InputPoints[BotInConnectionIndex];
-                        Point.Y += e.Y - MouseDownLocation.Y;
-                        PublicVariables.InputPoints[BotInConnectionIndex] = Point;
-                    }
-                    if (OutConnection != null)
-                    {
-                        foreach (int Index in OutConnectionIndex)
-                        {
-                            Point Point = PublicVariables.OutputPoints[Index];
-                            Point.Y += e.Y - MouseDownLocation.Y;
-                            PublicVariables.OutputPoints[Index] = Point;
-                        }
-                    }
-                    */
                 }
                 PublicVariables.Simulator.Invalidate();
             }
@@ -156,70 +105,6 @@ namespace LogicGateProject
                 PublicVariables.InputGate.CreateConnection(PublicVariables.InputGate, PublicVariables.OutputGate, PublicVariables.IsTop);
                 PublicVariables.Simulator.Invalidate();
             }
-
-            /*
-            if (thisclick)
-            {
-                if (PublicVariables.InputGate == this)
-                {
-                    PublicVariables.InputGate = null;
-                    return;
-                }
-                else
-                {
-                    PublicVariables.InputPoint = new Point (Location.X + this.Location.X, Location.Y + this.Location.Y);
-                    PublicVariables.InputGate = this;
-                }
-            }
-
-
-            if (PublicVariables.OutputGate != null && PublicVariables.InputGate != PublicVariables.OutputGate)
-            {
-                //Delete old connection
-                if (IsTop)
-                {
-                    if (TopInConnection != null)
-                    {
-                        TopInConnection.OutConnectionIndex.Remove(TopInConnectionIndex);
-                        RemoveConnection(TopInConnectionIndex);
-                        TopInConnection.OutConnection.Remove(this);
-                        TopInConnection.OutConnectionIndex.Remove(TopInConnectionIndex);
-                        TopInConnection = null;
-                    }
-                }
-                else
-                {
-                    if (BotInConnection != null)
-                    {
-                        BotInConnection.OutConnectionIndex.Remove(BotInConnectionIndex);
-                        RemoveConnection(BotInConnectionIndex);
-                        BotInConnection.OutConnection.Remove(this);
-                        BotInConnection.OutConnectionIndex.Remove(BotInConnectionIndex);
-                        BotInConnection = null;
-                    }
-                }
-
-                //Add new connection
-                PublicVariables.InputPoints.Add(PublicVariables.InputPoint);
-                PublicVariables.OutputPoints.Add(PublicVariables.OutputPoint);
-                PublicVariables.IsTopList.Add(IsTop);
-                if (IsTop)
-                {
-                    TopInConnection = PublicVariables.OutputGate;
-                    TopInConnectionIndex = PublicVariables.InputPoints.Count - 1;
-                }
-                else
-                {
-                    BotInConnection = PublicVariables.OutputGate;
-                    BotInConnectionIndex = PublicVariables.InputPoints.Count - 1;
-                }
-                PublicVariables.OutputGate.OutConnection.Add(this);
-                PublicVariables.OutputGate.OutConnectionIndex.Add(PublicVariables.InputPoints.Count - 1);
-                PublicVariables.InputGate = null;
-                PublicVariables.OutputGate = null;
-                PublicVariables.Simulator.Invalidate();
-            }
-            */
         }
 
         public bool IsValidOutput(LogicGates Input, LogicGates Output)
@@ -251,63 +136,22 @@ namespace LogicGateProject
                 PublicVariables.InputGate.CreateConnection(PublicVariables.InputGate, PublicVariables.OutputGate, PublicVariables.IsTop);
                 PublicVariables.Simulator.Invalidate();
             }
+        }
 
-            /*
-            if (PublicVariables.OutputGate == this)
+        public void CreateConnection(LogicGates Input, LogicGates Output, bool IsTop)
+        {
+            if (IsTop)
             {
-                PublicVariables.OutputGate = null;
-                return;
+                Input.TopInConnection = Output;
             }
             else
             {
-                PublicVariables.OutputPoint = new Point(Location.X + this.Location.X, Location.Y + this.Location.Y);
-                PublicVariables.OutputGate = this;
+                Input.BotInConnection = Output;
             }
-
-            if (PublicVariables.InputGate != null && PublicVariables.InputGate != PublicVariables.OutputGate)
-            {
-                //Delete old connection
-                if (PublicVariables.InputGate.)
-                {
-                    if (PublicVariables.InputGate.TopInConnection != null)
-                    {
-                        RemoveConnection(PublicVariables.InputGate.TopInConnectionIndex);
-                        PublicVariables.InputGate.TopInConnection.OutConnection.Remove(PublicVariables.InputGate);
-                        PublicVariables.InputGate.TopInConnection = null;
-                    }
-                }
-                else
-                {
-                    if (PublicVariables.InputGate.BotInConnection != null)
-                    {
-                        RemoveConnection(PublicVariables.InputGate.BotInConnectionIndex);
-                        PublicVariables.InputGate.BotInConnection.OutConnection.Remove(PublicVariables.InputGate);
-                        PublicVariables.InputGate.BotInConnection = null;
-                    }
-                }
-
-                //Add new connection
-                PublicVariables.InputPoints.Add(PublicVariables.InputPoint);
-                PublicVariables.OutputPoints.Add(PublicVariables.OutputPoint);
-                PublicVariables.IsTopList.Add(PublicVariables.IsTop);
-                if (PublicVariables.IsTop)
-                {
-                    PublicVariables.InputGate.TopInConnection = this;
-                    PublicVariables.InputGate.TopInConnectionIndex = PublicVariables.InputPoints.Count - 1;
-                }
-                else
-                {
-                    PublicVariables.InputGate.BotInConnection = this;
-                    PublicVariables.InputGate.BotInConnectionIndex = PublicVariables.InputPoints.Count - 1;
-                }
-                OutConnection.Add(PublicVariables.InputGate);
-                PublicVariables.InputGate = null;
-                PublicVariables.OutputGate = null;
-                PublicVariables.Simulator.Invalidate();
-            }
-            */
+            Output.OutConnection.Add(Input);
+            PublicVariables.InputGate = null;
+            PublicVariables.OutputGate = null;
         }
-
 
         public void RemoveConnection(LogicGates Input, bool IsTop)
         {
@@ -329,37 +173,8 @@ namespace LogicGateProject
             }
         }
 
-        public void CreateConnection(LogicGates Input, LogicGates Output, bool IsTop)
-        {
-            if (IsTop)
-            {
-                Input.TopInConnection = Output;
-            }
-            else
-            {
-                Input.BotInConnection = Output;
-            }
-            Output.OutConnection.Add(Input);
-        }
-        /*
-        public void RemoveConnection(int Index)
-        {
-            PublicVariables.InputPoints.RemoveAt(Index);
-            PublicVariables.OutputPoints.RemoveAt(Index);
-            foreach (LogicGates Gate in PublicVariables.Gates)
-            {
-                for (int i = 0; i < Gate.OutConnectionIndex.Count; i++)
-                {
-                    if (Gate.OutConnectionIndex[i] > Index)
-                        Gate.OutConnectionIndex[i]--;
-                }
-                if (Gate.TopInConnectionIndex > Index)
-                    Gate.TopInConnectionIndex--;
-                if (Gate.BotInConnectionIndex > Index)
-                    Gate.BotInConnectionIndex--;
-            }
-        }
-        */
+
+
         public void Traverse()
         {
             Traversed = true;
