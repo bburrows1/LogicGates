@@ -135,6 +135,7 @@ namespace LogicGateProject
         private void DesignerPanel_Paint(object sender, PaintEventArgs e)
         {
             PublicVariables.InputPoints.Clear();
+            PublicVariables.OutputPoints.Clear();
 
             foreach (LogicGates Gate in PublicVariables.Gates)
             {
