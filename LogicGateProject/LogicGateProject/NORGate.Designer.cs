@@ -58,6 +58,7 @@
             this.TopButton.Size = new System.Drawing.Size(75, 46);
             this.TopButton.TabIndex = 1;
             this.TopButton.UseVisualStyleBackColor = false;
+            this.TopButton.Click += new System.EventHandler(this.TopButton_Click);
             // 
             // BottomButton
             // 
@@ -68,6 +69,7 @@
             this.BottomButton.Size = new System.Drawing.Size(75, 46);
             this.BottomButton.TabIndex = 2;
             this.BottomButton.UseVisualStyleBackColor = false;
+            this.BottomButton.Click += new System.EventHandler(this.BottomButton_Click);
             // 
             // Out
             // 
@@ -80,6 +82,7 @@
             this.Out.Size = new System.Drawing.Size(75, 89);
             this.Out.TabIndex = 3;
             this.Out.UseVisualStyleBackColor = false;
+            this.Out.Click += new System.EventHandler(this.Out_Click);
             // 
             // DragBox
             // 

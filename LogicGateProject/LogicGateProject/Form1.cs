@@ -74,6 +74,7 @@ namespace LogicGateProject
             Input.SetGateID();
             Input.SetLocations();
             this.DesignerPanel.Controls.Add(Input);
+            Input.UpdateLocations();
         }
 
         private void AddAND_Click(object sender, EventArgs e)
@@ -82,6 +83,7 @@ namespace LogicGateProject
             ANDGate.SetGateID();
             ANDGate.SetLocations();
             this.DesignerPanel.Controls.Add(ANDGate);
+            ANDGate.UpdateLocations();
         }
 
         private void AddOR_Click(object sender, EventArgs e)
@@ -90,6 +92,7 @@ namespace LogicGateProject
             ORGate.SetGateID();
             ORGate.SetLocations();
             this.DesignerPanel.Controls.Add(ORGate);
+            ORGate.UpdateLocations();
         }
 
         private void AddNAND_Click(object sender, EventArgs e)
@@ -98,6 +101,7 @@ namespace LogicGateProject
             NANDGate.SetGateID();
             NANDGate.SetLocations();
             this.DesignerPanel.Controls.Add(NANDGate);
+            NANDGate.UpdateLocations();
         }
 
         private void AddNOR_Click(object sender, EventArgs e)
@@ -106,6 +110,7 @@ namespace LogicGateProject
             NORGate.SetGateID();
             NORGate.SetLocations();
             this.DesignerPanel.Controls.Add(NORGate);
+            NORGate.UpdateLocations();
         }
 
         private void AddXOR_Click(object sender, EventArgs e)
@@ -114,6 +119,7 @@ namespace LogicGateProject
             XORGate.SetGateID();
             XORGate.SetLocations();
             this.DesignerPanel.Controls.Add(XORGate);
+            XORGate.UpdateLocations();
         }
 
         private void AddNOT_Click(object sender, EventArgs e)
@@ -122,6 +128,7 @@ namespace LogicGateProject
             NOTGate.SetGateID();
             NOTGate.SetLocations();
             this.DesignerPanel.Controls.Add(NOTGate);
+            NOTGate.UpdateLocations();
         }
 
         private void AddOutput_Click(object sender, EventArgs e)
@@ -130,6 +137,7 @@ namespace LogicGateProject
             Output.SetGateID();
             Output.SetLocations();
             this.DesignerPanel.Controls.Add(Output);
+            Output.UpdateLocations();
         }
 
         private void DesignerPanel_Paint(object sender, PaintEventArgs e)

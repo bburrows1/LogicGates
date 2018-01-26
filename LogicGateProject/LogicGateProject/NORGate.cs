@@ -35,5 +35,22 @@ namespace LogicGateProject
         {
             MouseMoved(sender, e);
         }
+
+        private void Out_Click(object sender, EventArgs e)
+        {
+            OutputClick(sender, e);
+        }
+
+        private void TopButton_Click(object sender, EventArgs e)
+        {
+            PublicVariables.IsTop = true;
+            InputClick(sender, e);
+        }
+
+        private void BottomButton_Click(object sender, EventArgs e)
+        {
+            PublicVariables.IsTop = false;
+            InputClick(sender, e);
+        }
     }
 }

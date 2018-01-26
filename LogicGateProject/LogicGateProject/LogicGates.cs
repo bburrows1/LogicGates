@@ -12,9 +12,9 @@ namespace LogicGateProject
 {
     public class LogicGates : UserControl
     {
-        private LogicGates TopInConnection;
-        private LogicGates BotInConnection;
-        private List<LogicGates> OutConnection = new List<LogicGates>();
+        protected LogicGates TopInConnection;
+        protected LogicGates BotInConnection;
+        protected List<LogicGates> OutConnection = new List<LogicGates>();
         private Point TopInLocation;
         private Point BotInLocation;
         private Point OutLocation;
@@ -30,7 +30,6 @@ namespace LogicGateProject
             BackColor = System.Drawing.Color.Transparent;
             Location = new System.Drawing.Point(0, 0);
             Size = new System.Drawing.Size(131, 93);
-            this.UpdateLocations();
         }
 
         public void Down(object sender, MouseEventArgs e)
@@ -173,8 +172,6 @@ namespace LogicGateProject
             }
         }
 
-
-
         public void Traverse()
         {
             Traversed = true;
@@ -211,13 +208,25 @@ namespace LogicGateProject
                 }
             }
         }
+        public virtual void UpdateLogic(bool Input)
+        {
+        }
     }
+
 
     public partial class Input : LogicGates
     {
         public void SetLocations()
         {
             OutMarker = new Point(130, 37);
+        }
+
+        public override void UpdateLogic(bool Input)
+        {
+            foreach (LogicGates Gate in OutConnection)
+            {
+                Gate.UpdateLogic(Input);
+            }
         }
     }
 
@@ -226,6 +235,18 @@ namespace LogicGateProject
         public void SetLocations()
         {
             TopInMarker = new Point(5, 37);
+        }
+
+        public override void UpdateLogic(bool Input)
+        {
+            if(Input)
+            {
+                OutputBox.BackColor = Color.Green;
+            }
+            else if (!Input)
+            {
+                OutputBox.BackColor = Color.Red;
+            }
         }
     }
 
@@ -236,6 +257,10 @@ namespace LogicGateProject
             TopInMarker = new Point(5, 25);
             BotInMarker = new Point(5, 64);
             OutMarker = new Point(125, 45);
+        }
+        public override void UpdateLogic(bool Input)
+        {
+
         }
     }
 
@@ -253,8 +278,8 @@ namespace LogicGateProject
     {
         public void SetLocations()
         {
-            TopInMarker = new Point(5, 25);
-            OutMarker = new Point(125, 45);
+            TopInMarker = new Point(5, 43);
+            OutMarker = new Point(125, 43);
         }
     }
 
@@ -273,8 +298,8 @@ namespace LogicGateProject
         public void SetLocations()
         {
             TopInMarker = new Point(5, 25);
-            BotInMarker = new Point(5, 64);
-            OutMarker = new Point(125, 45);
+            BotInMarker = new Point(5, 63);
+            OutMarker = new Point(125, 44);
         }
     }
 
@@ -282,9 +307,9 @@ namespace LogicGateProject
     {
         public void SetLocations()
         {
-            TopInMarker = new Point(5, 25);
-            BotInMarker = new Point(5, 64);
-            OutMarker = new Point(125, 45);
+            TopInMarker = new Point(5, 24);
+            BotInMarker = new Point(5, 63);
+            OutMarker = new Point(125, 43);
         }
     }
 }

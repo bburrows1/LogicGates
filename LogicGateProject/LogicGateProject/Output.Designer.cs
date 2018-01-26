@@ -28,29 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.Result = new System.Windows.Forms.Label();
             this.DragBox = new System.Windows.Forms.PictureBox();
             this.In = new System.Windows.Forms.Button();
             this.Gate = new System.Windows.Forms.PictureBox();
+            this.OutputBox = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.DragBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Gate)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.OutputBox)).BeginInit();
             this.SuspendLayout();
-            // 
-            // Result
-            // 
-            this.Result.AutoSize = true;
-            this.Result.Font = new System.Drawing.Font("Century Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Result.Location = new System.Drawing.Point(64, 22);
-            this.Result.Name = "Result";
-            this.Result.Size = new System.Drawing.Size(0, 30);
-            this.Result.TabIndex = 5;
             // 
             // DragBox
             // 
+            this.DragBox.BackColor = System.Drawing.Color.Transparent;
             this.DragBox.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.DragBox.Location = new System.Drawing.Point(43, 4);
+            this.DragBox.Location = new System.Drawing.Point(45, 4);
             this.DragBox.Name = "DragBox";
-            this.DragBox.Size = new System.Drawing.Size(66, 65);
+            this.DragBox.Size = new System.Drawing.Size(64, 66);
             this.DragBox.TabIndex = 4;
             this.DragBox.TabStop = false;
             this.DragBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.DragBox_MouseDown);
@@ -80,12 +73,21 @@
             this.Gate.TabIndex = 0;
             this.Gate.TabStop = false;
             // 
+            // OutputBox
+            // 
+            this.OutputBox.BackColor = System.Drawing.Color.DimGray;
+            this.OutputBox.Location = new System.Drawing.Point(62, 23);
+            this.OutputBox.Name = "OutputBox";
+            this.OutputBox.Size = new System.Drawing.Size(30, 30);
+            this.OutputBox.TabIndex = 5;
+            this.OutputBox.TabStop = false;
+            // 
             // Output
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
-            this.Controls.Add(this.Result);
+            this.Controls.Add(this.OutputBox);
             this.Controls.Add(this.DragBox);
             this.Controls.Add(this.In);
             this.Controls.Add(this.Gate);
@@ -93,6 +95,7 @@
             this.Size = new System.Drawing.Size(150, 89);
             ((System.ComponentModel.ISupportInitialize)(this.DragBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Gate)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.OutputBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -103,6 +106,6 @@
         private System.Windows.Forms.PictureBox Gate;
         private System.Windows.Forms.Button In;
         private System.Windows.Forms.PictureBox DragBox;
-        private System.Windows.Forms.Label Result;
+        private System.Windows.Forms.PictureBox OutputBox;
     }
 }

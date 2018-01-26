@@ -28,13 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.Out = new System.Windows.Forms.Button();
             this.DragBox = new System.Windows.Forms.PictureBox();
+            this.Out = new System.Windows.Forms.Button();
             this.Gate = new System.Windows.Forms.PictureBox();
-            this.In = new System.Windows.Forms.TextBox();
+            this.InputButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DragBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Gate)).BeginInit();
             this.SuspendLayout();
+            // 
+            // DragBox
+            // 
+            this.DragBox.BackColor = System.Drawing.Color.Transparent;
+            this.DragBox.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.DragBox.Location = new System.Drawing.Point(39, 4);
+            this.DragBox.Name = "DragBox";
+            this.DragBox.Size = new System.Drawing.Size(64, 66);
+            this.DragBox.TabIndex = 4;
+            this.DragBox.TabStop = false;
+            this.DragBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.DragBox_MouseDown);
+            this.DragBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.DragBox_MouseMove);
             // 
             // Out
             // 
@@ -49,17 +61,6 @@
             this.Out.UseVisualStyleBackColor = false;
             this.Out.Click += new System.EventHandler(this.Out_Click);
             // 
-            // DragBox
-            // 
-            this.DragBox.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.DragBox.Location = new System.Drawing.Point(39, 3);
-            this.DragBox.Name = "DragBox";
-            this.DragBox.Size = new System.Drawing.Size(66, 68);
-            this.DragBox.TabIndex = 4;
-            this.DragBox.TabStop = false;
-            this.DragBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.DragBox_MouseDown);
-            this.DragBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.DragBox_MouseMove);
-            // 
             // Gate
             // 
             this.Gate.BackColor = System.Drawing.Color.Transparent;
@@ -71,20 +72,25 @@
             this.Gate.TabIndex = 0;
             this.Gate.TabStop = false;
             // 
-            // In
+            // InputButton
             // 
-            this.In.Font = new System.Drawing.Font("Century Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.In.Location = new System.Drawing.Point(54, 18);
-            this.In.Name = "In";
-            this.In.Size = new System.Drawing.Size(37, 37);
-            this.In.TabIndex = 5;
+            this.InputButton.BackColor = System.Drawing.Color.Red;
+            this.InputButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.InputButton.FlatAppearance.BorderSize = 0;
+            this.InputButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.InputButton.Location = new System.Drawing.Point(57, 22);
+            this.InputButton.Name = "InputButton";
+            this.InputButton.Size = new System.Drawing.Size(30, 30);
+            this.InputButton.TabIndex = 5;
+            this.InputButton.UseVisualStyleBackColor = false;
+            this.InputButton.Click += new System.EventHandler(this.InputButton_Click);
             // 
             // Input
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
-            this.Controls.Add(this.In);
+            this.Controls.Add(this.InputButton);
             this.Controls.Add(this.DragBox);
             this.Controls.Add(this.Out);
             this.Controls.Add(this.Gate);
@@ -102,6 +108,6 @@
         private System.Windows.Forms.PictureBox Gate;
         private System.Windows.Forms.Button Out;
         private System.Windows.Forms.PictureBox DragBox;
-        private System.Windows.Forms.TextBox In;
+        private System.Windows.Forms.Button InputButton;
     }
 }

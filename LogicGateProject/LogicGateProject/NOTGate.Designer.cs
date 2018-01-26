@@ -49,6 +49,7 @@
             // 
             // In
             // 
+            this.In.BackColor = System.Drawing.Color.Transparent;
             this.In.FlatAppearance.BorderSize = 0;
             this.In.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.In.ForeColor = System.Drawing.Color.Transparent;
@@ -65,7 +66,7 @@
             this.Out.FlatAppearance.BorderSize = 0;
             this.Out.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Out.ForeColor = System.Drawing.Color.Transparent;
-            this.Out.Location = new System.Drawing.Point(75, -3);
+            this.Out.Location = new System.Drawing.Point(75, 0);
             this.Out.Name = "Out";
             this.Out.Size = new System.Drawing.Size(75, 89);
             this.Out.TabIndex = 3;
@@ -74,10 +75,11 @@
             // 
             // DragBox
             // 
+            this.DragBox.BackColor = System.Drawing.Color.Transparent;
             this.DragBox.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.DragBox.Location = new System.Drawing.Point(61, 29);
+            this.DragBox.Location = new System.Drawing.Point(57, 35);
             this.DragBox.Name = "DragBox";
-            this.DragBox.Size = new System.Drawing.Size(30, 30);
+            this.DragBox.Size = new System.Drawing.Size(21, 15);
             this.DragBox.TabIndex = 4;
             this.DragBox.TabStop = false;
             this.DragBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.DragBox_MouseDown);
