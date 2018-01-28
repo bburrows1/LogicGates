@@ -22,7 +22,9 @@ namespace LogicGateProject
         protected Point BotInMarker;
         protected Point OutMarker;
         private Point MouseDownLocation;
-        public bool Traversed;
+        private bool Traversed;
+        private bool Result;
+        private bool Connected;
 
         public void SetGateID()
         {
@@ -63,6 +65,16 @@ namespace LogicGateProject
             TopInLocation = new Point(this.Location.X + TopInMarker.X, this.Location.Y + TopInMarker.Y);
             BotInLocation = new Point(this.Location.X + BotInMarker.X, this.Location.Y + BotInMarker.Y);
             OutLocation = new Point(this.Location.X + OutMarker.X, this.Location.Y + OutMarker.Y);
+        }
+
+        public bool IsTraversed()
+        {
+            return Traversed;
+        }
+
+        public void ResetTraversed()
+        {
+            Traversed = false;
         }
 
         public bool IsValidInput(LogicGates Input, LogicGates Output, bool IsTop)
@@ -150,6 +162,7 @@ namespace LogicGateProject
             Output.OutConnection.Add(Input);
             PublicVariables.InputGate = null;
             PublicVariables.OutputGate = null;
+            UpdateLogic();
         }
 
         public void RemoveConnection(LogicGates Input, bool IsTop)
@@ -208,8 +221,54 @@ namespace LogicGateProject
                 }
             }
         }
-        public virtual void UpdateLogic(bool Input)
+
+        public virtual void UpdateLogic()
         {
+        }
+
+        public bool GetResult()
+        {
+            return Result;
+        }
+
+        public void ToggleResult()
+        {
+            Result = !Result;
+        }
+
+        public void TrueResult()
+        {
+            Result = true;
+        }
+
+        public void FalseResult()
+        {
+            Result = false;
+        }
+
+        public virtual bool CheckConnected()
+        {
+            return (TopInConnection != null && BotInConnection != null);
+        }
+
+        public void UpdateOutputs()
+        {
+            foreach (LogicGates Output in OutConnection)
+            {
+                Output.UpdateLogic();
+            }
+        }
+
+        public void CheckUpdate(bool Result)
+        {
+            if (Result != GetResult())
+            {
+                if (Result)
+                    TrueResult();
+                else
+                    FalseResult();
+                UpdateOutputs();
+            }
         }
     }
 
@@ -221,12 +280,14 @@ namespace LogicGateProject
             OutMarker = new Point(130, 37);
         }
 
-        public override void UpdateLogic(bool Input)
+        public override void UpdateLogic()
         {
-            foreach (LogicGates Gate in OutConnection)
-            {
-                Gate.UpdateLogic(Input);
-            }
+            UpdateOutputs();
+        }
+
+        public override bool CheckConnected()
+        {
+            return true;
         }
     }
 
@@ -237,13 +298,22 @@ namespace LogicGateProject
             TopInMarker = new Point(5, 37);
         }
 
-        public override void UpdateLogic(bool Input)
+        public override bool CheckConnected()
         {
-            if(Input)
+            return (TopInConnection != null);
+        }
+
+        public override void UpdateLogic()
+        {
+            if (CheckConnected())
+            {
+                OutputBox.BackColor = Color.Gray;
+            }
+            if(TopInConnection.GetResult())
             {
                 OutputBox.BackColor = Color.Green;
             }
-            else if (!Input)
+            else 
             {
                 OutputBox.BackColor = Color.Red;
             }
@@ -258,9 +328,14 @@ namespace LogicGateProject
             BotInMarker = new Point(5, 64);
             OutMarker = new Point(125, 45);
         }
-        public override void UpdateLogic(bool Input)
-        {
 
+        public override void UpdateLogic()
+        {
+            if (CheckConnected())
+            {
+                bool LocalResult = TopInConnection.GetResult() && BotInConnection.GetResult();
+                CheckUpdate(LocalResult);
+            }
         }
     }
 
@@ -272,6 +347,15 @@ namespace LogicGateProject
             BotInMarker = new Point(5, 64);
             OutMarker = new Point(125, 45);
         }
+
+        public override void UpdateLogic()
+        {
+            if (CheckConnected())
+            {
+                bool LocalResult = TopInConnection.GetResult() || BotInConnection.GetResult();
+                CheckUpdate(LocalResult);
+            }
+        }
     }
 
     public partial class NOTGate : LogicGates
@@ -280,6 +364,19 @@ namespace LogicGateProject
         {
             TopInMarker = new Point(5, 43);
             OutMarker = new Point(125, 43);
+        }
+
+        public override bool CheckConnected()
+        {
+            return (TopInConnection != null);
+        }
+        public override void UpdateLogic()
+        {
+            if (CheckConnected())
+            {
+                bool LocalResult = !TopInConnection.GetResult();
+                CheckUpdate(LocalResult);
+            }
         }
     }
 
@@ -291,6 +388,15 @@ namespace LogicGateProject
             BotInMarker = new Point(5, 62);
             OutMarker = new Point(125, 43);
         }
+
+        public override void UpdateLogic()
+        {
+            if (CheckConnected())
+            {
+                bool LocalResult = TopInConnection.GetResult() != BotInConnection.GetResult();
+                CheckUpdate(LocalResult);
+            }
+        }
     }
 
     public partial class NANDGate : LogicGates
@@ -301,6 +407,15 @@ namespace LogicGateProject
             BotInMarker = new Point(5, 63);
             OutMarker = new Point(125, 44);
         }
+
+        public override void UpdateLogic()
+        {
+            if (CheckConnected())
+            {
+                bool LocalResult = !(TopInConnection.GetResult() && BotInConnection.GetResult());
+                CheckUpdate(LocalResult);
+            }
+        }
     }
 
     public partial class NORGate : LogicGates
@@ -310,6 +425,15 @@ namespace LogicGateProject
             TopInMarker = new Point(5, 24);
             BotInMarker = new Point(5, 63);
             OutMarker = new Point(125, 43);
+        }
+
+        public override void UpdateLogic()
+        {
+            if (CheckConnected())
+            {
+                bool LocalResult = !(TopInConnection.GetResult() || BotInConnection.GetResult());
+                CheckUpdate(LocalResult);
+            }
         }
     }
 }

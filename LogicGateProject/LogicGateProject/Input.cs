@@ -37,16 +37,12 @@ namespace LogicGateProject
 
         private void InputButton_Click(object sender, EventArgs e)
         {
-            if (this.InputButton.BackColor == Color.Red)
-            {
+            ToggleResult();
+            if (GetResult())
                 this.InputButton.BackColor = Color.Green;
-                UpdateLogic(true);
-            }
             else
-            {
                 this.InputButton.BackColor = Color.Red;
-                UpdateLogic(false);
-            }
+            UpdateLogic();
         }
     }
 }

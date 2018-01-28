@@ -144,15 +144,14 @@ namespace LogicGateProject
         {
             PublicVariables.InputPoints.Clear();
             PublicVariables.OutputPoints.Clear();
-
             foreach (LogicGates Gate in PublicVariables.Gates)
             {
-                if (!Gate.Traversed)
+                if (!Gate.IsTraversed())
                     Gate.Traverse();
             }
             foreach (LogicGates Gate in PublicVariables.Gates)
             {
-                Gate.Traversed = false;
+                Gate.ResetTraversed();
             }
 
             for (int i = 0; i < PublicVariables.InputPoints.Count; i++)
