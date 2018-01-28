@@ -52,11 +52,11 @@
     <Compile Include="ANDGate.Designer.cs">
       <DependentUpon>ANDGate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form1.cs">
+    <Compile Include="Simulator.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Simulator.Designer.cs">
+      <DependentUpon>Simulator.cs</DependentUpon>
     </Compile>
     <Compile Include="GCSEConvert.cs">
       <SubType>UserControl</SubType>
@@ -133,8 +133,8 @@
     <EmbeddedResource Include="ANDGate.resx">
       <DependentUpon>ANDGate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="Simulator.resx">
+      <DependentUpon>Simulator.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GCSEConvert.resx">
       <DependentUpon>GCSEConvert.cs</DependentUpon>

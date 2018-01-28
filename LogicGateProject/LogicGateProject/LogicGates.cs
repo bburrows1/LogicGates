@@ -24,9 +24,8 @@ namespace LogicGateProject
         private Point MouseDownLocation;
         private bool Traversed;
         private bool Result;
-        private bool Connected;
 
-        public void SetGateID()
+        public void CreateGate()
         {
             PublicVariables.Gates.Add(this);
             BackColor = System.Drawing.Color.Transparent;

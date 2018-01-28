@@ -71,7 +71,7 @@ namespace LogicGateProject
         private void AddInput_Click(object sender, EventArgs e)
         {
             Input Input = new Input();
-            Input.SetGateID();
+            Input.CreateGate();
             Input.SetLocations();
             this.DesignerPanel.Controls.Add(Input);
             Input.UpdateLocations();
@@ -80,7 +80,7 @@ namespace LogicGateProject
         private void AddAND_Click(object sender, EventArgs e)
         {
             ANDGate ANDGate = new ANDGate();
-            ANDGate.SetGateID();
+            ANDGate.CreateGate();
             ANDGate.SetLocations();
             this.DesignerPanel.Controls.Add(ANDGate);
             ANDGate.UpdateLocations();
@@ -89,7 +89,7 @@ namespace LogicGateProject
         private void AddOR_Click(object sender, EventArgs e)
         {
             ORGate ORGate = new ORGate();
-            ORGate.SetGateID();
+            ORGate.CreateGate();
             ORGate.SetLocations();
             this.DesignerPanel.Controls.Add(ORGate);
             ORGate.UpdateLocations();
@@ -98,7 +98,7 @@ namespace LogicGateProject
         private void AddNAND_Click(object sender, EventArgs e)
         {
             NANDGate NANDGate = new NANDGate();
-            NANDGate.SetGateID();
+            NANDGate.CreateGate();
             NANDGate.SetLocations();
             this.DesignerPanel.Controls.Add(NANDGate);
             NANDGate.UpdateLocations();
@@ -107,7 +107,7 @@ namespace LogicGateProject
         private void AddNOR_Click(object sender, EventArgs e)
         {
             NORGate NORGate = new NORGate();
-            NORGate.SetGateID();
+            NORGate.CreateGate();
             NORGate.SetLocations();
             this.DesignerPanel.Controls.Add(NORGate);
             NORGate.UpdateLocations();
@@ -116,7 +116,7 @@ namespace LogicGateProject
         private void AddXOR_Click(object sender, EventArgs e)
         {
             XORGate XORGate = new XORGate();
-            XORGate.SetGateID();
+            XORGate.CreateGate();
             XORGate.SetLocations();
             this.DesignerPanel.Controls.Add(XORGate);
             XORGate.UpdateLocations();
@@ -125,7 +125,7 @@ namespace LogicGateProject
         private void AddNOT_Click(object sender, EventArgs e)
         {
             NOTGate NOTGate = new NOTGate();
-            NOTGate.SetGateID();
+            NOTGate.CreateGate();
             NOTGate.SetLocations();
             this.DesignerPanel.Controls.Add(NOTGate);
             NOTGate.UpdateLocations();
@@ -134,7 +134,7 @@ namespace LogicGateProject
         private void AddOutput_Click(object sender, EventArgs e)
         {
             Output Output = new Output();
-            Output.SetGateID();
+            Output.CreateGate();
             Output.SetLocations();
             this.DesignerPanel.Controls.Add(Output);
             Output.UpdateLocations();
