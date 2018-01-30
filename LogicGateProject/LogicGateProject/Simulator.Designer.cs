@@ -49,8 +49,8 @@
             this.Back = new System.Windows.Forms.Button();
             this.AddExpression = new System.Windows.Forms.TextBox();
             this.DesignerPanel = new System.Windows.Forms.Panel();
-            this.DeleteButton = new System.Windows.Forms.Button();
             this.DeleteAll = new System.Windows.Forms.Button();
+            this.DeleteButton = new System.Windows.Forms.Button();
             this.RightPanel.SuspendLayout();
             this.LeftPanel.SuspendLayout();
             this.Header.SuspendLayout();
@@ -130,6 +130,7 @@
             this.CreateTruthTable.TabIndex = 4;
             this.CreateTruthTable.Text = "Truth Table";
             this.CreateTruthTable.UseVisualStyleBackColor = true;
+            this.CreateTruthTable.Click += new System.EventHandler(this.CreateTruthTable_Click);
             // 
             // AddNOR
             // 
@@ -378,20 +379,6 @@
             this.DesignerPanel.TabIndex = 3;
             this.DesignerPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.DesignerPanel_Paint);
             // 
-            // DeleteButton
-            // 
-            this.DeleteButton.BackColor = System.Drawing.Color.Transparent;
-            this.DeleteButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.DeleteButton.FlatAppearance.BorderSize = 0;
-            this.DeleteButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.DeleteButton.Image = global::LogicGateProject.Properties.Resources.Delete;
-            this.DeleteButton.Location = new System.Drawing.Point(1076, 0);
-            this.DeleteButton.Name = "DeleteButton";
-            this.DeleteButton.Size = new System.Drawing.Size(64, 67);
-            this.DeleteButton.TabIndex = 4;
-            this.DeleteButton.UseVisualStyleBackColor = false;
-            this.DeleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
-            // 
             // DeleteAll
             // 
             this.DeleteAll.BackColor = System.Drawing.Color.Black;
@@ -408,6 +395,20 @@
             this.DeleteAll.UseVisualStyleBackColor = false;
             this.DeleteAll.Visible = false;
             this.DeleteAll.Click += new System.EventHandler(this.DeleteAll_Click);
+            // 
+            // DeleteButton
+            // 
+            this.DeleteButton.BackColor = System.Drawing.Color.Transparent;
+            this.DeleteButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.DeleteButton.FlatAppearance.BorderSize = 0;
+            this.DeleteButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.DeleteButton.Image = global::LogicGateProject.Properties.Resources.Delete;
+            this.DeleteButton.Location = new System.Drawing.Point(1076, 0);
+            this.DeleteButton.Name = "DeleteButton";
+            this.DeleteButton.Size = new System.Drawing.Size(64, 67);
+            this.DeleteButton.TabIndex = 4;
+            this.DeleteButton.UseVisualStyleBackColor = false;
+            this.DeleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
             // 
             // Simulator
             // 

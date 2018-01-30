@@ -124,6 +124,12 @@
     <Compile Include="Quiz.Designer.cs">
       <DependentUpon>Quiz.cs</DependentUpon>
     </Compile>
+    <Compile Include="TruthTable.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TruthTable.Designer.cs">
+      <DependentUpon>TruthTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="XORGate.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -175,6 +181,9 @@
     </Compile>
     <EmbeddedResource Include="Quiz.resx">
       <DependentUpon>Quiz.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TruthTable.resx">
+      <DependentUpon>TruthTable.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="XORGate.resx">
       <DependentUpon>XORGate.cs</DependentUpon>

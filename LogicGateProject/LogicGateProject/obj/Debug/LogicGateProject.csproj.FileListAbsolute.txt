@@ -41,3 +41,4 @@ N:\B.Burrows\My Documents\Applications\LogicGates\LogicGateProject\LogicGateProj
 N:\B.Burrows\My Documents\Applications\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.csproj.CoreCompileInputs.cache
 N:\B.Burrows\My Documents\Applications\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.exe
 N:\B.Burrows\My Documents\Applications\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.pdb
+E:\Users\Ben\Documents\Homework\Warwick homework\AComputing\C# Programs\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.TruthTable.resources

@@ -28,6 +28,7 @@ namespace LogicGateProject
         public static Menu2 Menu2 = new Menu2();
         public static Simulator Simulator = new Simulator();
         public static Quiz Quiz = new Quiz();
+        public static TruthTable TruthTable = new TruthTable();
 
         //Ensures each gate has a unique ID
         public static List<LogicGates> Gates = new List<LogicGates>();

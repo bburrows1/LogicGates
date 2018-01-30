@@ -303,11 +303,35 @@ namespace LogicGateProject
                 UpdateOutputs();
             }
         }
+
+        public virtual void UpdateLogicTruthTable()
+        {
+        }
+
+        public void UpdateOutputsTruthTable()
+        {
+            foreach (LogicGates Output in OutConnection)
+            {
+                Output.UpdateLogicTruthTable();
+            }
+        }
+
+        public void TrueResultTruthTable()
+        {
+            Result = true;
+        }
+
+        public void FalseResultTruthTable()
+        {
+            Result = false;
+        }
     }
 
 
     public partial class Input : LogicGates
     {
+        private bool TruthTableResult;
+
         public void SetLocations()
         {
             OutMarker = new Point(130, 37);
@@ -321,6 +345,11 @@ namespace LogicGateProject
         public override bool CheckConnected()
         {
             return true;
+        }
+
+        public override void UpdateLogicTruthTable()
+        {
+            UpdateOutputsTruthTable();
         }
     }
 
@@ -350,6 +379,11 @@ namespace LogicGateProject
             {
                 OutputBox.BackColor = Color.Red;
             }
+        }
+
+        public override void UpdateLogicTruthTable()
+        {
+            UpdateOutputsTruthTable();
         }
     }
 
