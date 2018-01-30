@@ -41,5 +41,8 @@ namespace LogicGateProject
         public static Pen Linepen = new Pen(Color.Black, 4);
         public static List<Point> InputPoints = new List<Point>();
         public static List<Point> OutputPoints = new List<Point>();
+
+        //Tells gates to delete
+        public static bool Delete;
     }
 }

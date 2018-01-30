@@ -73,7 +73,7 @@ namespace LogicGateProject
             Input Input = new Input();
             Input.CreateGate();
             Input.SetLocations();
-            this.DesignerPanel.Controls.Add(Input);
+            DesignerPanel.Controls.Add(Input);
             Input.UpdateLocations();
         }
 
@@ -82,7 +82,7 @@ namespace LogicGateProject
             ANDGate ANDGate = new ANDGate();
             ANDGate.CreateGate();
             ANDGate.SetLocations();
-            this.DesignerPanel.Controls.Add(ANDGate);
+            DesignerPanel.Controls.Add(ANDGate);
             ANDGate.UpdateLocations();
         }
 
@@ -91,7 +91,7 @@ namespace LogicGateProject
             ORGate ORGate = new ORGate();
             ORGate.CreateGate();
             ORGate.SetLocations();
-            this.DesignerPanel.Controls.Add(ORGate);
+            DesignerPanel.Controls.Add(ORGate);
             ORGate.UpdateLocations();
         }
 
@@ -100,7 +100,7 @@ namespace LogicGateProject
             NANDGate NANDGate = new NANDGate();
             NANDGate.CreateGate();
             NANDGate.SetLocations();
-            this.DesignerPanel.Controls.Add(NANDGate);
+            DesignerPanel.Controls.Add(NANDGate);
             NANDGate.UpdateLocations();
         }
 
@@ -109,7 +109,7 @@ namespace LogicGateProject
             NORGate NORGate = new NORGate();
             NORGate.CreateGate();
             NORGate.SetLocations();
-            this.DesignerPanel.Controls.Add(NORGate);
+            DesignerPanel.Controls.Add(NORGate);
             NORGate.UpdateLocations();
         }
 
@@ -118,7 +118,7 @@ namespace LogicGateProject
             XORGate XORGate = new XORGate();
             XORGate.CreateGate();
             XORGate.SetLocations();
-            this.DesignerPanel.Controls.Add(XORGate);
+            DesignerPanel.Controls.Add(XORGate);
             XORGate.UpdateLocations();
         }
 
@@ -127,7 +127,7 @@ namespace LogicGateProject
             NOTGate NOTGate = new NOTGate();
             NOTGate.CreateGate();
             NOTGate.SetLocations();
-            this.DesignerPanel.Controls.Add(NOTGate);
+            DesignerPanel.Controls.Add(NOTGate);
             NOTGate.UpdateLocations();
         }
 
@@ -163,6 +163,32 @@ namespace LogicGateProject
                 e.Graphics.DrawLine(PublicVariables.Linepen, InputMidPoint, OutputMidPoint);
                 e.Graphics.DrawLine(PublicVariables.Linepen, OutputMidPoint, PublicVariables.OutputPoints[i]);
             }
+        }
+
+        public void DeleteAllButton()
+        {
+            if (PublicVariables.Delete)
+                DeleteAll.Show();
+            else
+                DeleteAll.Hide();
+        }
+
+        private void DeleteButton_Click(object sender, EventArgs e)
+        {
+            PublicVariables.Delete = !PublicVariables.Delete;
+            DeleteAllButton();
+        }
+
+        private void DeleteAll_Click(object sender, EventArgs e)
+        {
+            if (PublicVariables.Delete)
+            {
+                foreach (LogicGates Gate in PublicVariables.Gates)
+                {
+                    Gate.DeleteGate();
+                }
+            }
+            Invalidate();
         }
     }
 }

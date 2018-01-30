@@ -33,25 +33,28 @@
             this.StepByStep = new System.Windows.Forms.Button();
             this.CreateExpression = new System.Windows.Forms.Button();
             this.CreateTruthTable = new System.Windows.Forms.Button();
-            this.LeftPanel = new System.Windows.Forms.Panel();
-            this.Header = new System.Windows.Forms.Panel();
-            this.AddExpression = new System.Windows.Forms.TextBox();
-            this.DesignerPanel = new System.Windows.Forms.Panel();
             this.AddNOR = new System.Windows.Forms.Button();
             this.AddXOR = new System.Windows.Forms.Button();
             this.AddOR = new System.Windows.Forms.Button();
             this.AddOutput = new System.Windows.Forms.Button();
+            this.LeftPanel = new System.Windows.Forms.Panel();
             this.AddNAND = new System.Windows.Forms.Button();
             this.AddNOT = new System.Windows.Forms.Button();
             this.AddAND = new System.Windows.Forms.Button();
             this.AddInput = new System.Windows.Forms.Button();
+            this.Header = new System.Windows.Forms.Panel();
             this.Quit = new System.Windows.Forms.Button();
             this.LoadFile = new System.Windows.Forms.Button();
             this.Save = new System.Windows.Forms.Button();
             this.Back = new System.Windows.Forms.Button();
+            this.AddExpression = new System.Windows.Forms.TextBox();
+            this.DesignerPanel = new System.Windows.Forms.Panel();
+            this.DeleteButton = new System.Windows.Forms.Button();
+            this.DeleteAll = new System.Windows.Forms.Button();
             this.RightPanel.SuspendLayout();
             this.LeftPanel.SuspendLayout();
             this.Header.SuspendLayout();
+            this.DesignerPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // RightPanel
@@ -128,59 +131,6 @@
             this.CreateTruthTable.Text = "Truth Table";
             this.CreateTruthTable.UseVisualStyleBackColor = true;
             // 
-            // LeftPanel
-            // 
-            this.LeftPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(61)))), ((int)(((byte)(66)))));
-            this.LeftPanel.Controls.Add(this.AddNAND);
-            this.LeftPanel.Controls.Add(this.AddNOT);
-            this.LeftPanel.Controls.Add(this.AddAND);
-            this.LeftPanel.Controls.Add(this.AddInput);
-            this.LeftPanel.Dock = System.Windows.Forms.DockStyle.Left;
-            this.LeftPanel.Location = new System.Drawing.Point(0, 0);
-            this.LeftPanel.Name = "LeftPanel";
-            this.LeftPanel.Size = new System.Drawing.Size(150, 845);
-            this.LeftPanel.TabIndex = 1;
-            // 
-            // Header
-            // 
-            this.Header.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(66)))), ((int)(((byte)(130)))));
-            this.Header.Controls.Add(this.Quit);
-            this.Header.Controls.Add(this.LoadFile);
-            this.Header.Controls.Add(this.Save);
-            this.Header.Controls.Add(this.Back);
-            this.Header.Dock = System.Windows.Forms.DockStyle.Top;
-            this.Header.Location = new System.Drawing.Point(0, 0);
-            this.Header.Name = "Header";
-            this.Header.Size = new System.Drawing.Size(1440, 67);
-            this.Header.TabIndex = 1;
-            this.Header.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Header_MouseDown);
-            // 
-            // AddExpression
-            // 
-            this.AddExpression.BackColor = System.Drawing.Color.Silver;
-            this.AddExpression.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.AddExpression.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.AddExpression.Dock = System.Windows.Forms.DockStyle.Top;
-            this.AddExpression.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AddExpression.ForeColor = System.Drawing.Color.Gray;
-            this.AddExpression.Location = new System.Drawing.Point(300, 67);
-            this.AddExpression.Name = "AddExpression";
-            this.AddExpression.Size = new System.Drawing.Size(1140, 33);
-            this.AddExpression.TabIndex = 2;
-            this.AddExpression.Text = "INPUT BOOLEAN EXPRESSION";
-            this.AddExpression.Enter += new System.EventHandler(this.AddExpression_Enter);
-            this.AddExpression.Leave += new System.EventHandler(this.AddExpression_Leave);
-            // 
-            // DesignerPanel
-            // 
-            this.DesignerPanel.BackColor = System.Drawing.Color.Transparent;
-            this.DesignerPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.DesignerPanel.Location = new System.Drawing.Point(300, 100);
-            this.DesignerPanel.Name = "DesignerPanel";
-            this.DesignerPanel.Size = new System.Drawing.Size(1140, 812);
-            this.DesignerPanel.TabIndex = 3;
-            this.DesignerPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.DesignerPanel_Paint);
-            // 
             // AddNOR
             // 
             this.AddNOR.Dock = System.Windows.Forms.DockStyle.Top;
@@ -248,6 +198,19 @@
             this.AddOutput.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.AddOutput.UseVisualStyleBackColor = true;
             this.AddOutput.Click += new System.EventHandler(this.AddOutput_Click);
+            // 
+            // LeftPanel
+            // 
+            this.LeftPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(61)))), ((int)(((byte)(66)))));
+            this.LeftPanel.Controls.Add(this.AddNAND);
+            this.LeftPanel.Controls.Add(this.AddNOT);
+            this.LeftPanel.Controls.Add(this.AddAND);
+            this.LeftPanel.Controls.Add(this.AddInput);
+            this.LeftPanel.Dock = System.Windows.Forms.DockStyle.Left;
+            this.LeftPanel.Location = new System.Drawing.Point(0, 0);
+            this.LeftPanel.Name = "LeftPanel";
+            this.LeftPanel.Size = new System.Drawing.Size(150, 845);
+            this.LeftPanel.TabIndex = 1;
             // 
             // AddNAND
             // 
@@ -319,6 +282,20 @@
             this.AddInput.UseVisualStyleBackColor = true;
             this.AddInput.Click += new System.EventHandler(this.AddInput_Click);
             // 
+            // Header
+            // 
+            this.Header.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(66)))), ((int)(((byte)(130)))));
+            this.Header.Controls.Add(this.Quit);
+            this.Header.Controls.Add(this.LoadFile);
+            this.Header.Controls.Add(this.Save);
+            this.Header.Controls.Add(this.Back);
+            this.Header.Dock = System.Windows.Forms.DockStyle.Top;
+            this.Header.Location = new System.Drawing.Point(0, 0);
+            this.Header.Name = "Header";
+            this.Header.Size = new System.Drawing.Size(1440, 67);
+            this.Header.TabIndex = 1;
+            this.Header.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Header_MouseDown);
+            // 
             // Quit
             // 
             this.Quit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
@@ -373,6 +350,65 @@
             this.Back.UseVisualStyleBackColor = true;
             this.Back.Click += new System.EventHandler(this.Back_Click);
             // 
+            // AddExpression
+            // 
+            this.AddExpression.BackColor = System.Drawing.Color.Silver;
+            this.AddExpression.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.AddExpression.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.AddExpression.Dock = System.Windows.Forms.DockStyle.Top;
+            this.AddExpression.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AddExpression.ForeColor = System.Drawing.Color.Gray;
+            this.AddExpression.Location = new System.Drawing.Point(300, 67);
+            this.AddExpression.Name = "AddExpression";
+            this.AddExpression.Size = new System.Drawing.Size(1140, 33);
+            this.AddExpression.TabIndex = 2;
+            this.AddExpression.Text = "INPUT BOOLEAN EXPRESSION";
+            this.AddExpression.Enter += new System.EventHandler(this.AddExpression_Enter);
+            this.AddExpression.Leave += new System.EventHandler(this.AddExpression_Leave);
+            // 
+            // DesignerPanel
+            // 
+            this.DesignerPanel.BackColor = System.Drawing.Color.Transparent;
+            this.DesignerPanel.Controls.Add(this.DeleteAll);
+            this.DesignerPanel.Controls.Add(this.DeleteButton);
+            this.DesignerPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DesignerPanel.Location = new System.Drawing.Point(300, 100);
+            this.DesignerPanel.Name = "DesignerPanel";
+            this.DesignerPanel.Size = new System.Drawing.Size(1140, 812);
+            this.DesignerPanel.TabIndex = 3;
+            this.DesignerPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.DesignerPanel_Paint);
+            // 
+            // DeleteButton
+            // 
+            this.DeleteButton.BackColor = System.Drawing.Color.Transparent;
+            this.DeleteButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.DeleteButton.FlatAppearance.BorderSize = 0;
+            this.DeleteButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.DeleteButton.Image = global::LogicGateProject.Properties.Resources.Delete;
+            this.DeleteButton.Location = new System.Drawing.Point(1076, 0);
+            this.DeleteButton.Name = "DeleteButton";
+            this.DeleteButton.Size = new System.Drawing.Size(64, 67);
+            this.DeleteButton.TabIndex = 4;
+            this.DeleteButton.UseVisualStyleBackColor = false;
+            this.DeleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
+            // 
+            // DeleteAll
+            // 
+            this.DeleteAll.BackColor = System.Drawing.Color.Black;
+            this.DeleteAll.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.DeleteAll.FlatAppearance.BorderSize = 0;
+            this.DeleteAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.DeleteAll.Font = new System.Drawing.Font("Century Gothic", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DeleteAll.ForeColor = System.Drawing.Color.White;
+            this.DeleteAll.Location = new System.Drawing.Point(1076, 73);
+            this.DeleteAll.Name = "DeleteAll";
+            this.DeleteAll.Size = new System.Drawing.Size(64, 44);
+            this.DeleteAll.TabIndex = 5;
+            this.DeleteAll.Text = "All";
+            this.DeleteAll.UseVisualStyleBackColor = false;
+            this.DeleteAll.Visible = false;
+            this.DeleteAll.Click += new System.EventHandler(this.DeleteAll_Click);
+            // 
             // Simulator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -390,6 +426,7 @@
             this.RightPanel.ResumeLayout(false);
             this.LeftPanel.ResumeLayout(false);
             this.Header.ResumeLayout(false);
+            this.DesignerPanel.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -418,6 +455,8 @@
         private System.Windows.Forms.Button Back;
         private System.Windows.Forms.Button NANDSimplifcation;
         private System.Windows.Forms.Panel DesignerPanel;
+        private System.Windows.Forms.Button DeleteButton;
+        private System.Windows.Forms.Button DeleteAll;
     }
 }
 
