@@ -24,10 +24,16 @@ namespace LogicGateProject
 
         private void Quit_Click(object sender, EventArgs e)
         {
-            DialogResult dialog = MessageBox.Show("Do you really weant to close the program?\nUnsaved circuits will be lost.", "Exit", MessageBoxButtons.YesNo);
-            if (dialog == DialogResult.Yes)
+            Hide();
+        }
+
+        private void Header_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
             {
-                Application.Exit();
+                PublicVariables.ReleaseCapture();
+                PublicVariables.SendMessage(Handle, PublicVariables.WM_NCLBUTTONDOWN, PublicVariables.HT_CAPTION, 0);
+                PublicVariables.Menu2.Location = this.Location;
             }
         }
     }

@@ -57,6 +57,7 @@
             this.Header.Name = "Header";
             this.Header.Size = new System.Drawing.Size(565, 62);
             this.Header.TabIndex = 3;
+            this.Header.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Header_MouseDown);
             // 
             // ListView
             // 

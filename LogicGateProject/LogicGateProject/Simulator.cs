@@ -67,6 +67,7 @@ namespace LogicGateProject
             }
         }
 
+        //Add new gates
         private void AddInput_Click(object sender, EventArgs e)
         {
             Input Input = new Input();
@@ -141,6 +142,7 @@ namespace LogicGateProject
 
         private void DesignerPanel_Paint(object sender, PaintEventArgs e)
         {
+            //Create a list of lines to be drawn
             PublicVariables.InputPoints.Clear();
             PublicVariables.OutputPoints.Clear();
             foreach (LogicGates Gate in PublicVariables.Gates)
@@ -153,6 +155,7 @@ namespace LogicGateProject
                 Gate.ResetTraversed();
             }
 
+            //Draw lines
             for (int i = 0; i < PublicVariables.InputPoints.Count; i++)
             {
                 int MidPoint = (PublicVariables.InputPoints[i].X + PublicVariables.OutputPoints[i].X) / 2;
@@ -164,6 +167,7 @@ namespace LogicGateProject
             }
         }
 
+        //Reveal delete all button
         public void DeleteAllButton()
         {
             if (PublicVariables.Delete)
@@ -172,12 +176,14 @@ namespace LogicGateProject
                 DeleteAll.Hide();
         }
 
+        //Change to delete mode
         private void DeleteButton_Click(object sender, EventArgs e)
         {
             PublicVariables.Delete = !PublicVariables.Delete;
             DeleteAllButton();
         }
 
+        //Delete all gates
         private void DeleteAll_Click(object sender, EventArgs e)
         {
             if (PublicVariables.Delete)
@@ -190,11 +196,44 @@ namespace LogicGateProject
             Invalidate();
         }
 
+        //Create data for truth table
         private void CreateTruthTable_Click(object sender, EventArgs e)
         {
+            List<LogicGates> InputGates = new List<LogicGates>();
+            List<LogicGates> OutputGates = new List<LogicGates>();
+            List<bool> OriginalInputs = new List<bool>();
+            List<bool> Inputs = new List<bool>();
+            List<bool> Outputs = new List<bool>();
             PublicVariables.TruthTable.Show();
+            foreach (LogicGates Gate in PublicVariables.Gates)
+            {
+                if (Gate.GetType() == typeof(Input))
+                {
+                    InputGates.Add(Gate);
+                    OriginalInputs.Add(Gate.GetResult());
+                    Gate.FalseResult();
+                }
+                else if (Gate.GetType() == typeof(Output))
+                {
 
+                }
+            }
+            if (InputGates.Count != 0)
+            {
+                GatesTruthTable(InputGates, 0);
+            }
             PublicVariables.TruthTable.CreateTable();
+        }
+
+        private void GatesTruthTable(List<LogicGates> InputGates, int Start)
+        {
+            for (int i = Start; i < InputGates.Count; i++)
+            {
+                if (Start + 1 != InputGates.Count)
+                    GatesTruthTable(InputGates, Start + 1);
+                InputGates[Start].UpdateLogic();
+                InputGates[Start].ToggleResult();
+            }
         }
     }
 }
