@@ -22,11 +22,11 @@ namespace LogicGateProject
             ListView.Clear();
             foreach (LogicGates Input in Inputs)
             {
-                ListView.Columns.Add(Input.GetID().ToString(), 100);
+                ListView.Columns.Add(Input.GetID().ToString());
             }
             foreach (LogicGates Output in Outputs)
             {
-                ListView.Columns.Add(Output.GetID().ToString(), 100);
+                ListView.Columns.Add(Output.GetID().ToString());
             }
         }
 

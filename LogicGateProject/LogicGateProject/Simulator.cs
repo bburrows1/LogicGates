@@ -191,7 +191,16 @@ namespace LogicGateProject
             PublicVariables.TruthTable.ResetTable(InputGates, OutputGates);
             if (InputGates.Count != 0)
             {
+                AddToList(InputGates, OutputGates);
                 GatesTruthTable(InputGates, OutputGates, 0);
+            }
+            for (int i = 0; i < InputGates.Count; i++)
+            {
+                if (OriginalInputs[i])
+                    InputGates[i].TrueResult();
+                else
+                    InputGates[i].FalseResult();
+                InputGates[i].UpdateLogic();
             }
             PublicVariables.TruthTable.CreateTable();
             PublicVariables.TruthTable.Show();
@@ -199,30 +208,40 @@ namespace LogicGateProject
 
         private void GatesTruthTable(List<LogicGates> InputGates, List<LogicGates> OutputGates, int Start)
         {
+            for (int i = InputGates.Count - 1; i >= 0; i--)
+            {
+                if (!InputGates[i].GetResult())
+                {
+                    InputGates[i].TrueResult();
+                    InputGates[i].UpdateLogic();
+                    AddToList(InputGates, OutputGates);
+                }
+                else
+                {
+
+                }
+            }
+        }
+
+        private void AddToList(List<LogicGates> InputGates, List<LogicGates> OutputGates)
+        {
             List<string> Inputs = new List<string>();
             List<string> Outputs = new List<string>();
-            for (int i = Start; i < InputGates.Count; i++)
+            foreach (LogicGates Gate in InputGates)
             {
-                if (Start + 1 != InputGates.Count)
-                    GatesTruthTable(InputGates, OutputGates, Start + 1);
-                InputGates[Start].UpdateLogic();
-                foreach(LogicGates Gate in InputGates)
-                {
-                    if (Gate.GetResult())
-                        Inputs.Add("1");
-                    else
-                        Inputs.Add("0");
-                }
-                foreach (LogicGates Gate in OutputGates)
-                {
-                    if (Gate.GetResult())
-                        Inputs.Add("1");
-                    else
-                        Inputs.Add("0");
-                }
-                PublicVariables.TruthTable.AddToTable(Inputs.ToList().Concat(Outputs.ToList()));
-                InputGates[Start].ToggleResult();
+                if (Gate.GetResult())
+                    Inputs.Add("1");
+                else
+                    Inputs.Add("0");
             }
+            foreach (LogicGates Gate in OutputGates)
+            {
+                if (Gate.GetResult())
+                    Inputs.Add("1");
+                else
+                    Inputs.Add("0");
+            }
+            PublicVariables.TruthTable.AddToTable((Inputs.Concat(Outputs)).ToList());
         }
     }
 }

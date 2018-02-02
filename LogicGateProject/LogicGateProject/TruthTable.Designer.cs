@@ -62,11 +62,14 @@
             // ListView
             // 
             this.ListView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ListView.FullRowSelect = true;
+            this.ListView.GridLines = true;
             this.ListView.Location = new System.Drawing.Point(0, 62);
             this.ListView.Name = "ListView";
             this.ListView.Size = new System.Drawing.Size(565, 413);
             this.ListView.TabIndex = 4;
             this.ListView.UseCompatibleStateImageBehavior = false;
+            this.ListView.View = System.Windows.Forms.View.Details;
             // 
             // TruthTable
             // 
