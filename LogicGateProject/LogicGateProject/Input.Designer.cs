@@ -32,6 +32,7 @@
             this.Out = new System.Windows.Forms.Button();
             this.Gate = new System.Windows.Forms.PictureBox();
             this.InputButton = new System.Windows.Forms.Button();
+            this.IDLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.DragBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Gate)).BeginInit();
             this.SuspendLayout();
@@ -85,11 +86,22 @@
             this.InputButton.UseVisualStyleBackColor = false;
             this.InputButton.Click += new System.EventHandler(this.InputButton_Click);
             // 
+            // IDLabel
+            // 
+            this.IDLabel.AutoSize = true;
+            this.IDLabel.BackColor = System.Drawing.Color.Transparent;
+            this.IDLabel.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.IDLabel.Location = new System.Drawing.Point(40, 5);
+            this.IDLabel.Name = "IDLabel";
+            this.IDLabel.Size = new System.Drawing.Size(0, 18);
+            this.IDLabel.TabIndex = 6;
+            // 
             // Input
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
+            this.Controls.Add(this.IDLabel);
             this.Controls.Add(this.InputButton);
             this.Controls.Add(this.DragBox);
             this.Controls.Add(this.Out);
@@ -109,5 +121,6 @@
         private System.Windows.Forms.Button Out;
         private System.Windows.Forms.PictureBox DragBox;
         private System.Windows.Forms.Button InputButton;
+        private System.Windows.Forms.Label IDLabel;
     }
 }

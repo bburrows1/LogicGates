@@ -303,11 +303,24 @@ namespace LogicGateProject
                 UpdateOutputs();
             }
         }
+
+        public virtual int GetID()
+        {
+            return 0;
+        }
     }
 
 
     public partial class Input : LogicGates
     {
+        private int GateID;
+
+        public void SetID()
+        {
+            GateID = PublicVariables.InputID;
+            PublicVariables.InputID++;
+            IDLabel.Text = GateID.ToString();
+        }
         public void SetLocations()
         {
             OutMarker = new Point(130, 37);
@@ -323,10 +336,23 @@ namespace LogicGateProject
             return true;
         }
 
+        public override int GetID()
+        {
+            return GateID;
+        }
     }
 
     public partial class Output : LogicGates
     {
+        private int GateID;
+
+        public void SetID()
+        {
+            GateID = PublicVariables.OutputID;
+            PublicVariables.OutputID++;
+            IDLabel.Text = GateID.ToString();
+        }
+
         public void SetLocations()
         {
             TopInMarker = new Point(5, 37);
@@ -351,6 +377,10 @@ namespace LogicGateProject
             {
                 OutputBox.BackColor = Color.Red;
             }
+        }
+        public override int GetID()
+        {
+            return GateID;
         }
     }
 

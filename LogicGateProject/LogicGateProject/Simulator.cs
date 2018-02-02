@@ -17,7 +17,7 @@ namespace LogicGateProject
             InitializeComponent();
         }
 
-        //Clear placholder when entered
+        //Clear placeholder when entered
         private void AddExpression_Enter(object sender, EventArgs e)
         {
             if (AddExpression.Text == "INPUT BOOLEAN EXPRESSION")
@@ -47,6 +47,11 @@ namespace LogicGateProject
             }
         }
 
+        public void AddToDesignerPanel(LogicGates Gate)
+        {
+            DesignerPanel.Controls.Add(Gate);
+        } 
+
         //Back
         private void Back_Click(object sender, EventArgs e)
         {
@@ -71,73 +76,41 @@ namespace LogicGateProject
         private void AddInput_Click(object sender, EventArgs e)
         {
             Input Input = new Input();
-            Input.CreateGate();
-            Input.SetLocations();
-            DesignerPanel.Controls.Add(Input);
-            Input.UpdateLocations();
         }
 
         private void AddAND_Click(object sender, EventArgs e)
         {
             ANDGate ANDGate = new ANDGate();
-            ANDGate.CreateGate();
-            ANDGate.SetLocations();
-            DesignerPanel.Controls.Add(ANDGate);
-            ANDGate.UpdateLocations();
         }
 
         private void AddOR_Click(object sender, EventArgs e)
         {
             ORGate ORGate = new ORGate();
-            ORGate.CreateGate();
-            ORGate.SetLocations();
-            DesignerPanel.Controls.Add(ORGate);
-            ORGate.UpdateLocations();
         }
 
         private void AddNAND_Click(object sender, EventArgs e)
         {
             NANDGate NANDGate = new NANDGate();
-            NANDGate.CreateGate();
-            NANDGate.SetLocations();
-            DesignerPanel.Controls.Add(NANDGate);
-            NANDGate.UpdateLocations();
         }
 
         private void AddNOR_Click(object sender, EventArgs e)
         {
             NORGate NORGate = new NORGate();
-            NORGate.CreateGate();
-            NORGate.SetLocations();
-            DesignerPanel.Controls.Add(NORGate);
-            NORGate.UpdateLocations();
         }
 
         private void AddXOR_Click(object sender, EventArgs e)
         {
             XORGate XORGate = new XORGate();
-            XORGate.CreateGate();
-            XORGate.SetLocations();
-            DesignerPanel.Controls.Add(XORGate);
-            XORGate.UpdateLocations();
         }
 
         private void AddNOT_Click(object sender, EventArgs e)
         {
             NOTGate NOTGate = new NOTGate();
-            NOTGate.CreateGate();
-            NOTGate.SetLocations();
-            DesignerPanel.Controls.Add(NOTGate);
-            NOTGate.UpdateLocations();
         }
 
         private void AddOutput_Click(object sender, EventArgs e)
         {
             Output Output = new Output();
-            Output.CreateGate();
-            Output.SetLocations();
-            this.DesignerPanel.Controls.Add(Output);
-            Output.UpdateLocations();
         }
 
         private void DesignerPanel_Paint(object sender, PaintEventArgs e)
@@ -202,9 +175,6 @@ namespace LogicGateProject
             List<LogicGates> InputGates = new List<LogicGates>();
             List<LogicGates> OutputGates = new List<LogicGates>();
             List<bool> OriginalInputs = new List<bool>();
-            List<bool> Inputs = new List<bool>();
-            List<bool> Outputs = new List<bool>();
-            PublicVariables.TruthTable.Show();
             foreach (LogicGates Gate in PublicVariables.Gates)
             {
                 if (Gate.GetType() == typeof(Input))
@@ -215,23 +185,42 @@ namespace LogicGateProject
                 }
                 else if (Gate.GetType() == typeof(Output))
                 {
-
+                    OutputGates.Add(Gate);
                 }
             }
+            PublicVariables.TruthTable.ResetTable(InputGates, OutputGates);
             if (InputGates.Count != 0)
             {
-                GatesTruthTable(InputGates, 0);
+                GatesTruthTable(InputGates, OutputGates, 0);
             }
             PublicVariables.TruthTable.CreateTable();
+            PublicVariables.TruthTable.Show();
         }
 
-        private void GatesTruthTable(List<LogicGates> InputGates, int Start)
+        private void GatesTruthTable(List<LogicGates> InputGates, List<LogicGates> OutputGates, int Start)
         {
+            List<string> Inputs = new List<string>();
+            List<string> Outputs = new List<string>();
             for (int i = Start; i < InputGates.Count; i++)
             {
                 if (Start + 1 != InputGates.Count)
-                    GatesTruthTable(InputGates, Start + 1);
+                    GatesTruthTable(InputGates, OutputGates, Start + 1);
                 InputGates[Start].UpdateLogic();
+                foreach(LogicGates Gate in InputGates)
+                {
+                    if (Gate.GetResult())
+                        Inputs.Add("1");
+                    else
+                        Inputs.Add("0");
+                }
+                foreach (LogicGates Gate in OutputGates)
+                {
+                    if (Gate.GetResult())
+                        Inputs.Add("1");
+                    else
+                        Inputs.Add("0");
+                }
+                PublicVariables.TruthTable.AddToTable(Inputs.ToList().Concat(Outputs.ToList()));
                 InputGates[Start].ToggleResult();
             }
         }

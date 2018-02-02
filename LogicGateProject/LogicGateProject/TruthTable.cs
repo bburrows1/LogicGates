@@ -17,6 +17,24 @@ namespace LogicGateProject
             InitializeComponent();
         }
 
+        public void ResetTable(List<LogicGates> Inputs, List<LogicGates> Outputs)
+        {
+            ListView.Clear();
+            foreach (LogicGates Input in Inputs)
+            {
+                ListView.Columns.Add(Input.GetID().ToString(), 100);
+            }
+            foreach (LogicGates Output in Outputs)
+            {
+                ListView.Columns.Add(Output.GetID().ToString(), 100);
+            }
+        }
+
+        public void AddToTable(List<string> Inputs)
+        {
+            ListView.Items.Add(new ListViewItem(Inputs.ToArray()));
+        }
+
         public void CreateTable()
         {
 
