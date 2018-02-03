@@ -267,16 +267,19 @@ namespace LogicGateProject
         public void ToggleResult()
         {
             Result = !Result;
+            UpdateOutputs();
         }
 
         public void TrueResult()
         {
             Result = true;
+            UpdateOutputs();
         }
 
         public void FalseResult()
         {
             Result = false;
+            UpdateOutputs();
         }
 
         public virtual bool CheckConnected()
@@ -300,7 +303,6 @@ namespace LogicGateProject
                     TrueResult();
                 else
                     FalseResult();
-                UpdateOutputs();
             }
         }
 

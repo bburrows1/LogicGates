@@ -43,3 +43,26 @@ N:\B.Burrows\My Documents\Applications\LogicGates\LogicGateProject\LogicGateProj
 N:\B.Burrows\My Documents\Applications\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.pdb
 E:\Users\Ben\Documents\Homework\Warwick homework\AComputing\C# Programs\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.TruthTable.resources
 N:\B.Burrows\My Documents\Applications\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.TruthTable.resources
+C:\Users\Alison\Documents\Ben Project\LogicGates\LogicGateProject\LogicGateProject\bin\Debug\LogicGateProject.exe.config
+C:\Users\Alison\Documents\Ben Project\LogicGates\LogicGateProject\LogicGateProject\bin\Debug\LogicGateProject.exe
+C:\Users\Alison\Documents\Ben Project\LogicGates\LogicGateProject\LogicGateProject\bin\Debug\LogicGateProject.pdb
+C:\Users\Alison\Documents\Ben Project\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.csprojResolveAssemblyReference.cache
+C:\Users\Alison\Documents\Ben Project\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.ANDGate.resources
+C:\Users\Alison\Documents\Ben Project\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.Simulator.resources
+C:\Users\Alison\Documents\Ben Project\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.GCSEConvert.resources
+C:\Users\Alison\Documents\Ben Project\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.Input.resources
+C:\Users\Alison\Documents\Ben Project\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.Menu1.resources
+C:\Users\Alison\Documents\Ben Project\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.Menu2.resources
+C:\Users\Alison\Documents\Ben Project\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.NANDGate.resources
+C:\Users\Alison\Documents\Ben Project\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.NORGate.resources
+C:\Users\Alison\Documents\Ben Project\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.NOTGate.resources
+C:\Users\Alison\Documents\Ben Project\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.ORGate.resources
+C:\Users\Alison\Documents\Ben Project\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.Output.resources
+C:\Users\Alison\Documents\Ben Project\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.Properties.Resources.resources
+C:\Users\Alison\Documents\Ben Project\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.Quiz.resources
+C:\Users\Alison\Documents\Ben Project\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.TruthTable.resources
+C:\Users\Alison\Documents\Ben Project\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.XORGate.resources
+C:\Users\Alison\Documents\Ben Project\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.csproj.GenerateResource.Cache
+C:\Users\Alison\Documents\Ben Project\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.csproj.CoreCompileInputs.cache
+C:\Users\Alison\Documents\Ben Project\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.exe
+C:\Users\Alison\Documents\Ben Project\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.pdb

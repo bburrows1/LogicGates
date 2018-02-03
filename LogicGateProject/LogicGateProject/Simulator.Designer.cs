@@ -72,7 +72,7 @@
             this.RightPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.RightPanel.Location = new System.Drawing.Point(0, 67);
             this.RightPanel.Name = "RightPanel";
-            this.RightPanel.Size = new System.Drawing.Size(300, 845);
+            this.RightPanel.Size = new System.Drawing.Size(300, 721);
             this.RightPanel.TabIndex = 0;
             // 
             // NANDSimplifcation
@@ -210,7 +210,7 @@
             this.LeftPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.LeftPanel.Location = new System.Drawing.Point(0, 0);
             this.LeftPanel.Name = "LeftPanel";
-            this.LeftPanel.Size = new System.Drawing.Size(150, 845);
+            this.LeftPanel.Size = new System.Drawing.Size(150, 721);
             this.LeftPanel.TabIndex = 1;
             // 
             // AddNAND
@@ -293,7 +293,7 @@
             this.Header.Dock = System.Windows.Forms.DockStyle.Top;
             this.Header.Location = new System.Drawing.Point(0, 0);
             this.Header.Name = "Header";
-            this.Header.Size = new System.Drawing.Size(1440, 67);
+            this.Header.Size = new System.Drawing.Size(1386, 67);
             this.Header.TabIndex = 1;
             this.Header.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Header_MouseDown);
             // 
@@ -304,7 +304,7 @@
             this.Quit.FlatAppearance.BorderSize = 0;
             this.Quit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Quit.Image = global::LogicGateProject.Properties.Resources.Quit;
-            this.Quit.Location = new System.Drawing.Point(1376, 0);
+            this.Quit.Location = new System.Drawing.Point(1322, 0);
             this.Quit.Name = "Quit";
             this.Quit.Size = new System.Drawing.Size(64, 67);
             this.Quit.TabIndex = 3;
@@ -361,7 +361,7 @@
             this.AddExpression.ForeColor = System.Drawing.Color.Gray;
             this.AddExpression.Location = new System.Drawing.Point(300, 67);
             this.AddExpression.Name = "AddExpression";
-            this.AddExpression.Size = new System.Drawing.Size(1140, 33);
+            this.AddExpression.Size = new System.Drawing.Size(1086, 33);
             this.AddExpression.TabIndex = 2;
             this.AddExpression.Text = "INPUT BOOLEAN EXPRESSION";
             this.AddExpression.Enter += new System.EventHandler(this.AddExpression_Enter);
@@ -375,7 +375,7 @@
             this.DesignerPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DesignerPanel.Location = new System.Drawing.Point(300, 100);
             this.DesignerPanel.Name = "DesignerPanel";
-            this.DesignerPanel.Size = new System.Drawing.Size(1140, 812);
+            this.DesignerPanel.Size = new System.Drawing.Size(1086, 688);
             this.DesignerPanel.TabIndex = 3;
             this.DesignerPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.DesignerPanel_Paint);
             // 
@@ -415,7 +415,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1440, 912);
+            this.ClientSize = new System.Drawing.Size(1386, 788);
             this.Controls.Add(this.DesignerPanel);
             this.Controls.Add(this.AddExpression);
             this.Controls.Add(this.RightPanel);

@@ -191,35 +191,32 @@ namespace LogicGateProject
             PublicVariables.TruthTable.ResetTable(InputGates, OutputGates);
             if (InputGates.Count != 0)
             {
-                AddToList(InputGates, OutputGates);
-                GatesTruthTable(InputGates, OutputGates, 0);
-            }
-            for (int i = 0; i < InputGates.Count; i++)
-            {
-                if (OriginalInputs[i])
-                    InputGates[i].TrueResult();
-                else
-                    InputGates[i].FalseResult();
-                InputGates[i].UpdateLogic();
-            }
-            PublicVariables.TruthTable.CreateTable();
-            PublicVariables.TruthTable.Show();
-        }
-
-        private void GatesTruthTable(List<LogicGates> InputGates, List<LogicGates> OutputGates, int Start)
-        {
-            for (int i = InputGates.Count - 1; i >= 0; i--)
-            {
-                if (!InputGates[i].GetResult())
+                for (int i = 0; i < Convert.ToInt32(Math.Pow(2.0, InputGates.Count)); i++)
                 {
-                    InputGates[i].TrueResult();
-                    InputGates[i].UpdateLogic();
+                    string Binary = Convert.ToString(i, 2);
+                    for (int j = Binary.Length - 1; j >= 0; j--)
+                    {
+                        if (Binary[j] == '0')
+                        {
+                            InputGates[InputGates.Count - Binary.Length + j].FalseResult();
+                        }
+                        else
+                        {
+                            InputGates[InputGates.Count - Binary.Length + j].TrueResult();
+                        }
+                    }
                     AddToList(InputGates, OutputGates);
                 }
-                else
+                for (int i = 0; i < InputGates.Count; i++)
                 {
-
+                    if (OriginalInputs[i])
+                        InputGates[i].TrueResult();
+                    else
+                        InputGates[i].FalseResult();
+                    InputGates[i].UpdateLogic();
                 }
+                PublicVariables.TruthTable.CreateTable();
+                PublicVariables.TruthTable.Show();
             }
         }
 
