@@ -76,7 +76,7 @@
             // 
             // OutputBox
             // 
-            this.OutputBox.BackColor = System.Drawing.Color.DimGray;
+            this.OutputBox.BackColor = System.Drawing.Color.Red;
             this.OutputBox.Location = new System.Drawing.Point(62, 23);
             this.OutputBox.Name = "OutputBox";
             this.OutputBox.Size = new System.Drawing.Size(30, 30);

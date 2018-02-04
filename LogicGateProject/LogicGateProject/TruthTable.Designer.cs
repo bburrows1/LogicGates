@@ -41,7 +41,7 @@
             this.Quit.FlatAppearance.BorderSize = 0;
             this.Quit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Quit.Image = global::LogicGateProject.Properties.Resources.Quit;
-            this.Quit.Location = new System.Drawing.Point(501, 0);
+            this.Quit.Location = new System.Drawing.Point(213, 0);
             this.Quit.Name = "Quit";
             this.Quit.Size = new System.Drawing.Size(64, 62);
             this.Quit.TabIndex = 6;
@@ -55,18 +55,20 @@
             this.Header.Dock = System.Windows.Forms.DockStyle.Top;
             this.Header.Location = new System.Drawing.Point(0, 0);
             this.Header.Name = "Header";
-            this.Header.Size = new System.Drawing.Size(565, 62);
+            this.Header.Size = new System.Drawing.Size(277, 62);
             this.Header.TabIndex = 3;
             this.Header.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Header_MouseDown);
             // 
             // ListView
             // 
+            this.ListView.BackColor = System.Drawing.Color.White;
             this.ListView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ListView.FullRowSelect = true;
             this.ListView.GridLines = true;
+            this.ListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.ListView.Location = new System.Drawing.Point(0, 62);
             this.ListView.Name = "ListView";
-            this.ListView.Size = new System.Drawing.Size(565, 413);
+            this.ListView.Size = new System.Drawing.Size(277, 352);
             this.ListView.TabIndex = 4;
             this.ListView.UseCompatibleStateImageBehavior = false;
             this.ListView.View = System.Windows.Forms.View.Details;
@@ -75,7 +77,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(565, 475);
+            this.ClientSize = new System.Drawing.Size(277, 414);
             this.Controls.Add(this.ListView);
             this.Controls.Add(this.Header);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;

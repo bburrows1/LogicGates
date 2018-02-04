@@ -40,6 +40,7 @@ namespace LogicGateProject
                 if (PublicVariables.Delete)
                 {
                     DeleteGate();
+                    PublicVariables.Gates.Remove(this);
                 }
                 else 
                     MouseDownLocation = e.Location;
@@ -367,17 +368,15 @@ namespace LogicGateProject
 
         public override void UpdateLogic()
         {
-            if (CheckConnected())
-            {
-                OutputBox.BackColor = Color.Gray;
-            }
             if(TopInConnection.GetResult())
             {
                 OutputBox.BackColor = Color.Green;
+                TrueResult();
             }
             else 
             {
                 OutputBox.BackColor = Color.Red;
+                FalseResult();
             }
         }
         public override int GetID()

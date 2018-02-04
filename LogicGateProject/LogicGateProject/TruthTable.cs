@@ -22,22 +22,17 @@ namespace LogicGateProject
             ListView.Clear();
             foreach (LogicGates Input in Inputs)
             {
-                ListView.Columns.Add(Input.GetID().ToString());
+                ListView.Columns.Add(Input.GetID().ToString(), 25);
             }
             foreach (LogicGates Output in Outputs)
             {
-                ListView.Columns.Add(Output.GetID().ToString());
+                ListView.Columns.Add(Output.GetID().ToString(), 25);
             }
         }
 
         public void AddToTable(List<string> Inputs)
         {
             ListView.Items.Add(new ListViewItem(Inputs.ToArray()));
-        }
-
-        public void CreateTable()
-        {
-
         }
 
         private void Quit_Click(object sender, EventArgs e)

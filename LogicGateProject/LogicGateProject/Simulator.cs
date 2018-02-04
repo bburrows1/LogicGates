@@ -165,6 +165,7 @@ namespace LogicGateProject
                 {
                     Gate.DeleteGate();
                 }
+                PublicVariables.Gates.Clear();
             }
             Invalidate();
         }
@@ -205,6 +206,12 @@ namespace LogicGateProject
                             InputGates[InputGates.Count - Binary.Length + j].TrueResult();
                         }
                     }
+                    OutputGates.Clear();
+                    foreach (LogicGates Gate in PublicVariables.Gates)
+                    {
+                        if (Gate.GetType() == typeof(Output))
+                            OutputGates.Add(Gate);
+                    }
                     AddToList(InputGates, OutputGates);
                 }
                 for (int i = 0; i < InputGates.Count; i++)
@@ -213,32 +220,30 @@ namespace LogicGateProject
                         InputGates[i].TrueResult();
                     else
                         InputGates[i].FalseResult();
-                    InputGates[i].UpdateLogic();
                 }
-                PublicVariables.TruthTable.CreateTable();
                 PublicVariables.TruthTable.Show();
+                PublicVariables.TruthTable.BringToFront();
             }
         }
 
         private void AddToList(List<LogicGates> InputGates, List<LogicGates> OutputGates)
         {
-            List<string> Inputs = new List<string>();
-            List<string> Outputs = new List<string>();
+            List<string> Results = new List<string>();
             foreach (LogicGates Gate in InputGates)
             {
                 if (Gate.GetResult())
-                    Inputs.Add("1");
+                    Results.Add("1");
                 else
-                    Inputs.Add("0");
+                    Results.Add("0");
             }
             foreach (LogicGates Gate in OutputGates)
             {
                 if (Gate.GetResult())
-                    Inputs.Add("1");
+                    Results.Add("1");
                 else
-                    Inputs.Add("0");
+                    Results.Add("0");
             }
-            PublicVariables.TruthTable.AddToTable((Inputs.Concat(Outputs)).ToList());
+            PublicVariables.TruthTable.AddToTable(Results);
         }
     }
 }
