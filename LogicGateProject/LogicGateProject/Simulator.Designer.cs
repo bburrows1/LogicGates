@@ -324,6 +324,7 @@
             this.LoadFile.Size = new System.Drawing.Size(64, 67);
             this.LoadFile.TabIndex = 2;
             this.LoadFile.UseVisualStyleBackColor = true;
+            this.LoadFile.Click += new System.EventHandler(this.LoadFile_Click);
             // 
             // Save
             // 
@@ -337,6 +338,7 @@
             this.Save.Size = new System.Drawing.Size(64, 67);
             this.Save.TabIndex = 1;
             this.Save.UseVisualStyleBackColor = true;
+            this.Save.Click += new System.EventHandler(this.Save_Click);
             // 
             // Back
             // 

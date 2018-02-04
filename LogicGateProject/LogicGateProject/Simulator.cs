@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace LogicGateProject
 {
@@ -252,6 +253,63 @@ namespace LogicGateProject
                     Results.Add("0");
             }
             PublicVariables.TruthTable.AddToTable(Results);
+        }
+
+        private void Save_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog SaveFileDialog = new SaveFileDialog();
+            SaveFileDialog.InitialDirectory = Application.StartupPath + "\\Saves";
+            SaveFileDialog.DefaultExt = "txt";
+            SaveFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
+            if (SaveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string Data = "";
+                StreamWriter Writer = new StreamWriter(SaveFileDialog.OpenFile());
+                foreach (LogicGates Gate in PublicVariables.Gates)
+                {
+                    Data += Gate.GetID() + ":" + Gate.GetType().ToString() + " ";
+                }
+                Data.TrimEnd(' ');
+                Writer.WriteLine(Data);
+                foreach (LogicGates Gate in PublicVariables.Gates)
+                {
+                    Writer.WriteLine(Gate.GetSaveData());
+                }
+                Writer.Dispose();
+                Writer.Close();
+            }
+        }
+
+        private void LoadFile_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog OpenFileDialog = new OpenFileDialog();
+            OpenFileDialog.InitialDirectory = Application.StartupPath + "\\Saves";
+            OpenFileDialog.DefaultExt = "txt";
+            OpenFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
+            if (OpenFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                StreamReader Reader = new StreamReader(OpenFileDialog.OpenFile());
+                string Data = Reader.ReadLine();
+                string[] FirstLine = Data.Split(' ');
+                Array.Resize(ref FirstLine, FirstLine.Length - 1);
+                foreach (string Line in FirstLine) 
+                {
+                    string[] Info = Line.Split(':');
+                    switch(Info[1])
+                    {
+                        case "LogicGateProject.Input":
+                            Input Input = new Input();
+                            Input.SetID(int.Parse(Info[0]));
+                            break;
+                    }
+                }
+                while ((Data = Reader.ReadLine()) != null)
+                {
+                    
+                }
+                Reader.Dispose();
+                Reader.Close();
+            }
         }
     }
 }

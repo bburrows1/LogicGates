@@ -32,6 +32,7 @@ namespace LogicGateProject
 
         //Ensures each gate has a unique ID
         public static List<LogicGates> Gates = new List<LogicGates>();
+        public static int ID = 1;
         public static int InputID = 1;
         public static int OutputID = 1;
 

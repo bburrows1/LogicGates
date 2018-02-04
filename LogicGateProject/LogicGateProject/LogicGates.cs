@@ -12,6 +12,7 @@ namespace LogicGateProject
 {
     public class LogicGates : UserControl
     {
+        private int ID;
         protected LogicGates TopInConnection;
         protected LogicGates BotInConnection;
         protected List<LogicGates> OutConnection = new List<LogicGates>();
@@ -28,9 +29,16 @@ namespace LogicGateProject
         public void CreateGate()
         {
             PublicVariables.Gates.Add(this);
+            ID = PublicVariables.ID;
+            PublicVariables.ID++;
             BackColor = System.Drawing.Color.Transparent;
             Location = new System.Drawing.Point(0, 0);
             Size = new System.Drawing.Size(131, 93);
+        }
+
+        public string GetID()
+        {
+            return ID.ToString();
         }
 
         public void Down(object sender, MouseEventArgs e)
@@ -310,7 +318,7 @@ namespace LogicGateProject
             }
         }
 
-        public virtual int GetID()
+        public virtual int GetTableID()
         {
             return 0;
         }
@@ -319,20 +327,55 @@ namespace LogicGateProject
         {
 
         }
+
+        public string GetSaveData()
+        {
+            string Data = "";
+            Data += ID + ",";
+            Data += Location.ToString() + ",";
+            if (TopInConnection != null)
+                Data += TopInConnection.GetID() + ",";
+            else
+                Data += "null,";
+            if (BotInConnection != null)
+                Data += BotInConnection.GetID() + ",";
+            else
+                Data += "null,";
+            if (OutConnection.Count != 0)
+            {
+                foreach (LogicGates Output in OutConnection)
+                {
+                    Data += Output.ID + ",";
+                }
+            }
+            else
+                Data += "null,";
+            return Data;
+        }
+
+        public void SetLocation (Point NewLocation)
+        {
+            Location = NewLocation;
+        }
+
+        public void SetID(int NewID)
+        {
+            ID = NewID;
+        }
     }
 
 
     public partial class Input : LogicGates
     {
-        private int GateID;
+        private int InputGateID;
 
-        public void SetID()
+        public void SetInputID()
         {
-            GateID = PublicVariables.InputID;
+            InputGateID = PublicVariables.InputID;
             PublicVariables.InputID++;
-            IDLabel.Text = GateID.ToString();
+            IDLabel.Text = InputGateID.ToString();
         }
-        public void SetLocations()
+        public void SetMarkers()
         {
             OutMarker = new Point(130, 37);
         }
@@ -348,21 +391,21 @@ namespace LogicGateProject
             return true;
         }
 
-        public override int GetID()
+        public override int GetTableID()
         {
-            return GateID;
+            return InputGateID;
         }
     }
 
     public partial class Output : LogicGates
     {
-        private int GateID;
+        private int OutputGateID;
 
-        public void SetID()
+        public void SetOutputID()
         {
-            GateID = PublicVariables.OutputID;
+            OutputGateID = PublicVariables.OutputID;
             PublicVariables.OutputID++;
-            IDLabel.Text = GateID.ToString();
+            IDLabel.Text = OutputGateID.ToString();
         }
 
         public void SetLocations()
@@ -397,9 +440,9 @@ namespace LogicGateProject
             }
             UpdateStep();
         }
-        public override int GetID()
+        public override int GetTableID()
         {
-            return GateID;
+            return OutputGateID;
         }
     }
 

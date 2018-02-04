@@ -22,7 +22,7 @@ namespace LogicGateProject
             SetLocations();
             PublicVariables.Simulator.AddToDesignerPanel(this);
             UpdateLocations();
-            SetID();
+            SetOutputID();
         }
 
         public void DragBox_MouseDown(object sender, MouseEventArgs e)

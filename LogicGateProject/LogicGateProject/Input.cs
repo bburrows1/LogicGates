@@ -19,10 +19,10 @@ namespace LogicGateProject
             Out.FlatAppearance.MouseOverBackColor = Color.FromArgb(100, Color.Gray);
             Out.FlatAppearance.MouseDownBackColor = Color.FromArgb(100, Color.DarkGray);
             CreateGate();
-            SetLocations();
+            SetMarkers();
             PublicVariables.Simulator.AddToDesignerPanel(this);
             UpdateLocations();
-            SetID();
+            SetInputID();
         }
 
         public void DragBox_MouseDown(object sender, MouseEventArgs e)
