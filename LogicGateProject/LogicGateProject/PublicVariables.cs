@@ -47,5 +47,8 @@ namespace LogicGateProject
 
         //Tells gates to delete
         public static bool Delete;
+
+        //Tells gates to work step by step
+        public static bool Step;
     }
 }

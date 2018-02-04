@@ -77,11 +77,13 @@ namespace LogicGateProject
             if (TopInConnection != null)
             {
                 TopInConnection.OutConnection.Remove(this);
+                TopInConnection.UpdateLogic();
                 TopInConnection = null;
             }
             if (BotInConnection != null)
             {
                 BotInConnection.OutConnection.Remove(this);
+                BotInConnection.UpdateLogic();
                 BotInConnection = null;
             }
             foreach(LogicGates Output in OutConnection)
@@ -94,6 +96,7 @@ namespace LogicGateProject
                 {
                     Output.BotInConnection = null;
                 }
+                Output.UpdateLogic();
             }
             OutConnection.Clear();
             PublicVariables.Delete = false;
@@ -311,6 +314,11 @@ namespace LogicGateProject
         {
             return 0;
         }
+
+        public virtual void UpdateStep()
+        {
+
+        }
     }
 
 
@@ -332,6 +340,7 @@ namespace LogicGateProject
         public override void UpdateLogic()
         {
             UpdateOutputs();
+            UpdateStep();
         }
 
         public override bool CheckConnected()
@@ -368,16 +377,25 @@ namespace LogicGateProject
 
         public override void UpdateLogic()
         {
-            if(TopInConnection.GetResult())
+            if (TopInConnection != null)
             {
-                OutputBox.BackColor = Color.Green;
-                TrueResult();
+                if (TopInConnection.GetResult())
+                {
+                    OutputBox.BackColor = Color.Green;
+                    TrueResult();
+                }
+                else
+                {
+                    OutputBox.BackColor = Color.Red;
+                    FalseResult();
+                }
             }
-            else 
+            else
             {
                 OutputBox.BackColor = Color.Red;
                 FalseResult();
             }
+            UpdateStep();
         }
         public override int GetID()
         {
@@ -401,6 +419,40 @@ namespace LogicGateProject
                 bool LocalResult = TopInConnection.GetResult() && BotInConnection.GetResult();
                 CheckUpdate(LocalResult);
             }
+            else
+                CheckUpdate(false);
+            UpdateStep();
+        }
+
+        public override void UpdateStep()
+        {
+            if (PublicVariables.Step)
+            {
+                if (TopInConnection != null)
+                {
+                    if (TopInConnection.GetResult())
+                        TopButton.BackColor = Color.FromArgb(100, Color.Green);
+                    else
+                        TopButton.BackColor = Color.FromArgb(100, Color.Red);
+                }
+                if (BotInConnection != null)
+                {
+                    if (BotInConnection.GetResult())
+                        BottomButton.BackColor = Color.FromArgb(100, Color.Green);
+                    else
+                        BottomButton.BackColor = Color.FromArgb(100, Color.Red);
+                }
+                if (GetResult())
+                    Out.BackColor = Color.FromArgb(100, Color.Green);
+                else
+                    Out.BackColor = Color.FromArgb(100, Color.Red);
+            }
+            else
+            {
+                TopButton.BackColor = Color.Transparent;
+                BottomButton.BackColor = Color.Transparent;
+                Out.BackColor = Color.Transparent;
+            }
         }
     }
 
@@ -420,6 +472,40 @@ namespace LogicGateProject
                 bool LocalResult = TopInConnection.GetResult() || BotInConnection.GetResult();
                 CheckUpdate(LocalResult);
             }
+            else
+                CheckUpdate(false);
+            UpdateStep();
+        }
+
+        public override void UpdateStep()
+        {
+            if (PublicVariables.Step)
+            {
+                if (TopInConnection != null)
+                {
+                    if (TopInConnection.GetResult())
+                        TopButton.BackColor = Color.FromArgb(100, Color.Green);
+                    else
+                        TopButton.BackColor = Color.FromArgb(100, Color.Red);
+                }
+                if (BotInConnection != null)
+                {
+                    if (BotInConnection.GetResult())
+                        BottomButton.BackColor = Color.FromArgb(100, Color.Green);
+                    else
+                        BottomButton.BackColor = Color.FromArgb(100, Color.Red);
+                }
+                if (GetResult())
+                    Out.BackColor = Color.FromArgb(100, Color.Green);
+                else
+                    Out.BackColor = Color.FromArgb(100, Color.Red);
+            }
+            else
+            {
+                TopButton.BackColor = Color.Transparent;
+                BottomButton.BackColor = Color.Transparent;
+                Out.BackColor = Color.Transparent;
+            }
         }
     }
 
@@ -435,12 +521,39 @@ namespace LogicGateProject
         {
             return (TopInConnection != null);
         }
+
         public override void UpdateLogic()
         {
             if (CheckConnected())
             {
                 bool LocalResult = !TopInConnection.GetResult();
                 CheckUpdate(LocalResult);
+            }
+            else
+                CheckUpdate(false);
+            UpdateStep();
+        }
+
+        public override void UpdateStep()
+        {
+            if (PublicVariables.Step)
+            {
+                if (TopInConnection != null)
+                {
+                    if (TopInConnection.GetResult())
+                        In.BackColor = Color.FromArgb(100, Color.Green);
+                    else
+                        In.BackColor = Color.FromArgb(100, Color.Red);
+                }
+                if (GetResult())
+                    Out.BackColor = Color.FromArgb(100, Color.Green);
+                else
+                    Out.BackColor = Color.FromArgb(100, Color.Red);
+            }
+            else
+            {
+                In.BackColor = Color.Transparent;
+                Out.BackColor = Color.Transparent;
             }
         }
     }
@@ -461,6 +574,40 @@ namespace LogicGateProject
                 bool LocalResult = TopInConnection.GetResult() != BotInConnection.GetResult();
                 CheckUpdate(LocalResult);
             }
+            else
+                CheckUpdate(false);
+            UpdateStep();
+        }
+
+        public override void UpdateStep()
+        {
+            if (PublicVariables.Step)
+            {
+                if (TopInConnection != null)
+                {
+                    if (TopInConnection.GetResult())
+                        TopButton.BackColor = Color.FromArgb(100, Color.Green);
+                    else
+                        TopButton.BackColor = Color.FromArgb(100, Color.Red);
+                }
+                if (BotInConnection != null)
+                {
+                    if (BotInConnection.GetResult())
+                        BottomButton.BackColor = Color.FromArgb(100, Color.Green);
+                    else
+                        BottomButton.BackColor = Color.FromArgb(100, Color.Red);
+                }
+                if (GetResult())
+                    Out.BackColor = Color.FromArgb(100, Color.Green);
+                else
+                    Out.BackColor = Color.FromArgb(100, Color.Red);
+            }
+            else
+            {
+                TopButton.BackColor = Color.Transparent;
+                BottomButton.BackColor = Color.Transparent;
+                Out.BackColor = Color.Transparent;
+            }
         }
     }
 
@@ -479,6 +626,40 @@ namespace LogicGateProject
             {
                 bool LocalResult = !(TopInConnection.GetResult() && BotInConnection.GetResult());
                 CheckUpdate(LocalResult);
+                UpdateStep();
+            }
+            else
+                CheckUpdate(false);
+        }
+
+        public override void UpdateStep()
+        {
+            if (PublicVariables.Step)
+            {
+                if (TopInConnection != null)
+                {
+                    if (TopInConnection.GetResult())
+                        TopButton.BackColor = Color.FromArgb(100, Color.Green);
+                    else
+                        TopButton.BackColor = Color.FromArgb(100, Color.Red);
+                }
+                if (BotInConnection != null)
+                {
+                    if (BotInConnection.GetResult())
+                        BottomButton.BackColor = Color.FromArgb(100, Color.Green);
+                    else
+                        BottomButton.BackColor = Color.FromArgb(100, Color.Red);
+                }
+                if (GetResult())
+                    Out.BackColor = Color.FromArgb(100, Color.Green);
+                else
+                    Out.BackColor = Color.FromArgb(100, Color.Red);
+            }
+            else
+            {
+                TopButton.BackColor = Color.Transparent;
+                BottomButton.BackColor = Color.Transparent;
+                Out.BackColor = Color.Transparent;
             }
         }
     }
@@ -498,6 +679,38 @@ namespace LogicGateProject
             {
                 bool LocalResult = !(TopInConnection.GetResult() || BotInConnection.GetResult());
                 CheckUpdate(LocalResult);
+                UpdateStep();
+            }
+        }
+
+        public override void UpdateStep()
+        {
+            if (PublicVariables.Step)
+            {
+                if (TopInConnection != null)
+                {
+                    if (TopInConnection.GetResult())
+                        TopButton.BackColor = Color.FromArgb(100, Color.Green);
+                    else
+                        TopButton.BackColor = Color.FromArgb(100, Color.Red);
+                }
+                if (BotInConnection != null)
+                {
+                    if (BotInConnection.GetResult())
+                        BottomButton.BackColor = Color.FromArgb(100, Color.Green);
+                    else
+                        BottomButton.BackColor = Color.FromArgb(100, Color.Red);
+                }
+                if (GetResult())
+                    Out.BackColor = Color.FromArgb(100, Color.Green);
+                else
+                    Out.BackColor = Color.FromArgb(100, Color.Red);
+            }
+            else
+            {
+                TopButton.BackColor = Color.Transparent;
+                BottomButton.BackColor = Color.Transparent;
+                Out.BackColor = Color.Transparent;
             }
         }
     }

@@ -127,7 +127,6 @@ namespace LogicGateProject
             {
                 Gate.ResetTraversed();
             }
-
             //Draw lines
             for (int i = 0; i < PublicVariables.InputPoints.Count; i++)
             {
@@ -137,6 +136,15 @@ namespace LogicGateProject
                 e.Graphics.DrawLine(PublicVariables.Linepen, PublicVariables.InputPoints[i], InputMidPoint);
                 e.Graphics.DrawLine(PublicVariables.Linepen, InputMidPoint, OutputMidPoint);
                 e.Graphics.DrawLine(PublicVariables.Linepen, OutputMidPoint, PublicVariables.OutputPoints[i]);
+            }
+        }
+
+        private void StepByStep_Click(object sender, EventArgs e)
+        {
+            PublicVariables.Step = !PublicVariables.Step;
+            foreach (LogicGates Gate in PublicVariables.Gates)
+            {
+                Gate.UpdateStep();
             }
         }
 

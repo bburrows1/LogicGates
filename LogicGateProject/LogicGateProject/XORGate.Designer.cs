@@ -64,7 +64,7 @@
             // 
             this.BottomButton.FlatAppearance.BorderSize = 0;
             this.BottomButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BottomButton.Location = new System.Drawing.Point(0, 43);
+            this.BottomButton.Location = new System.Drawing.Point(0, 46);
             this.BottomButton.Name = "BottomButton";
             this.BottomButton.Size = new System.Drawing.Size(75, 46);
             this.BottomButton.TabIndex = 2;
@@ -77,7 +77,7 @@
             this.Out.FlatAppearance.BorderSize = 0;
             this.Out.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Out.ForeColor = System.Drawing.Color.Transparent;
-            this.Out.Location = new System.Drawing.Point(75, -3);
+            this.Out.Location = new System.Drawing.Point(75, 0);
             this.Out.Name = "Out";
             this.Out.Size = new System.Drawing.Size(75, 89);
             this.Out.TabIndex = 3;

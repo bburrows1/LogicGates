@@ -102,6 +102,7 @@
             this.StepByStep.TabIndex = 6;
             this.StepByStep.Text = "Step-By-Step";
             this.StepByStep.UseVisualStyleBackColor = true;
+            this.StepByStep.Click += new System.EventHandler(this.StepByStep_Click);
             // 
             // CreateExpression
             // 
