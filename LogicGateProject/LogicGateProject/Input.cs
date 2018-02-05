@@ -44,10 +44,15 @@ namespace LogicGateProject
         {
             ToggleResult();
             if (GetResult())
-                this.InputButton.BackColor = Color.Green;
+                InputButton.BackColor = Color.Green;
             else
-                this.InputButton.BackColor = Color.Red;
+                InputButton.BackColor = Color.Red;
             UpdateLogic();
+        }
+
+        private void ClockButton_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

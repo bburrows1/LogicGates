@@ -49,6 +49,7 @@ namespace LogicGateProject
                 {
                     DeleteGate();
                     PublicVariables.Gates.Remove(this);
+                    PublicVariables.Simulator.Invalidate();
                 }
                 else 
                     MouseDownLocation = e.Location;
@@ -109,7 +110,7 @@ namespace LogicGateProject
             OutConnection.Clear();
             PublicVariables.Delete = false;
             PublicVariables.Simulator.DeleteAllButton();
-            Hide();
+            Dispose();
         }
 
         public bool IsValidInput(LogicGates Input, LogicGates Output, bool IsTop)
@@ -184,7 +185,7 @@ namespace LogicGateProject
             }
         }
 
-        public void CreateConnection(LogicGates Input, LogicGates Output, bool IsTop)
+        private void CreateConnection(LogicGates Input, LogicGates Output, bool IsTop)
         {
             if (IsTop)
             {
@@ -200,7 +201,7 @@ namespace LogicGateProject
             UpdateLogic();
         }
 
-        public void RemoveConnection(LogicGates Input, bool IsTop)
+        private void RemoveConnection(LogicGates Input, bool IsTop)
         {
             if (IsTop)
             {
@@ -332,7 +333,7 @@ namespace LogicGateProject
         {
             string Data = "";
             Data += ID + ",";
-            Data += Location.ToString() + ",";
+            Data += Location.X.ToString() + " " + Location.Y.ToString() + ",";
             if (TopInConnection != null)
                 Data += TopInConnection.GetID() + ",";
             else
@@ -341,26 +342,29 @@ namespace LogicGateProject
                 Data += BotInConnection.GetID() + ",";
             else
                 Data += "null,";
-            if (OutConnection.Count != 0)
-            {
-                foreach (LogicGates Output in OutConnection)
-                {
-                    Data += Output.ID + ",";
-                }
-            }
-            else
-                Data += "null,";
             return Data;
         }
 
-        public void SetLocation (Point NewLocation)
+        public void SetLocation (int X, int Y)
         {
+            Point NewLocation = new Point(X, Y);
             Location = NewLocation;
+            UpdateLocations();
         }
 
         public void SetID(int NewID)
         {
             ID = NewID;
+        }
+
+        public void SetTopInConnection(LogicGates Gate)
+        {
+            CreateConnection(this, Gate, true);
+        }
+
+        public void SetBotInConnection(LogicGates Gate)
+        {
+            CreateConnection(this, Gate, false);
         }
     }
 
@@ -368,6 +372,7 @@ namespace LogicGateProject
     public partial class Input : LogicGates
     {
         private int InputGateID;
+        private float WaitTime;
 
         public void SetInputID()
         {
@@ -375,6 +380,7 @@ namespace LogicGateProject
             PublicVariables.InputID++;
             IDLabel.Text = InputGateID.ToString();
         }
+
         public void SetMarkers()
         {
             OutMarker = new Point(130, 37);
@@ -394,6 +400,16 @@ namespace LogicGateProject
         public override int GetTableID()
         {
             return InputGateID;
+        }
+
+        public void SetWaitTime(float Time)
+        {
+            WaitTime = Time;
+        }
+
+        public float GetWaitTime()
+        {
+            return WaitTime;
         }
     }
 

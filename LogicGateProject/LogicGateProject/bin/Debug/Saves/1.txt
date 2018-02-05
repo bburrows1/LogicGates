@@ -1,2 +1,2 @@
 1:LogicGateProject.Input 
-1,{X=0,Y=0},null,null,null,
+1,0 0,null,null,

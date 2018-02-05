@@ -33,6 +33,7 @@
             this.Gate = new System.Windows.Forms.PictureBox();
             this.InputButton = new System.Windows.Forms.Button();
             this.IDLabel = new System.Windows.Forms.Label();
+            this.ClockButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DragBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Gate)).BeginInit();
             this.SuspendLayout();
@@ -96,11 +97,26 @@
             this.IDLabel.Size = new System.Drawing.Size(0, 18);
             this.IDLabel.TabIndex = 6;
             // 
+            // ClockButton
+            // 
+            this.ClockButton.BackColor = System.Drawing.Color.Transparent;
+            this.ClockButton.FlatAppearance.BorderSize = 0;
+            this.ClockButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ClockButton.ForeColor = System.Drawing.Color.Transparent;
+            this.ClockButton.Image = global::LogicGateProject.Properties.Resources.Clock;
+            this.ClockButton.Location = new System.Drawing.Point(86, 4);
+            this.ClockButton.Name = "ClockButton";
+            this.ClockButton.Size = new System.Drawing.Size(17, 17);
+            this.ClockButton.TabIndex = 7;
+            this.ClockButton.UseVisualStyleBackColor = false;
+            this.ClockButton.Click += new System.EventHandler(this.ClockButton_Click);
+            // 
             // Input
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
+            this.Controls.Add(this.ClockButton);
             this.Controls.Add(this.IDLabel);
             this.Controls.Add(this.InputButton);
             this.Controls.Add(this.DragBox);
@@ -122,5 +138,6 @@
         private System.Windows.Forms.PictureBox DragBox;
         private System.Windows.Forms.Button InputButton;
         private System.Windows.Forms.Label IDLabel;
+        private System.Windows.Forms.Button ClockButton;
     }
 }

@@ -168,14 +168,11 @@ namespace LogicGateProject
         //Delete all gates
         private void DeleteAll_Click(object sender, EventArgs e)
         {
-            if (PublicVariables.Delete)
+            foreach (LogicGates Gate in PublicVariables.Gates)
             {
-                foreach (LogicGates Gate in PublicVariables.Gates)
-                {
-                    Gate.DeleteGate();
-                }
-                PublicVariables.Gates.Clear();
+                Gate.DeleteGate();
             }
+            PublicVariables.Gates.Clear();
             Invalidate();
         }
 
@@ -282,12 +279,14 @@ namespace LogicGateProject
 
         private void LoadFile_Click(object sender, EventArgs e)
         {
+            Dictionary<int, LogicGates> Gates = new Dictionary<int, LogicGates>();
             OpenFileDialog OpenFileDialog = new OpenFileDialog();
             OpenFileDialog.InitialDirectory = Application.StartupPath + "\\Saves";
             OpenFileDialog.DefaultExt = "txt";
             OpenFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
             if (OpenFileDialog.ShowDialog() == DialogResult.OK)
             {
+                DeleteAll_Click(sender, e);
                 StreamReader Reader = new StreamReader(OpenFileDialog.OpenFile());
                 string Data = Reader.ReadLine();
                 string[] FirstLine = Data.Split(' ');
@@ -300,12 +299,54 @@ namespace LogicGateProject
                         case "LogicGateProject.Input":
                             Input Input = new Input();
                             Input.SetID(int.Parse(Info[0]));
+                            Gates.Add(int.Parse(Input.GetID()), Input);
+                            break;
+                        case "LogicGateProject.Output":
+                            Output Output = new Output();
+                            Output.SetID(int.Parse(Info[0]));
+                            Gates.Add(int.Parse(Output.GetID()), Output);
+                            break;
+                        case "LogicGateProject.ANDGate":
+                            ANDGate ANDGate = new ANDGate();
+                            ANDGate.SetID(int.Parse(Info[0]));
+                            Gates.Add(int.Parse(ANDGate.GetID()), ANDGate);
+                            break;
+                        case "LogicGateProject.ORGate":
+                            ORGate ORGate = new ORGate();
+                            ORGate.SetID(int.Parse(Info[0]));
+                            Gates.Add(int.Parse(ORGate.GetID()), ORGate);
+                            break;
+                        case "LogicGateProject.NOTGate":
+                            NOTGate NOTGate = new NOTGate();
+                            NOTGate.SetID(int.Parse(Info[0]));
+                            Gates.Add(int.Parse(NOTGate.GetID()), NOTGate);
+                            break;
+                        case "LogicGateProject.XORGate":
+                            XORGate XORGate = new XORGate();
+                            XORGate.SetID(int.Parse(Info[0]));
+                            Gates.Add(int.Parse(XORGate.GetID()), XORGate);
+                            break;
+                        case "LogicGateProject.NANDGate":
+                            NANDGate NANDGate = new NANDGate();
+                            NANDGate.SetID(int.Parse(Info[0]));
+                            Gates.Add(int.Parse(NANDGate.GetID()), NANDGate);
+                            break;
+                        case "LogicGateProject.NORGate":
+                            NORGate NORGate = new NORGate();
+                            NORGate.SetID(int.Parse(Info[0]));
+                            Gates.Add(int.Parse(NORGate.GetID()), NORGate);
                             break;
                     }
                 }
                 while ((Data = Reader.ReadLine()) != null)
                 {
-                    
+                    string[] Line = Data.Split(',');
+                    string[] Location = Line[1].Split(' ');
+                    Gates[int.Parse(Line[0])].SetLocation(int.Parse(Location[0]), int.Parse(Location[1]));
+                    if (Line[2] != "null")
+                        Gates[int.Parse(Line[0])].SetTopInConnection(Gates[int.Parse(Line[2])]);
+                    if (Line[3] != "null")
+                        Gates[int.Parse(Line[0])].SetBotInConnection(Gates[int.Parse(Line[3])]);
                 }
                 Reader.Dispose();
                 Reader.Close();
