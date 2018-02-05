@@ -28,12 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.DragBox = new System.Windows.Forms.PictureBox();
             this.Out = new System.Windows.Forms.Button();
             this.Gate = new System.Windows.Forms.PictureBox();
             this.InputButton = new System.Windows.Forms.Button();
             this.IDLabel = new System.Windows.Forms.Label();
             this.ClockButton = new System.Windows.Forms.Button();
+            this.Timer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.DragBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Gate)).BeginInit();
             this.SuspendLayout();
@@ -111,6 +113,10 @@
             this.ClockButton.UseVisualStyleBackColor = false;
             this.ClockButton.Click += new System.EventHandler(this.ClockButton_Click);
             // 
+            // Timer
+            // 
+            this.Timer.Tick += new System.EventHandler(this.Timer_Tick);
+            // 
             // Input
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -139,5 +145,6 @@
         private System.Windows.Forms.Button InputButton;
         private System.Windows.Forms.Label IDLabel;
         private System.Windows.Forms.Button ClockButton;
+        private System.Windows.Forms.Timer Timer;
     }
 }

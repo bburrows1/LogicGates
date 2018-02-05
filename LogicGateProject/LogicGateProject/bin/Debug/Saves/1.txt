@@ -1,2 +1,0 @@
-1:LogicGateProject.Input 
-1,0 0,null,null,

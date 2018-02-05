@@ -329,10 +329,10 @@ namespace LogicGateProject
 
         }
 
-        public string GetSaveData()
+        public virtual string GetSaveData()
         {
             string Data = "";
-            Data += ID + ",";
+            Data += GetID() + ",";
             Data += Location.X.ToString() + " " + Location.Y.ToString() + ",";
             if (TopInConnection != null)
                 Data += TopInConnection.GetID() + ",";
@@ -341,7 +341,7 @@ namespace LogicGateProject
             if (BotInConnection != null)
                 Data += BotInConnection.GetID() + ",";
             else
-                Data += "null,";
+                Data += "null";
             return Data;
         }
 
@@ -410,6 +410,23 @@ namespace LogicGateProject
         public float GetWaitTime()
         {
             return WaitTime;
+        }
+
+        public override string GetSaveData()
+        {
+            string Data = "";
+            Data += GetID() + ",";
+            Data += Location.X.ToString() + " " + Location.Y.ToString() + ",";
+            if (TopInConnection != null)
+                Data += TopInConnection.GetID() + ",";
+            else
+                Data += "null,";
+            if (BotInConnection != null)
+                Data += BotInConnection.GetID() + ",";
+            else
+                Data += "null,";
+            Data += WaitTime.ToString();
+            return Data;
         }
     }
 

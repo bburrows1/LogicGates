@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.VisualBasic;
 
 namespace LogicGateProject
 {
@@ -52,7 +53,25 @@ namespace LogicGateProject
 
         private void ClockButton_Click(object sender, EventArgs e)
         {
+            string NewTimeString;
+            float NewTime;
+            do
+            {
+                NewTimeString = Interaction.InputBox("Select Interval (0 - 1000 Seconds)", "Timer Interval", GetWaitTime().ToString());
+            } while (!(float.TryParse(NewTimeString, out NewTime) && NewTime >= 0 && NewTime <= 1000));
+            SetWaitTime(NewTime);
+            if (NewTime == 0)
+                Timer.Enabled = false;
+            else
+            {
+                Timer.Interval = (int)((GetWaitTime() * 1000));
+                Timer.Enabled = true;
+            }
+        }
 
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            InputButton_Click(sender, e);
         }
     }
 }

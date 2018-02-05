@@ -347,6 +347,7 @@ namespace LogicGateProject
                         Gates[int.Parse(Line[0])].SetTopInConnection(Gates[int.Parse(Line[2])]);
                     if (Line[3] != "null")
                         Gates[int.Parse(Line[0])].SetBotInConnection(Gates[int.Parse(Line[3])]);
+
                 }
                 Reader.Dispose();
                 Reader.Close();

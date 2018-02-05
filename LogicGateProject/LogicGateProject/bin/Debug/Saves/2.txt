@@ -1,5 +1,0 @@
-1:LogicGateProject.Input 2:LogicGateProject.Input 3:LogicGateProject.ANDGate 4:LogicGateProject.Output 
-1,28 264,null,null,
-2,34 383,null,null,
-3,288 299,1,2,
-4,531 308,3,null,
