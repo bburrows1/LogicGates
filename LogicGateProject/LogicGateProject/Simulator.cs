@@ -21,7 +21,7 @@ namespace LogicGateProject
         //Clear placeholder when entered
         private void AddExpression_Enter(object sender, EventArgs e)
         {
-            if (AddExpression.Text == "INPUT BOOLEAN EXPRESSION")
+            if (AddExpression.Text == "INPUT BOOLEAN EXPRESSION E.G. A.(B + C)' (USE % FOR XOR)")
             {
                 AddExpression.Text = "";
                 AddExpression.ForeColor = Color.Black;
@@ -33,7 +33,7 @@ namespace LogicGateProject
         {
             if (AddExpression.Text == "")
             {
-                AddExpression.Text = "INPUT BOOLEAN EXPRESSION";
+                AddExpression.Text = "INPUT BOOLEAN EXPRESSION E.G. A.(B + C)' (USE % FOR XOR)";
                 AddExpression.ForeColor = Color.Gray;
             }
         }
@@ -365,6 +365,79 @@ namespace LogicGateProject
                 Reader.Dispose();
                 Reader.Close();
             }
+        }
+
+        private bool IsEnter;
+        private void AddExpression_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (IsEnter && AddExpression.Text != "")
+            {
+                string Input = AddExpression.Text.Replace(" ", string.Empty);
+                if (CheckValidExpression(Input))
+                {
+
+                }
+                else
+                    MessageBox.Show("Invalid Input\nPlease use the form A.(B + C)' (Use % for XOR)", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
+
+        private void AddExpression_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                IsEnter = true;
+            }
+            else
+                IsEnter = false;
+        }
+
+        private bool CheckValidExpression(string Input)
+        {
+            bool IsInput = false;
+            int BracketsOpen = 0;
+            foreach (char Letter in Input)
+            {
+                if (Char.IsLetter(Letter) || Letter == '0' || Letter == '1')
+                {
+                    if (IsInput)
+                        return false;
+                    IsInput = true;
+                }
+                else if (Letter == '.' || Letter == '+')
+                {
+                    if (!IsInput)
+                        return false;
+                    IsInput = false;
+                }
+                else if (Letter == '\'')
+                {
+
+                }
+                else if (Letter == '(')
+                {
+                    BracketsOpen++;
+                }
+                else if (Letter == ')')
+                {
+                    if (BracketsOpen == 0)
+                        return false;
+                    BracketsOpen--;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            if (BracketsOpen != 0)
+                return false;
+            return true;
+        }
+
+        private void DesignerPanel_MouseClick(object sender, MouseEventArgs e)
+        {
+            DesignerPanel.Focus();
         }
     }
 }

@@ -366,8 +366,10 @@
             this.AddExpression.Name = "AddExpression";
             this.AddExpression.Size = new System.Drawing.Size(1141, 33);
             this.AddExpression.TabIndex = 2;
-            this.AddExpression.Text = "INPUT BOOLEAN EXPRESSION";
+            this.AddExpression.Text = "INPUT BOOLEAN EXPRESSION E.G. A.(B + C)\' (USE % FOR XOR)";
             this.AddExpression.Enter += new System.EventHandler(this.AddExpression_Enter);
+            this.AddExpression.KeyDown += new System.Windows.Forms.KeyEventHandler(this.AddExpression_KeyDown);
+            this.AddExpression.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.AddExpression_KeyPress);
             this.AddExpression.Leave += new System.EventHandler(this.AddExpression_Leave);
             // 
             // DesignerPanel
@@ -381,6 +383,7 @@
             this.DesignerPanel.Size = new System.Drawing.Size(1141, 813);
             this.DesignerPanel.TabIndex = 3;
             this.DesignerPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.DesignerPanel_Paint);
+            this.DesignerPanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.DesignerPanel_MouseClick);
             // 
             // DeleteAll
             // 
