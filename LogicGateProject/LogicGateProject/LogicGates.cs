@@ -366,6 +366,10 @@ namespace LogicGateProject
         {
             CreateConnection(this, Gate, false);
         }
+
+        public virtual void SetWaitTime(float Time)
+        {
+        }
     }
 
 
@@ -402,9 +406,10 @@ namespace LogicGateProject
             return InputGateID;
         }
 
-        public void SetWaitTime(float Time)
+        public override void SetWaitTime(float Time)
         {
             WaitTime = Time;
+            UpdateTimer(Time);
         }
 
         public float GetWaitTime()

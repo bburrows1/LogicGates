@@ -131,9 +131,21 @@ namespace LogicGateProject
             //Draw lines
             for (int i = 0; i < PublicVariables.InputPoints.Count; i++)
             {
-                int MidPoint = (PublicVariables.InputPoints[i].X + PublicVariables.OutputPoints[i].X) / 2;
-                Point InputMidPoint = new Point(MidPoint, PublicVariables.InputPoints[i].Y);
-                Point OutputMidPoint = new Point(MidPoint, PublicVariables.OutputPoints[i].Y);
+                int MidPoint;
+                Point InputMidPoint;
+                Point OutputMidPoint;
+                if (PublicVariables.InputPoints[i].X > PublicVariables.OutputPoints[i].X)
+                {
+                    MidPoint = (PublicVariables.InputPoints[i].X + PublicVariables.OutputPoints[i].X) / 2;
+                    InputMidPoint = new Point(MidPoint, PublicVariables.InputPoints[i].Y);
+                    OutputMidPoint = new Point(MidPoint, PublicVariables.OutputPoints[i].Y);
+                }
+                else
+                {
+                    MidPoint = (PublicVariables.InputPoints[i].Y + PublicVariables.OutputPoints[i].Y) / 2;
+                    InputMidPoint = new Point(PublicVariables.InputPoints[i].X, MidPoint);
+                    OutputMidPoint = new Point(PublicVariables.OutputPoints[i].X, MidPoint);
+                }
                 e.Graphics.DrawLine(PublicVariables.Linepen, PublicVariables.InputPoints[i], InputMidPoint);
                 e.Graphics.DrawLine(PublicVariables.Linepen, InputMidPoint, OutputMidPoint);
                 e.Graphics.DrawLine(PublicVariables.Linepen, OutputMidPoint, PublicVariables.OutputPoints[i]);
@@ -347,7 +359,8 @@ namespace LogicGateProject
                         Gates[int.Parse(Line[0])].SetTopInConnection(Gates[int.Parse(Line[2])]);
                     if (Line[3] != "null")
                         Gates[int.Parse(Line[0])].SetBotInConnection(Gates[int.Parse(Line[3])]);
-
+                    if (Gates[int.Parse(Line[0])] is Input)
+                        Gates[int.Parse(Line[0])].SetWaitTime(float.Parse(Line[4]));
                 }
                 Reader.Dispose();
                 Reader.Close();

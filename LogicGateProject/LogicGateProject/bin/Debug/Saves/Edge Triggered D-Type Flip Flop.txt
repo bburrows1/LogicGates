@@ -1,0 +1,10 @@
+48:LogicGateProject.Input 49:LogicGateProject.Input 50:LogicGateProject.ANDGate 51:LogicGateProject.ANDGate 52:LogicGateProject.NORGate 53:LogicGateProject.NORGate 54:LogicGateProject.Output 55:LogicGateProject.Output 56:LogicGateProject.NOTGate 
+48,0 142,null,null,0
+49,57 263,null,null,2
+50,325 122,56,49,
+51,276 353,49,48,
+52,560 143,50,53,
+53,552 335,52,51,
+54,861 149,52,null
+55,859 341,53,null
+56,158 31,48,null

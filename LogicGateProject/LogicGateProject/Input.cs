@@ -60,6 +60,10 @@ namespace LogicGateProject
                 NewTimeString = Interaction.InputBox("Select Interval (0 - 1000 Seconds)", "Timer Interval", GetWaitTime().ToString());
             } while (!(float.TryParse(NewTimeString, out NewTime) && NewTime >= 0 && NewTime <= 1000));
             SetWaitTime(NewTime);
+        }
+
+        private void UpdateTimer(float NewTime)
+        {
             if (NewTime == 0)
                 Timer.Enabled = false;
             else
