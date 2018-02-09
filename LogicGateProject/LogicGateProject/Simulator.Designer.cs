@@ -117,6 +117,7 @@
             this.CreateExpression.TabIndex = 6;
             this.CreateExpression.Text = "Boolean Expression";
             this.CreateExpression.UseVisualStyleBackColor = true;
+            this.CreateExpression.Click += new System.EventHandler(this.CreateExpression_Click);
             // 
             // CreateTruthTable
             // 

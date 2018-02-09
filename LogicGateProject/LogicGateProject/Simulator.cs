@@ -399,13 +399,13 @@ namespace LogicGateProject
             int BracketsOpen = 0;
             foreach (char Letter in Input)
             {
-                if (Char.IsLetter(Letter) || Letter == '0' || Letter == '1')
+                if (Char.IsLetter(Letter))
                 {
                     if (IsInput)
                         return false;
                     IsInput = true;
                 }
-                else if (Letter == '.' || Letter == '+')
+                else if (Letter == '.' || Letter == '+' || Letter == '%')
                 {
                     if (!IsInput)
                         return false;
@@ -413,7 +413,8 @@ namespace LogicGateProject
                 }
                 else if (Letter == '\'')
                 {
-
+                    if (!IsInput)
+                        return false;
                 }
                 else if (Letter == '(')
                 {
@@ -438,6 +439,47 @@ namespace LogicGateProject
         private void DesignerPanel_MouseClick(object sender, MouseEventArgs e)
         {
             DesignerPanel.Focus();
+        }
+
+        private void CreateExpression_Click(object sender, EventArgs e)
+        {
+            Dictionary<LogicGates, char> InputGates = new Dictionary<LogicGates, char>();
+            List<LogicGates> OutputGates = new List<LogicGates>();
+            int Inputs = 0;
+            string Expression = "";
+            foreach (LogicGates Gate in PublicVariables.Gates)
+            {
+                if (Gate.GetType() == typeof(Input))
+                {
+                    Inputs++;
+                    char Letter = NumberToCharacter(Inputs);
+                    if (Letter != ' ')
+                    {
+                        InputGates.Add(Gate, Letter);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Invalid Circuit\nPlease connect all gates to create an expression", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                }
+                else if (Gate.GetType() == typeof(Output))
+                {
+                    OutputGates.Add(Gate);
+                }
+            }
+            foreach (LogicGates Output in OutputGates)
+            {
+                Output.CreateExpression(InputGates, ref Expression);
+            }
+        }
+        private char NumberToCharacter(int Input)
+        {
+            if (64 + Input < 91)
+                return (char)(64 + Input);
+            else if (96 + (Input % 26) < 123)
+                return (char)(96 + Input);
+            return ' ';
         }
     }
 }

@@ -370,6 +370,11 @@ namespace LogicGateProject
         public virtual void SetWaitTime(float Time)
         {
         }
+
+        public virtual string CreateExpression(Dictionary<LogicGates, char> InputGates, ref string Expression)
+        {
+            return "";
+        }
     }
 
 
@@ -433,6 +438,11 @@ namespace LogicGateProject
             Data += WaitTime.ToString();
             return Data;
         }
+
+        public override string CreateExpression(Dictionary<LogicGates, char> InputGates, ref string Expression)
+        {
+            return "";
+        }
     }
 
     public partial class Output : LogicGates
@@ -481,6 +491,11 @@ namespace LogicGateProject
         public override int GetTableID()
         {
             return OutputGateID;
+        }
+
+        public override string CreateExpression(Dictionary<LogicGates, char> InputGates, ref string Expression)
+        {
+            return TopInConnection.CreateExpression(InputGates, ref Expression);
         }
     }
 
@@ -534,6 +549,16 @@ namespace LogicGateProject
                 BottomButton.BackColor = Color.Transparent;
                 Out.BackColor = Color.Transparent;
             }
+        }
+
+        public override string CreateExpression(Dictionary<LogicGates, char> InputGates, ref string Expression)
+        {
+            if (CheckConnected())
+            {
+                TopInConnection.CreateExpression(InputGates, ref Expression);
+                BotInConnection.CreateExpression(InputGates, ref Expression);
+            }
+            return "Circuit not connected";
         }
     }
 
