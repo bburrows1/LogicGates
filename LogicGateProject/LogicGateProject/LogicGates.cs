@@ -371,9 +371,8 @@ namespace LogicGateProject
         {
         }
 
-        public virtual string CreateExpression(Dictionary<LogicGates, char> InputGates, ref string Expression)
+        public virtual void CreateExpression(Dictionary<LogicGates, char> InputGates, ref string Expression)
         {
-            return "";
         }
     }
 
@@ -439,9 +438,9 @@ namespace LogicGateProject
             return Data;
         }
 
-        public override string CreateExpression(Dictionary<LogicGates, char> InputGates, ref string Expression)
+        public override void CreateExpression(Dictionary<LogicGates, char> InputGates, ref string Expression)
         {
-            return "";
+            Expression += InputGates[this];
         }
     }
 
@@ -493,9 +492,9 @@ namespace LogicGateProject
             return OutputGateID;
         }
 
-        public override string CreateExpression(Dictionary<LogicGates, char> InputGates, ref string Expression)
+        public override void CreateExpression(Dictionary<LogicGates, char> InputGates, ref string Expression)
         {
-            return TopInConnection.CreateExpression(InputGates, ref Expression);
+            TopInConnection.CreateExpression(InputGates, ref Expression);
         }
     }
 
@@ -551,14 +550,18 @@ namespace LogicGateProject
             }
         }
 
-        public override string CreateExpression(Dictionary<LogicGates, char> InputGates, ref string Expression)
+        public override void CreateExpression(Dictionary<LogicGates, char> InputGates, ref string Expression)
         {
             if (CheckConnected())
             {
+                Expression += "(";
                 TopInConnection.CreateExpression(InputGates, ref Expression);
+                Expression += ".";
                 BotInConnection.CreateExpression(InputGates, ref Expression);
+                Expression += ")";
             }
-            return "Circuit not connected";
+            else
+                Expression = "Circuit not connected";
         }
     }
 
@@ -613,6 +616,20 @@ namespace LogicGateProject
                 Out.BackColor = Color.Transparent;
             }
         }
+
+        public override void CreateExpression(Dictionary<LogicGates, char> InputGates, ref string Expression)
+        {
+            if (CheckConnected())
+            {
+                Expression += "(";
+                TopInConnection.CreateExpression(InputGates, ref Expression);
+                Expression += "+";
+                BotInConnection.CreateExpression(InputGates, ref Expression);
+                Expression += ")";
+            }
+            else
+                Expression = "Circuit not connected";
+        }
     }
 
     public partial class NOTGate : LogicGates
@@ -661,6 +678,17 @@ namespace LogicGateProject
                 In.BackColor = Color.Transparent;
                 Out.BackColor = Color.Transparent;
             }
+        }
+
+        public override void CreateExpression(Dictionary<LogicGates, char> InputGates, ref string Expression)
+        {
+            if (CheckConnected())
+            {
+                TopInConnection.CreateExpression(InputGates, ref Expression);
+                Expression += "'";
+            }
+            else
+                Expression = "Circuit not connected";
         }
     }
 
@@ -715,6 +743,20 @@ namespace LogicGateProject
                 Out.BackColor = Color.Transparent;
             }
         }
+
+        public override void CreateExpression(Dictionary<LogicGates, char> InputGates, ref string Expression)
+        {
+            if (CheckConnected())
+            {
+                Expression += "(";
+                TopInConnection.CreateExpression(InputGates, ref Expression);
+                Expression += "%";
+                BotInConnection.CreateExpression(InputGates, ref Expression);
+                Expression += ")";
+            }
+            else
+                Expression = "Circuit not connected";
+        }
     }
 
     public partial class NANDGate : LogicGates
@@ -768,6 +810,20 @@ namespace LogicGateProject
                 Out.BackColor = Color.Transparent;
             }
         }
+
+        public override void CreateExpression(Dictionary<LogicGates, char> InputGates, ref string Expression)
+        {
+            if (CheckConnected())
+            {
+                Expression += "(";
+                TopInConnection.CreateExpression(InputGates, ref Expression);
+                Expression += ".";
+                BotInConnection.CreateExpression(InputGates, ref Expression);
+                Expression += ")'";
+            }
+            else
+                Expression = "Circuit not connected";
+        }
     }
 
     public partial class NORGate : LogicGates
@@ -818,6 +874,20 @@ namespace LogicGateProject
                 BottomButton.BackColor = Color.Transparent;
                 Out.BackColor = Color.Transparent;
             }
+        }
+
+        public override void CreateExpression(Dictionary<LogicGates, char> InputGates, ref string Expression)
+        {
+            if (CheckConnected())
+            {
+                Expression += "(";
+                TopInConnection.CreateExpression(InputGates, ref Expression);
+                Expression += "+";
+                BotInConnection.CreateExpression(InputGates, ref Expression);
+                Expression += ")'";
+            }
+            else
+                Expression = "Circuit not connected";
         }
     }
 }

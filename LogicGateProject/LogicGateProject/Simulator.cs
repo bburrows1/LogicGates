@@ -471,8 +471,10 @@ namespace LogicGateProject
             foreach (LogicGates Output in OutputGates)
             {
                 Output.CreateExpression(InputGates, ref Expression);
+                CreateExpression.Text = Expression;
             }
         }
+
         private char NumberToCharacter(int Input)
         {
             if (64 + Input < 91)
