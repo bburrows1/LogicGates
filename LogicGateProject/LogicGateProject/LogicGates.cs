@@ -371,8 +371,19 @@ namespace LogicGateProject
         {
         }
 
-        public virtual void CreateExpression(Dictionary<LogicGates, char> InputGates, ref string Expression)
+        public virtual void CreateExpression(ref string Expression)
         {
+        }
+        public virtual bool CheckForLoop()
+        {
+            if (OutConnection.Contains(TopInConnection) || OutConnection.Contains(BotInConnection))
+                return true;
+            return false;
+        }
+
+        public virtual string GetOutputID()
+        {
+            return "";
         }
     }
 
@@ -386,7 +397,7 @@ namespace LogicGateProject
         {
             InputGateID = PublicVariables.InputID;
             PublicVariables.InputID++;
-            IDLabel.Text = InputGateID.ToString();
+            IDLabel.Text = PublicVariables.NumberToCharacter(InputGateID).ToString();
         }
 
         public void SetMarkers()
@@ -438,9 +449,9 @@ namespace LogicGateProject
             return Data;
         }
 
-        public override void CreateExpression(Dictionary<LogicGates, char> InputGates, ref string Expression)
+        public override void CreateExpression(ref string Expression)
         {
-            Expression += InputGates[this];
+            Expression += PublicVariables.NumberToCharacter(InputGateID).ToString();
         }
     }
 
@@ -453,6 +464,11 @@ namespace LogicGateProject
             OutputGateID = PublicVariables.OutputID;
             PublicVariables.OutputID++;
             IDLabel.Text = OutputGateID.ToString();
+        }
+
+        public override string GetOutputID()
+        {
+            return OutputGateID.ToString();
         }
 
         public void SetLocations()
@@ -492,9 +508,9 @@ namespace LogicGateProject
             return OutputGateID;
         }
 
-        public override void CreateExpression(Dictionary<LogicGates, char> InputGates, ref string Expression)
+        public override void CreateExpression(ref string Expression)
         {
-            TopInConnection.CreateExpression(InputGates, ref Expression);
+            TopInConnection.CreateExpression(ref Expression);
         }
     }
 
@@ -550,18 +566,18 @@ namespace LogicGateProject
             }
         }
 
-        public override void CreateExpression(Dictionary<LogicGates, char> InputGates, ref string Expression)
+        public override void CreateExpression(ref string Expression)
         {
-            if (CheckConnected())
+            if (CheckConnected() && !CheckForLoop())
             {
                 Expression += "(";
-                TopInConnection.CreateExpression(InputGates, ref Expression);
+                TopInConnection.CreateExpression(ref Expression);
                 Expression += ".";
-                BotInConnection.CreateExpression(InputGates, ref Expression);
+                BotInConnection.CreateExpression(ref Expression);
                 Expression += ")";
             }
             else
-                Expression = "Circuit not connected";
+                Expression = "Invalid Circuit";
         }
     }
 
@@ -617,18 +633,18 @@ namespace LogicGateProject
             }
         }
 
-        public override void CreateExpression(Dictionary<LogicGates, char> InputGates, ref string Expression)
+        public override void CreateExpression(ref string Expression)
         {
-            if (CheckConnected())
+            if (CheckConnected() && !CheckForLoop())
             {
                 Expression += "(";
-                TopInConnection.CreateExpression(InputGates, ref Expression);
+                TopInConnection.CreateExpression(ref Expression);
                 Expression += "+";
-                BotInConnection.CreateExpression(InputGates, ref Expression);
+                BotInConnection.CreateExpression(ref Expression);
                 Expression += ")";
             }
             else
-                Expression = "Circuit not connected";
+                Expression = "Invalid Circuit";
         }
     }
 
@@ -680,15 +696,15 @@ namespace LogicGateProject
             }
         }
 
-        public override void CreateExpression(Dictionary<LogicGates, char> InputGates, ref string Expression)
+        public override void CreateExpression(ref string Expression)
         {
-            if (CheckConnected())
+            if (CheckConnected() && !CheckForLoop())
             {
-                TopInConnection.CreateExpression(InputGates, ref Expression);
+                TopInConnection.CreateExpression(ref Expression);
                 Expression += "'";
             }
             else
-                Expression = "Circuit not connected";
+                Expression = "Invalid Circuit";
         }
     }
 
@@ -744,18 +760,18 @@ namespace LogicGateProject
             }
         }
 
-        public override void CreateExpression(Dictionary<LogicGates, char> InputGates, ref string Expression)
+        public override void CreateExpression(ref string Expression)
         {
-            if (CheckConnected())
+            if (CheckConnected() && !CheckForLoop())
             {
                 Expression += "(";
-                TopInConnection.CreateExpression(InputGates, ref Expression);
+                TopInConnection.CreateExpression(ref Expression);
                 Expression += "%";
-                BotInConnection.CreateExpression(InputGates, ref Expression);
+                BotInConnection.CreateExpression(ref Expression);
                 Expression += ")";
             }
             else
-                Expression = "Circuit not connected";
+                Expression = "Invalid Circuit";
         }
     }
 
@@ -811,18 +827,18 @@ namespace LogicGateProject
             }
         }
 
-        public override void CreateExpression(Dictionary<LogicGates, char> InputGates, ref string Expression)
+        public override void CreateExpression(ref string Expression)
         {
-            if (CheckConnected())
+            if (CheckConnected() && !CheckForLoop())
             {
                 Expression += "(";
-                TopInConnection.CreateExpression(InputGates, ref Expression);
+                TopInConnection.CreateExpression(ref Expression);
                 Expression += ".";
-                BotInConnection.CreateExpression(InputGates, ref Expression);
+                BotInConnection.CreateExpression(ref Expression);
                 Expression += ")'";
             }
             else
-                Expression = "Circuit not connected";
+                Expression = "Invalid Circuit";
         }
     }
 
@@ -876,18 +892,18 @@ namespace LogicGateProject
             }
         }
 
-        public override void CreateExpression(Dictionary<LogicGates, char> InputGates, ref string Expression)
+        public override void CreateExpression(ref string Expression)
         {
-            if (CheckConnected())
+            if (CheckConnected() && !CheckForLoop())
             {
                 Expression += "(";
-                TopInConnection.CreateExpression(InputGates, ref Expression);
+                TopInConnection.CreateExpression(ref Expression);
                 Expression += "+";
-                BotInConnection.CreateExpression(InputGates, ref Expression);
+                BotInConnection.CreateExpression(ref Expression);
                 Expression += ")'";
             }
             else
-                Expression = "Circuit not connected";
+                Expression = "Invalid Circuit";
         }
     }
 }

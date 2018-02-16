@@ -29,6 +29,7 @@ namespace LogicGateProject
         public static Simulator Simulator = new Simulator();
         public static Quiz Quiz = new Quiz();
         public static TruthTable TruthTable = new TruthTable();
+        public static ExpressionsTable ExpressionsTable = new ExpressionsTable();
 
         //Ensures each gate has a unique ID
         public static List<LogicGates> Gates = new List<LogicGates>();
@@ -51,5 +52,16 @@ namespace LogicGateProject
 
         //Tells gates to work step by step
         public static bool Step;
+
+        //Convert a number to a letter
+        public static char NumberToCharacter(int Input)
+        {
+            if (64 + Input < 91)
+                return (char)(64 + Input);
+            else if (96 + (Input % 26) < 123)
+                return (char)(96 + Input);
+            else
+                return (char)(Input - 55);
+        }
     }
 }

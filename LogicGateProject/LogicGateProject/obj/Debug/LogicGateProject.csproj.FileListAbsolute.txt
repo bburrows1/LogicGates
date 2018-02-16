@@ -66,3 +66,4 @@ C:\Users\Alison\Documents\Ben Project\LogicGates\LogicGateProject\LogicGateProje
 C:\Users\Alison\Documents\Ben Project\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.csproj.CoreCompileInputs.cache
 C:\Users\Alison\Documents\Ben Project\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.exe
 C:\Users\Alison\Documents\Ben Project\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.pdb
+N:\B.Burrows\My Documents\Applications\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.ExpressionsTable.resources

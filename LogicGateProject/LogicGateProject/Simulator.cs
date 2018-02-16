@@ -443,45 +443,23 @@ namespace LogicGateProject
 
         private void CreateExpression_Click(object sender, EventArgs e)
         {
-            Dictionary<LogicGates, char> InputGates = new Dictionary<LogicGates, char>();
             List<LogicGates> OutputGates = new List<LogicGates>();
-            int Inputs = 0;
             string Expression = "";
             foreach (LogicGates Gate in PublicVariables.Gates)
             {
-                if (Gate.GetType() == typeof(Input))
-                {
-                    Inputs++;
-                    char Letter = NumberToCharacter(Inputs);
-                    if (Letter != ' ')
-                    {
-                        InputGates.Add(Gate, Letter);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Invalid Circuit\nPlease connect all gates to create an expression", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
-                    }
-                }
-                else if (Gate.GetType() == typeof(Output))
+                if (Gate.GetType() == typeof(Output))
                 {
                     OutputGates.Add(Gate);
                 }
             }
+            PublicVariables.ExpressionsTable.ResetTable();
             foreach (LogicGates Output in OutputGates)
             {
-                Output.CreateExpression(InputGates, ref Expression);
-                CreateExpression.Text = Expression;
+                Output.CreateExpression(ref Expression);
+                PublicVariables.ExpressionsTable.AddToTable(Output.GetOutputID(), Expression);
+                Expression = "";
             }
-        }
-
-        private char NumberToCharacter(int Input)
-        {
-            if (64 + Input < 91)
-                return (char)(64 + Input);
-            else if (96 + (Input % 26) < 123)
-                return (char)(96 + Input);
-            return ' ';
+            PublicVariables.ExpressionsTable.Show();
         }
     }
 }
