@@ -58,10 +58,21 @@ namespace LogicGateProject
         {
             if (64 + Input < 91)
                 return (char)(64 + Input);
-            else if (96 + (Input % 26) < 123)
-                return (char)(96 + Input);
+            else if (96 + (Input - 26) < 123)
+                return (char)(96 + (Input - 26));
             else
-                return (char)(Input - 55);
+                return '#';
+        }
+
+        //Convert a letter to a number
+        public static int CharacterToNumber(char Character)
+        {
+            if ((int)Character < 91)
+                return ((int)Character - 64);
+            else if ((int)Character < 123)
+                return ((int)Character - 96);
+            else
+                return (0);
         }
     }
 }

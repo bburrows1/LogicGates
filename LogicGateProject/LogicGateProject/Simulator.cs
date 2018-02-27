@@ -370,16 +370,46 @@ namespace LogicGateProject
         private bool IsEnter;
         private void AddExpression_KeyPress(object sender, KeyPressEventArgs e)
         {
+            List<char> InputGates = new List<char>();
             if (IsEnter && AddExpression.Text != "")
             {
                 string Input = AddExpression.Text.Replace(" ", string.Empty);
                 if (CheckValidExpression(Input))
                 {
-
+                    DeleteAll_Click(sender, e);
+                    for (int i = 0; i < Input.Length; i++)
+                    {
+                        if (char.IsLetter(Input[i]) && !InputGates.Contains(Input[i]))
+                        {
+                            InputGates.Add(Input[i]);
+                        }
+                    }
+                    for (int Back = 0; Back < Input.Length; Back++)
+                    {
+                        if (Input[Back] == ')')
+                        {
+                            int Front = Back;
+                            while (Input[Front] != '(')
+                            {
+                                Front--;
+                            }
+                            if (Input[Back + 1] == '\'')
+                            {
+                                Back++;
+                            }
+                            CreateGate(Input.Substring(Front, Back));
+                            Input.Replace(Input.Substring(Front, Back), (PublicVariables.ID - 1).ToString());
+                        }
+                    }
                 }
                 else
                     MessageBox.Show("Invalid Input\nPlease use the form A.(B + C)' (Use % for XOR)", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
+        }
+
+        public void CreateGate(string Input)
+        {
 
         }
 

@@ -319,7 +319,7 @@ namespace LogicGateProject
             }
         }
 
-        public virtual int GetTableID()
+        public virtual int GetInputID()
         {
             return 0;
         }
@@ -400,6 +400,11 @@ namespace LogicGateProject
             IDLabel.Text = PublicVariables.NumberToCharacter(InputGateID).ToString();
         }
 
+        public override int GetInputID()
+        {
+            return InputGateID;
+        }
+
         public void SetMarkers()
         {
             OutMarker = new Point(130, 37);
@@ -414,11 +419,6 @@ namespace LogicGateProject
         public override bool CheckConnected()
         {
             return true;
-        }
-
-        public override int GetTableID()
-        {
-            return InputGateID;
         }
 
         public override void SetWaitTime(float Time)
@@ -503,7 +503,7 @@ namespace LogicGateProject
             }
             UpdateStep();
         }
-        public override int GetTableID()
+        public override int GetInputID()
         {
             return OutputGateID;
         }
