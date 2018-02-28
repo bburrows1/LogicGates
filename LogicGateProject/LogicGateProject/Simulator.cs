@@ -185,6 +185,7 @@ namespace LogicGateProject
                 Gate.DeleteGate();
             }
             PublicVariables.Gates.Clear();
+            PublicVariables.ID = 1;
             Invalidate();
         }
 
@@ -370,7 +371,7 @@ namespace LogicGateProject
         private bool IsEnter;
         private void AddExpression_KeyPress(object sender, KeyPressEventArgs e)
         {
-            List<char> InputGates = new List<char>();
+            Dictionary<string, LogicGates> Gates = new Dictionary<string, LogicGates>();
             if (IsEnter && AddExpression.Text != "")
             {
                 string Input = AddExpression.Text.Replace(" ", string.Empty);
@@ -379,38 +380,89 @@ namespace LogicGateProject
                     DeleteAll_Click(sender, e);
                     for (int i = 0; i < Input.Length; i++)
                     {
-                        if (char.IsLetter(Input[i]) && !InputGates.Contains(Input[i]))
+                        if (char.IsLetter(Input[i]) && !Gates.ContainsKey(Input[i].ToString()))
                         {
-                            InputGates.Add(Input[i]);
+                            Gates.Add(Input[i].ToString(), CreateGate(Gates, Input[i].ToString()));
                         }
                     }
-                    for (int Back = 0; Back < Input.Length; Back++)
+                    if (Input.Length > 1)
                     {
-                        if (Input[Back] == ')')
+                        for (int Back = 0; Back < Input.Length; Back++)
                         {
-                            int Front = Back;
-                            while (Input[Front] != '(')
+                            if (Back + 1 < Input.Length)
                             {
-                                Front--;
+                                if (char.IsLetter(Input[Back]) && Input[Back + 1] == '\'')
+                                {
+                                    Gates.Add(PublicVariables.ID.ToString(), CreateGate(Gates, Input.Substring(Back, Back + 1)));
+                                    StepByStep.Text = Input.Substring(Back, Back + 1);
+                                    Input.Remove(Back, Back + 1);
+                                    Input.Insert(Back, (PublicVariables.ID - 1).ToString());
+                                    Back -= (PublicVariables.ID - 1).ToString().Length;
+                                    continue;
+                                }
+                                if (char.IsDigit(Input[Back]) && Input[Back + 1] == '\'')
+                                {
+                                    Gates.Add(PublicVariables.ID.ToString(), CreateGate(Gates, Input.Substring(Back, Back + 1)));
+                                    StepByStep.Text = Input.Substring(Back, Back + 1);
+                                    Input.Remove(Back + 1 - GetNumber(Input, Back).Length, Back + 1);
+                                    Input.Insert(Back, (PublicVariables.ID - 1).ToString());
+                                    Back -= (PublicVariables.ID - 1).ToString().Length;
+                                    continue;
+                                }
                             }
-                            if (Input[Back + 1] == '\'')
+                            if (Input[Back] == ')')
                             {
-                                Back++;
+                                int Front = Back;
+                                while (Input[Front] != '(')
+                                {
+                                    Front--;
+                                }
+                                if (Input[Back + 1] == '\'')
+                                {
+                                    Back++;
+                                }
+                                Gates.Add(PublicVariables.ID.ToString(), CreateGate(Gates, Input.Substring(Front, Back)));
+                                Input.Replace(Input.Substring(Front, Back), (PublicVariables.ID - 1).ToString());
+                                Back = Front;
                             }
-                            CreateGate(Input.Substring(Front, Back));
-                            Input.Replace(Input.Substring(Front, Back), (PublicVariables.ID - 1).ToString());
                         }
                     }
                 }
                 else
                     MessageBox.Show("Invalid Input\nPlease use the form A.(B + C)' (Use % for XOR)", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
 
-        public void CreateGate(string Input)
+        public string GetNumber(string Input, int Back)
         {
+            string Number = "";
+            while (char.IsDigit(Input[Back]))
+            {
+                Number += Input[Back];
+                Back--;
+            }
+            return Number;
+        }
 
+        public LogicGates CreateGate(Dictionary<string, LogicGates> InputGates, string Expression)
+        {
+            if (Expression.Length == 1)
+            {
+                Input Input = new Input();
+                Input.EditInputID(Expression[0]);
+                return Input;
+            }
+            if (char.IsLetter(Expression[0]) && Expression[1] == '\'')
+            {
+                NOTGate NOTGate = new NOTGate();
+                NOTGate.CreateConnection(InputGates[Expression[0].ToString()], NOTGate, true);
+                return NOTGate;
+            }
+            if (Expression.Substring(Expression.Length - 2) == ")'")
+            {
+
+            }
+            return null;
         }
 
         private void AddExpression_KeyDown(object sender, KeyEventArgs e)
@@ -429,7 +481,7 @@ namespace LogicGateProject
             int BracketsOpen = 0;
             foreach (char Letter in Input)
             {
-                if (Char.IsLetter(Letter))
+                if (char.IsLetter(Letter))
                 {
                     if (IsInput)
                         return false;
@@ -486,7 +538,7 @@ namespace LogicGateProject
             foreach (LogicGates Output in OutputGates)
             {
                 Output.CreateExpression(ref Expression);
-                PublicVariables.ExpressionsTable.AddToTable(Output.GetOutputID(), Expression);
+                PublicVariables.ExpressionsTable.AddToTable(Output.GetOutputID().ToString(), Expression);
                 Expression = "";
             }
             PublicVariables.ExpressionsTable.Show();

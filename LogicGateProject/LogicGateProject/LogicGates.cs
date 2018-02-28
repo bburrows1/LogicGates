@@ -185,7 +185,7 @@ namespace LogicGateProject
             }
         }
 
-        private void CreateConnection(LogicGates Input, LogicGates Output, bool IsTop)
+        public void CreateConnection(LogicGates Input, LogicGates Output, bool IsTop)
         {
             if (IsTop)
             {
@@ -381,9 +381,9 @@ namespace LogicGateProject
             return false;
         }
 
-        public virtual string GetOutputID()
+        public virtual int GetOutputID()
         {
-            return "";
+            return 0;
         }
     }
 
@@ -395,14 +395,19 @@ namespace LogicGateProject
 
         public void SetInputID()
         {
-            InputGateID = PublicVariables.InputID;
-            PublicVariables.InputID++;
+            InputGateID = PublicVariables.GetInputID();
             IDLabel.Text = PublicVariables.NumberToCharacter(InputGateID).ToString();
         }
 
         public override int GetInputID()
         {
             return InputGateID;
+        }
+
+        public void EditInputID(char InputID)
+        {
+            InputGateID = PublicVariables.CharacterToNumber(InputID);
+            IDLabel.Text = PublicVariables.NumberToCharacter(InputGateID).ToString();
         }
 
         public void SetMarkers()
@@ -461,14 +466,13 @@ namespace LogicGateProject
 
         public void SetOutputID()
         {
-            OutputGateID = PublicVariables.OutputID;
-            PublicVariables.OutputID++;
+            OutputGateID = PublicVariables.GetOutputID();
             IDLabel.Text = OutputGateID.ToString();
         }
 
-        public override string GetOutputID()
+        public override int GetOutputID()
         {
-            return OutputGateID.ToString();
+            return OutputGateID;
         }
 
         public void SetLocations()

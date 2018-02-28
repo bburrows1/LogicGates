@@ -34,8 +34,37 @@ namespace LogicGateProject
         //Ensures each gate has a unique ID
         public static List<LogicGates> Gates = new List<LogicGates>();
         public static int ID = 1;
-        public static int InputID = 1;
-        public static int OutputID = 1;
+        public static int GetInputID()
+        {
+            List<int> Ids = new List<int>();
+            int NewID = 1;
+            foreach (LogicGates Gate in Gates)
+            {
+                if (Gate is Input)
+                    Ids.Add(Gate.GetInputID());
+            }
+            while (Ids.Contains(NewID))
+            {
+                NewID++;
+            }
+            return NewID;
+        }
+
+        public static int GetOutputID()
+        {
+            List<int> Ids = new List<int>();
+            int NewID = 1;
+            foreach (LogicGates Gate in Gates)
+            {
+                if (Gate is Output)
+                    Ids.Add(Gate.GetOutputID());
+            }
+            while (Ids.Contains(NewID))
+            {
+                NewID++;
+            }
+            return NewID;
+        }
 
         //Stores connections between gates
         public static LogicGates InputGate = null;
