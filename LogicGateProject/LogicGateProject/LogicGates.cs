@@ -385,6 +385,14 @@ namespace LogicGateProject
         {
             return 0;
         }
+
+        public bool HasNoOutputs()
+        {
+            if (OutConnection.Count == 0)
+                return true;
+            else
+                return false;
+        }
     }
 
 

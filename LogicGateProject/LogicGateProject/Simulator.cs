@@ -393,19 +393,18 @@ namespace LogicGateProject
                             {
                                 if (char.IsLetter(Input[Back]) && Input[Back + 1] == '\'')
                                 {
-                                    Gates.Add(PublicVariables.ID.ToString(), CreateGate(Gates, Input.Substring(Back, Back + 1)));
-                                    StepByStep.Text = Input.Substring(Back, Back + 1);
-                                    Input.Remove(Back, Back + 1);
-                                    Input.Insert(Back, (PublicVariables.ID - 1).ToString());
+                                    Gates.Add(PublicVariables.ID.ToString(), CreateGate(Gates, Input.Substring(Back, 2)));
+                                    Input = Input.Remove(Back, 2);
+                                    Input = Input.Insert(Back, (PublicVariables.ID - 1).ToString());
                                     Back -= (PublicVariables.ID - 1).ToString().Length;
                                     continue;
                                 }
                                 if (char.IsDigit(Input[Back]) && Input[Back + 1] == '\'')
                                 {
-                                    Gates.Add(PublicVariables.ID.ToString(), CreateGate(Gates, Input.Substring(Back, Back + 1)));
-                                    StepByStep.Text = Input.Substring(Back, Back + 1);
-                                    Input.Remove(Back + 1 - GetNumber(Input, Back).Length, Back + 1);
-                                    Input.Insert(Back, (PublicVariables.ID - 1).ToString());
+                                    string Number = GetNumber(Input, Back);
+                                    Gates.Add(PublicVariables.ID.ToString(), CreateGate(Gates, Input.Substring(Back + 1 - Number.Length, Number.Length + 1)));
+                                    Input = Input.Remove(Back + 1 - Number.Length, Number.Length + 1);
+                                    Input = Input.Insert(Back, (PublicVariables.ID - 1).ToString());
                                     Back -= (PublicVariables.ID - 1).ToString().Length;
                                     continue;
                                 }
@@ -417,14 +416,29 @@ namespace LogicGateProject
                                 {
                                     Front--;
                                 }
-                                if (Input[Back + 1] == '\'')
+                                if (Back + 1 < Input.Length)
                                 {
-                                    Back++;
+                                    if (Input[Back + 1] == '\'')
+                                        Back++;
                                 }
-                                Gates.Add(PublicVariables.ID.ToString(), CreateGate(Gates, Input.Substring(Front, Back)));
-                                Input.Replace(Input.Substring(Front, Back), (PublicVariables.ID - 1).ToString());
-                                Back = Front;
+                                Gates.Add(PublicVariables.ID.ToString(), CreateGate(Gates, Input.Substring(Front, Back - Front + 1)));
+                                Input = Input.Remove(Front, Back - Front + 1);
+                                Input = Input.Insert(Front, (PublicVariables.ID - 1).ToString());
+                                Back = Front - 1;
+                                continue;
                             }
+                        }
+                        CompleteExpression(ref Gates, Input);
+                    }
+                    List<LogicGates> ListOfGates = new List<LogicGates>();
+                    foreach (LogicGates Gate in PublicVariables.Gates)
+                        ListOfGates.Add(Gate);
+                    foreach (LogicGates Gate in ListOfGates)
+                    {
+                        if (Gate.HasNoOutputs())
+                        {
+                            Output Output = new Output();
+                            Output.CreateConnection(Output, Gate, true);
                         }
                     }
                 }
@@ -433,15 +447,87 @@ namespace LogicGateProject
             }
         }
 
-        public string GetNumber(string Input, int Back)
+        public string CompleteExpression(ref Dictionary<string, LogicGates> Gates, string Input)
         {
-            string Number = "";
-            while (char.IsDigit(Input[Back]))
+            for (int Sign = 0; Sign < Input.Length; Sign++)
             {
-                Number += Input[Back];
-                Back--;
+                if (Input[Sign] == '.')
+                {
+                    int Back = 0;
+                    string Expression = GetExpression(Input, Sign, ".");
+                    Gates.Add(PublicVariables.ID.ToString(), CreateGate(Gates, Expression));
+                    if (char.IsDigit(Input[Sign - 1]))
+                    {
+                        Back = Sign - GetNumber(Input, Sign - 1).Length;
+                        Input = Input.Remove(Back, Expression.Length);
+                    }
+                    else
+                    {
+                        Back = Sign - 1;
+                        Input = Input.Remove(Back, Expression.Length);
+                    }
+                    Input = Input.Insert(Back, (PublicVariables.ID - 1).ToString());
+                    Sign--;
+                }
             }
-            return Number;
+            for (int Sign = 0; Sign < Input.Length; Sign++)
+            {
+                if (Input[Sign] == '%')
+                {
+                    int Back = 0;
+                    string Expression = GetExpression(Input, Sign, "%");
+                    Gates.Add(PublicVariables.ID.ToString(), CreateGate(Gates, Expression));
+                    if (char.IsDigit(Input[Sign - 1]))
+                    {
+                        Back = Sign - GetNumber(Input, Sign - 1).Length;
+                        Input = Input.Remove(Back, Expression.Length);
+                    }
+                    else
+                    {
+                        Back = Sign - 1;
+                        Input = Input.Remove(Back, Expression.Length);
+                    }
+                    Input = Input.Insert(Back, (PublicVariables.ID - 1).ToString());
+                    Sign--;
+                }
+            }
+            for (int Sign = 0; Sign < Input.Length; Sign++)
+            {
+                if (Input[Sign] == '+')
+                {
+                    int Back = 0;
+                    string Expression = GetExpression(Input, Sign, "+");
+                    Gates.Add(PublicVariables.ID.ToString(), CreateGate(Gates, Expression));
+                    if (char.IsDigit(Input[Sign - 1]))
+                    {
+                        Back = Sign - GetNumber(Input, Sign - 1).Length;
+                        Input = Input.Remove(Back, Expression.Length);
+                    }
+                    else
+                    {
+                        Back = Sign - 1;
+                        Input = Input.Remove(Back, Expression.Length);
+                    }
+                    Input = Input.Insert(Back, (PublicVariables.ID - 1).ToString());
+                    Sign--;
+                }
+            }
+            return Input;
+        }
+
+        public string GetExpression(string Input, int SignIndex, string SignValue)
+        {
+            string Left = "";
+            string Right = "";
+            if (char.IsDigit(Input[SignIndex - 1]))
+                Left = GetNumber(Input, SignIndex - 1);
+            else
+                Left = Input[SignIndex - 1].ToString();
+            if (char.IsDigit(Input[Input.Length - 1]))
+                Right = GetNumber(Input, Input.Length - 1);
+            else
+                Right = Input[SignIndex + 1].ToString();
+            return Left + SignValue + Right;
         }
 
         public LogicGates CreateGate(Dictionary<string, LogicGates> InputGates, string Expression)
@@ -452,17 +538,80 @@ namespace LogicGateProject
                 Input.EditInputID(Expression[0]);
                 return Input;
             }
-            if (char.IsLetter(Expression[0]) && Expression[1] == '\'')
+            if (char.IsLetterOrDigit(Expression[0]) && Expression[1] == '\'')
             {
+                Expression = Expression.Remove(Expression.Length - 1, 1);
                 NOTGate NOTGate = new NOTGate();
-                NOTGate.CreateConnection(InputGates[Expression[0].ToString()], NOTGate, true);
+                NOTGate.CreateConnection(NOTGate, InputGates[Expression], true);
                 return NOTGate;
             }
             if (Expression.Substring(Expression.Length - 2) == ")'")
             {
-
+                Expression = Expression.Remove(0, 1);
+                Expression = Expression.Remove(Expression.Length - 2, 2);
+                if (Expression.Contains('.'))
+                {
+                    string[] Inputs = Expression.Split('.');
+                    NANDGate NANDGate = new NANDGate();
+                    NANDGate.CreateConnection(NANDGate, InputGates[Inputs[0]], true);
+                    NANDGate.CreateConnection(NANDGate, InputGates[Inputs[1]], false);
+                    return NANDGate;
+                }
+                if (Expression.Contains('+'))
+                {
+                    string[] Inputs = Expression.Split('+');
+                    NORGate NORGate = new NORGate();
+                    NORGate.CreateConnection(NORGate, InputGates[Inputs[0]], true);
+                    NORGate.CreateConnection(NORGate, InputGates[Inputs[1]], false);
+                    return NORGate;
+                }
+                NOTGate NOTGate = new NOTGate();
+                NOTGate.CreateConnection(NOTGate, InputGates[Expression], true);
+                return NOTGate;
+            }
+            if (Expression[0] == '(')
+            {
+                Expression = Expression.Remove(0, 1);
+                Expression = Expression.Remove(Expression.Length - 1, 1);
+            }
+            if (Expression.Contains('.'))
+            {
+                string[] Inputs = Expression.Split('.');
+                ANDGate ANDGate = new ANDGate();
+                ANDGate.CreateConnection(ANDGate, InputGates[Inputs[0]], true);
+                ANDGate.CreateConnection(ANDGate, InputGates[Inputs[1]], false);
+                return ANDGate;
+            }
+            if (Expression.Contains('+'))
+            {
+                string[] Inputs = Expression.Split('+');
+                ORGate ORGate = new ORGate();
+                ORGate.CreateConnection(ORGate, InputGates[Inputs[0]], true);
+                ORGate.CreateConnection(ORGate, InputGates[Inputs[1]], false);
+                return ORGate;
+            }
+            if (Expression.Contains('%'))
+            {
+                string[] Inputs = Expression.Split('%');
+                XORGate XORGate = new XORGate();
+                XORGate.CreateConnection(XORGate, InputGates[Inputs[0]], true);
+                XORGate.CreateConnection(XORGate, InputGates[Inputs[1]], false);
+                return XORGate;
             }
             return null;
+        }
+
+        public string GetNumber(string Input, int Back)
+        {
+            string Number = "";
+            while (char.IsDigit(Input[Back]))
+            {
+                Number += Input[Back];
+                Back--;
+                if (Back < 0)
+                    return Number;
+            }
+            return Number;
         }
 
         private void AddExpression_KeyDown(object sender, KeyEventArgs e)
@@ -505,6 +654,8 @@ namespace LogicGateProject
                 else if (Letter == ')')
                 {
                     if (BracketsOpen == 0)
+                        return false;
+                    if (!IsInput)
                         return false;
                     BracketsOpen--;
                 }
