@@ -181,13 +181,11 @@ namespace LogicGateProject
         //Delete all gates
         private void DeleteAll_Click(object sender, EventArgs e)
         {
-            foreach (LogicGates Gate in PublicVariables.Gates)
+            while(PublicVariables.Gates.Count != 0)
             {
-                Gate.DeleteGate();
+                PublicVariables.Gates[0].DeleteGate();
             }
-            PublicVariables.Gates.Clear();
             PublicVariables.ID = 1;
-            Invalidate();
         }
 
         //Create data for truth table
@@ -366,6 +364,7 @@ namespace LogicGateProject
                 }
                 Reader.Dispose();
                 Reader.Close();
+                Invalidate();
             }
         }
 
@@ -398,16 +397,17 @@ namespace LogicGateProject
                                     Gates.Add(PublicVariables.ID.ToString(), CreateGate(Gates, Input.Substring(Back, 2)));
                                     Input = Input.Remove(Back, 2);
                                     Input = Input.Insert(Back, (PublicVariables.ID - 1).ToString());
-                                    Back -= (PublicVariables.ID - 1).ToString().Length;
+                                    Back--;
                                     continue;
                                 }
                                 if (char.IsDigit(Input[Back]) && Input[Back + 1] == '\'')
                                 {
                                     string Number = GetNumber(Input, Back);
-                                    Gates.Add(PublicVariables.ID.ToString(), CreateGate(Gates, Input.Substring(Back + 1 - Number.Length, Number.Length + 1)));
-                                    Input = Input.Remove(Back + 1 - Number.Length, Number.Length + 1);
+                                    Back = Back + 1 - Number.Length;
+                                    Gates.Add(PublicVariables.ID.ToString(), CreateGate(Gates, Input.Substring(Back, Number.Length + 1)));
+                                    Input = Input.Remove(Back, Number.Length + 1);
                                     Input = Input.Insert(Back, (PublicVariables.ID - 1).ToString());
-                                    Back -= (PublicVariables.ID - 1).ToString().Length;
+                                    Back--;
                                     continue;
                                 }
                             }
@@ -437,7 +437,7 @@ namespace LogicGateProject
                         if (Gate.HasNoOutputs())
                         {
                             Output Output = new Output();
-                            Output.CreateConnection(Output, Gate, true);
+                            Output.SetTopInConnection(Gate);
                         }
                     }
                     SetGateLocations();
@@ -507,31 +507,31 @@ namespace LogicGateProject
             {
                 Expression = Expression.Remove(Expression.Length - 1, 1);
                 NOTGate NOTGate = new NOTGate();
-                NOTGate.CreateConnection(NOTGate, InputGates[Expression], true);
+                NOTGate.SetTopInConnection(InputGates[Expression]);
                 return NOTGate;
             }
             if (Expression.Contains('.'))
             {
                 string[] Inputs = Expression.Split('.');
                 ANDGate ANDGate = new ANDGate();
-                ANDGate.CreateConnection(ANDGate, InputGates[Inputs[0]], true);
-                ANDGate.CreateConnection(ANDGate, InputGates[Inputs[1]], false);
+                ANDGate.SetTopInConnection(InputGates[Inputs[0]]);
+                ANDGate.SetBotInConnection(InputGates[Inputs[1]]);
                 return ANDGate;
             }
             if (Expression.Contains('+'))
             {
                 string[] Inputs = Expression.Split('+');
                 ORGate ORGate = new ORGate();
-                ORGate.CreateConnection(ORGate, InputGates[Inputs[0]], true);
-                ORGate.CreateConnection(ORGate, InputGates[Inputs[1]], false);
+                ORGate.SetTopInConnection(InputGates[Inputs[0]]);
+                ORGate.SetBotInConnection(InputGates[Inputs[1]]);
                 return ORGate;
             }
             if (Expression.Contains('%'))
             {
                 string[] Inputs = Expression.Split('%');
                 XORGate XORGate = new XORGate();
-                XORGate.CreateConnection(XORGate, InputGates[Inputs[0]], true);
-                XORGate.CreateConnection(XORGate, InputGates[Inputs[1]], false);
+                XORGate.SetTopInConnection(InputGates[Inputs[0]]);
+                XORGate.SetBotInConnection(InputGates[Inputs[1]]);
                 return XORGate;
             }
             return null;
@@ -709,6 +709,82 @@ namespace LogicGateProject
                 AddNAND.Show();
                 AddNOR.Show();
                 AddExpression.Show();
+            }
+        }
+
+        private void NANDSimplifcation_Click(object sender, EventArgs e)
+        {
+            List<LogicGates> Gates = new List<LogicGates>();
+            LogicGates TopInConnection;
+            LogicGates BotInConnection;
+            Point GateLocation;
+            Dictionary<LogicGates, bool> OutConnections;
+            foreach (LogicGates Gate in PublicVariables.Gates)
+                Gates.Add(Gate);
+            foreach (LogicGates Gate in Gates)
+            {
+                if (Gate.GetType() == typeof(ANDGate))
+                {
+                    TopInConnection = Gate.GetTopInConnection();
+                    BotInConnection = Gate.GetBotInConnection();
+                    OutConnections = Gate.GetOutConnections();
+                    GateLocation = Gate.Location;
+                    Gate.DeleteGate();
+
+                    NANDGate Gate1 = new NANDGate();
+                    NANDGate Gate2 = new NANDGate();
+                    if (TopInConnection != null)
+                        Gate1.SetTopInConnection(TopInConnection);
+                    if (BotInConnection != null)
+                        Gate1.SetBotInConnection(BotInConnection);
+                    Gate2.SetTopInConnection(Gate1);
+                    Gate2.SetBotInConnection(Gate1);
+                    Gate2.SetOutConnections(OutConnections);
+                    Gate1.SetLocation(GateLocation.X, GateLocation.Y);
+                    Gate2.SetLocation(GateLocation.X + 130, GateLocation.Y);
+                }
+                else if (Gate.GetType() == typeof(ORGate))
+                {
+                    TopInConnection = Gate.GetTopInConnection();
+                    BotInConnection = Gate.GetBotInConnection();
+                    OutConnections = Gate.GetOutConnections();
+                    GateLocation = Gate.Location;
+                    Gate.DeleteGate();
+                    NANDGate Gate1 = new NANDGate();
+                    NANDGate Gate2 = new NANDGate();
+                    NANDGate Gate3 = new NANDGate();
+                    if (TopInConnection != null)
+                    {
+                        Gate1.SetTopInConnection(TopInConnection);
+                        Gate1.SetBotInConnection(TopInConnection);
+                    }
+                    if (BotInConnection != null)
+                    {
+                        Gate2.SetTopInConnection(BotInConnection);
+                        Gate2.SetBotInConnection(BotInConnection);
+                    }
+                    Gate3.SetTopInConnection(Gate1);
+                    Gate3.SetBotInConnection(Gate2);
+                    Gate3.SetOutConnections(OutConnections);
+                    Gate1.SetLocation(GateLocation.X, GateLocation.Y - 50);
+                    Gate2.SetLocation(GateLocation.X, GateLocation.Y + 50);
+                    Gate3.SetLocation(GateLocation.X + 130, GateLocation.Y);
+                }
+                else if (Gate.GetType() == typeof(NOTGate))
+                {
+                    TopInConnection = Gate.GetTopInConnection();
+                    OutConnections = Gate.GetOutConnections();
+                    GateLocation = Gate.Location;
+                    Gate.DeleteGate();
+                    NANDGate Gate1 = new NANDGate();
+                    if (TopInConnection != null)
+                    {
+                        Gate1.SetTopInConnection(TopInConnection);
+                        Gate1.SetBotInConnection(TopInConnection);
+                    }
+                    Gate1.SetOutConnections(OutConnections);
+                    Gate1.SetLocation(GateLocation.X, GateLocation.Y);
+                }
             }
         }
     }

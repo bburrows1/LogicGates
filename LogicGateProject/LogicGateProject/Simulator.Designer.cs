@@ -88,6 +88,7 @@
             this.NANDSimplifcation.TabIndex = 7;
             this.NANDSimplifcation.Text = "NAND Simplification";
             this.NANDSimplifcation.UseVisualStyleBackColor = true;
+            this.NANDSimplifcation.Click += new System.EventHandler(this.NANDSimplifcation_Click);
             // 
             // StepByStep
             // 

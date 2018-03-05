@@ -19,7 +19,7 @@ namespace LogicGateProject
             In.FlatAppearance.MouseOverBackColor = Color.FromArgb(100, Color.Gray);
             In.FlatAppearance.MouseDownBackColor = Color.FromArgb(100, Color.DarkGray);
             CreateGate();
-            SetLocations();
+            SetMarkers();
             PublicVariables.Simulator.AddToDesignerPanel(this);
             UpdateLocations();
             SetOutputID();

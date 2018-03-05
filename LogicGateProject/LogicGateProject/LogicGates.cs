@@ -15,7 +15,7 @@ namespace LogicGateProject
         private int ID;
         protected LogicGates TopInConnection;
         protected LogicGates BotInConnection;
-        protected List<LogicGates> OutConnection = new List<LogicGates>();
+        protected List<LogicGates> OutConnections = new List<LogicGates>();
         private Point TopInLocation;
         private Point BotInLocation;
         private Point OutLocation;
@@ -48,8 +48,6 @@ namespace LogicGateProject
                 if (PublicVariables.Delete)
                 {
                     DeleteGate();
-                    PublicVariables.Gates.Remove(this);
-                    PublicVariables.Simulator.Invalidate();
                 }
                 else 
                     MouseDownLocation = e.Location;
@@ -85,17 +83,17 @@ namespace LogicGateProject
         {
             if (TopInConnection != null)
             {
-                TopInConnection.OutConnection.Remove(this);
+                TopInConnection.OutConnections.Remove(this);
                 TopInConnection.UpdateLogic();
                 TopInConnection = null;
             }
             if (BotInConnection != null)
             {
-                BotInConnection.OutConnection.Remove(this);
+                BotInConnection.OutConnections.Remove(this);
                 BotInConnection.UpdateLogic();
                 BotInConnection = null;
             }
-            foreach(LogicGates Output in OutConnection)
+            foreach(LogicGates Output in OutConnections)
             {
                 if (Output.TopInConnection == this)
                 {
@@ -107,9 +105,12 @@ namespace LogicGateProject
                 }
                 Output.UpdateLogic();
             }
-            OutConnection.Clear();
+            OutConnections.Clear();
             PublicVariables.Delete = false;
             PublicVariables.Simulator.DeleteAllButton();
+            PublicVariables.Gates.Remove(this);
+            Hide();
+            PublicVariables.Simulator.Invalidate();
             Dispose();
         }
 
@@ -158,7 +159,7 @@ namespace LogicGateProject
         {
             if (Input != null && Input != Output)
             {
-                if(!Output.OutConnection.Contains(Input))
+                if(!Output.OutConnections.Contains(Input))
                 {
                     return true;
                 }
@@ -185,7 +186,7 @@ namespace LogicGateProject
             }
         }
 
-        public void CreateConnection(LogicGates Input, LogicGates Output, bool IsTop)
+        private void CreateConnection(LogicGates Input, LogicGates Output, bool IsTop)
         {
             if (IsTop)
             {
@@ -195,10 +196,11 @@ namespace LogicGateProject
             {
                 Input.BotInConnection = Output;
             }
-            Output.OutConnection.Add(Input);
+            Output.OutConnections.Add(Input);
             PublicVariables.InputGate = null;
             PublicVariables.OutputGate = null;
-            UpdateLogic();
+            Output.UpdateOutputs();
+            PublicVariables.Simulator.Invalidate();
         }
 
         private void RemoveConnection(LogicGates Input, bool IsTop)
@@ -207,7 +209,7 @@ namespace LogicGateProject
             {
                 if (Input.TopInConnection != null)
                 {
-                    Input.TopInConnection.OutConnection.Remove(Input);
+                    Input.TopInConnection.OutConnections.Remove(Input);
                     Input.TopInConnection = null;
                 }
             }
@@ -215,7 +217,7 @@ namespace LogicGateProject
             {
                 if (Input.BotInConnection != null)
                 {
-                    Input.BotInConnection.OutConnection.Remove(Input);
+                    Input.BotInConnection.OutConnections.Remove(Input);
                     Input.BotInConnection = null;
                 }
             }
@@ -250,7 +252,7 @@ namespace LogicGateProject
                     PublicVariables.OutputPoints.Add(BotInConnection.OutLocation);
                 }
             }
-            foreach (LogicGates Output in OutConnection)
+            foreach (LogicGates Output in OutConnections)
             {
                 if (!Output.Traversed)
                 {
@@ -302,7 +304,7 @@ namespace LogicGateProject
 
         public void UpdateOutputs()
         {
-            foreach (LogicGates Output in OutConnection)
+            foreach (LogicGates Output in OutConnections)
             {
                 Output.UpdateLogic();
             }
@@ -362,9 +364,40 @@ namespace LogicGateProject
             CreateConnection(this, Gate, true);
         }
 
+        public LogicGates GetTopInConnection()
+        {
+            return TopInConnection;
+        }
+
         public void SetBotInConnection(LogicGates Gate)
         {
             CreateConnection(this, Gate, false);
+        }
+
+        public LogicGates GetBotInConnection()
+        {
+            return BotInConnection;
+        }
+
+        public void SetOutConnections(Dictionary<LogicGates, bool> Gates)
+        {
+            foreach (KeyValuePair<LogicGates, bool> Gate in Gates)
+            {
+                CreateConnection(Gate.Key, this, Gate.Value);
+            }
+        }
+
+        public Dictionary<LogicGates, bool> GetOutConnections()
+        {
+            Dictionary<LogicGates, bool> OutDictionary = new Dictionary<LogicGates, bool>();
+            foreach (LogicGates Gate in OutConnections)
+            {
+                if (Gate.TopInConnection == this)
+                    OutDictionary.Add(Gate, true);
+                if (Gate.BotInConnection == this)
+                    OutDictionary.Add(Gate, false);
+            }
+            return OutDictionary;
         }
 
         public virtual void SetWaitTime(float Time)
@@ -376,7 +409,7 @@ namespace LogicGateProject
         }
         public virtual bool CheckForLoop()
         {
-            if (OutConnection.Contains(TopInConnection) || OutConnection.Contains(BotInConnection))
+            if (OutConnections.Contains(TopInConnection) || OutConnections.Contains(BotInConnection))
                 return true;
             return false;
         }
@@ -388,7 +421,7 @@ namespace LogicGateProject
 
         public bool HasNoOutputs()
         {
-            if (OutConnection.Count == 0)
+            if (OutConnections.Count == 0)
                 return true;
             else
                 return false;
@@ -483,7 +516,7 @@ namespace LogicGateProject
             return OutputGateID;
         }
 
-        public void SetLocations()
+        public void SetMarkers()
         {
             TopInMarker = new Point(5, 37);
         }
@@ -802,10 +835,10 @@ namespace LogicGateProject
             {
                 bool LocalResult = !(TopInConnection.GetResult() && BotInConnection.GetResult());
                 CheckUpdate(LocalResult);
-                UpdateStep();
             }
             else
                 CheckUpdate(false);
+            UpdateStep();
         }
 
         public override void UpdateStep()
@@ -869,8 +902,10 @@ namespace LogicGateProject
             {
                 bool LocalResult = !(TopInConnection.GetResult() || BotInConnection.GetResult());
                 CheckUpdate(LocalResult);
-                UpdateStep();
             }
+            else
+                CheckUpdate(false);
+            UpdateStep();
         }
 
         public override void UpdateStep()
