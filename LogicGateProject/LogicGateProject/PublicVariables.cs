@@ -20,9 +20,6 @@ namespace LogicGateProject
         [System.Runtime.InteropServices.DllImportAttribute("user32.dll")]
         public static extern bool ReleaseCapture();
 
-        //Indicates what level has been chosen
-        public static int level = 0;
-
         //So that forms can be returned to
         public static Menu1 Menu1 = null;
         public static Menu2 Menu2 = new Menu2();

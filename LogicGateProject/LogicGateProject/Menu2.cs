@@ -20,7 +20,6 @@ namespace LogicGateProject
         //Back
         private void Back_Click(object sender, EventArgs e)
         {
-            PublicVariables.level = 0;
             this.Hide();
             PublicVariables.Menu1.Show();
         }

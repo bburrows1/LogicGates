@@ -96,7 +96,7 @@
             this.StepByStep.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.StepByStep.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.StepByStep.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.StepByStep.Location = new System.Drawing.Point(0, 653);
+            this.StepByStep.Location = new System.Drawing.Point(0, 717);
             this.StepByStep.Name = "StepByStep";
             this.StepByStep.Size = new System.Drawing.Size(300, 64);
             this.StepByStep.TabIndex = 6;
@@ -111,7 +111,7 @@
             this.CreateExpression.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.CreateExpression.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CreateExpression.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.CreateExpression.Location = new System.Drawing.Point(-3, 717);
+            this.CreateExpression.Location = new System.Drawing.Point(0, 653);
             this.CreateExpression.Name = "CreateExpression";
             this.CreateExpression.Size = new System.Drawing.Size(300, 64);
             this.CreateExpression.TabIndex = 6;

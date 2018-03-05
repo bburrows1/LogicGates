@@ -12,6 +12,7 @@ namespace LogicGateProject
 {
     public partial class Menu1 : Form
     {
+        private int Level = 0;
         public Menu1()
         {
             InitializeComponent();
@@ -30,9 +31,10 @@ namespace LogicGateProject
         //GCSE
         private void GCSEButton_Click(object sender, EventArgs e)
         {
-            PublicVariables.level = 1;
+            Level = 1;
             PublicVariables.Menu1 = this;
             this.Hide();
+            PublicVariables.Simulator.AdjustLevel(Level);
             PublicVariables.Menu2.Location = this.Location;
             PublicVariables.Menu2.Show();
         }
@@ -40,9 +42,10 @@ namespace LogicGateProject
         //A-Level
         private void AlevelButton_Click(object sender, EventArgs e)
         {
-            PublicVariables.level = 2;
+            Level = 2;
             PublicVariables.Menu1 = this;
             this.Hide();
+            PublicVariables.Simulator.AdjustLevel(Level);
             PublicVariables.Menu2.Location = this.Location;
             PublicVariables.Menu2.Show();
         }
@@ -50,9 +53,10 @@ namespace LogicGateProject
         //Further Learning
         private void FurtherButton_Click(object sender, EventArgs e)
         {
-            PublicVariables.level = 3;
+            Level = 3;
             PublicVariables.Menu1 = this;
             this.Hide();
+            PublicVariables.Simulator.AdjustLevel(Level);
             PublicVariables.Simulator.Show();
         }
 
@@ -65,6 +69,12 @@ namespace LogicGateProject
                 PublicVariables.SendMessage(Handle, PublicVariables.WM_NCLBUTTONDOWN, PublicVariables.HT_CAPTION, 0);
                 PublicVariables.Menu2.Location = this.Location;
             }
+        }
+
+        //Return difficulty level
+        public int GetLevel()
+        {
+            return Level;
         }
     }
 }

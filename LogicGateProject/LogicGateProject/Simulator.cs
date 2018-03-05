@@ -57,7 +57,7 @@ namespace LogicGateProject
         private void Back_Click(object sender, EventArgs e)
         {
             this.Hide();
-            if (PublicVariables.level == 3)
+            if (PublicVariables.Menu1.GetLevel() == 3)
                 PublicVariables.Menu1.Show();
             else
                 PublicVariables.Menu2.Show();
@@ -679,6 +679,37 @@ namespace LogicGateProject
                 Expression = "";
             }
             PublicVariables.ExpressionsTable.Show();
+        }
+
+        public void AdjustLevel(int Level)
+        {
+            if (Level == 1)
+            {
+                NANDSimplifcation.Hide();
+                CreateExpression.Hide();
+                AddXOR.Hide();
+                AddNAND.Hide();
+                AddNOR.Hide();
+                AddExpression.Hide();
+            }
+            if (Level == 2)
+            {
+                NANDSimplifcation.Hide();
+                CreateExpression.Show();
+                AddXOR.Show();
+                AddNAND.Show();
+                AddNOR.Show();
+                AddExpression.Show();
+            }
+            if (Level == 3)
+            {
+                NANDSimplifcation.Show();
+                CreateExpression.Show();
+                AddXOR.Show();
+                AddNAND.Show();
+                AddNOR.Show();
+                AddExpression.Show();
+            }
         }
     }
 }
