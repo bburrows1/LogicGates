@@ -109,6 +109,10 @@ namespace LogicGateProject
             PublicVariables.Delete = false;
             PublicVariables.Simulator.DeleteAllButton();
             PublicVariables.Gates.Remove(this);
+            if (PublicVariables.InputGate == this)
+                PublicVariables.InputGate = null;
+            if (PublicVariables.OutputGate == this)
+                PublicVariables.OutputGate = null;
             Hide();
             PublicVariables.Simulator.Invalidate();
             Dispose();
@@ -379,23 +383,37 @@ namespace LogicGateProject
             return BotInConnection;
         }
 
-        public void SetOutConnections(Dictionary<LogicGates, bool> Gates)
+        public void SetOutConnections(Dictionary<LogicGates, int> Gates)
         {
-            foreach (KeyValuePair<LogicGates, bool> Gate in Gates)
+            foreach (KeyValuePair<LogicGates, int> Gate in Gates)
             {
-                CreateConnection(Gate.Key, this, Gate.Value);
+                if (Gate.Value == 2)
+                {
+                    CreateConnection(Gate.Key, this, true);
+                    CreateConnection(Gate.Key, this, false);
+                }
+                else if (Gate.Value == 0)
+                    CreateConnection(Gate.Key, this, true);
+                else
+                    CreateConnection(Gate.Key, this, false);
             }
         }
 
-        public Dictionary<LogicGates, bool> GetOutConnections()
+        public Dictionary<LogicGates, int> GetOutConnections()
         {
-            Dictionary<LogicGates, bool> OutDictionary = new Dictionary<LogicGates, bool>();
+            Dictionary<LogicGates, int> OutDictionary = new Dictionary<LogicGates, int>();
             foreach (LogicGates Gate in OutConnections)
             {
-                if (Gate.TopInConnection == this)
-                    OutDictionary.Add(Gate, true);
-                if (Gate.BotInConnection == this)
-                    OutDictionary.Add(Gate, false);
+                int Result;
+                if (Gate.TopInConnection == this && Gate.BotInConnection == this && !(OutDictionary.TryGetValue(Gate, out Result) && Result == 2))
+                    OutDictionary.Add(Gate, 2);
+                else
+                {
+                    if (Gate.TopInConnection == this && !(OutDictionary.TryGetValue(Gate, out Result)))
+                        OutDictionary.Add(Gate, 0);
+                    if (Gate.BotInConnection == this && !(OutDictionary.TryGetValue(Gate, out Result)))
+                        OutDictionary.Add(Gate, 1);
+                }
             }
             return OutDictionary;
         }

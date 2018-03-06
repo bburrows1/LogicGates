@@ -718,7 +718,7 @@ namespace LogicGateProject
             LogicGates TopInConnection;
             LogicGates BotInConnection;
             Point GateLocation;
-            Dictionary<LogicGates, bool> OutConnections;
+            Dictionary<LogicGates, int> OutConnections;
             foreach (LogicGates Gate in PublicVariables.Gates)
                 Gates.Add(Gate);
             foreach (LogicGates Gate in Gates)
@@ -785,7 +785,70 @@ namespace LogicGateProject
                     Gate1.SetOutConnections(OutConnections);
                     Gate1.SetLocation(GateLocation.X, GateLocation.Y);
                 }
+                else if (Gate.GetType() == typeof(XORGate))
+                {
+                    TopInConnection = Gate.GetTopInConnection();
+                    BotInConnection = Gate.GetBotInConnection();
+                    OutConnections = Gate.GetOutConnections();
+                    GateLocation = Gate.Location;
+                    Gate.DeleteGate();
+                    NANDGate Gate1 = new NANDGate();
+                    NANDGate Gate2 = new NANDGate();
+                    NANDGate Gate3 = new NANDGate();
+                    NANDGate Gate4 = new NANDGate();
+                    if (TopInConnection != null)
+                    {
+                        Gate1.SetTopInConnection(TopInConnection);
+                        Gate2.SetTopInConnection(TopInConnection);
+                    }
+                    if (BotInConnection != null)
+                    {
+                        Gate1.SetBotInConnection(BotInConnection);
+                        Gate3.SetBotInConnection(BotInConnection);
+                    }
+                    Gate2.SetBotInConnection(Gate1);
+                    Gate3.SetTopInConnection(Gate1);
+                    Gate4.SetTopInConnection(Gate2);
+                    Gate4.SetBotInConnection(Gate3);
+                    Gate4.SetOutConnections(OutConnections);
+                    Gate1.SetLocation(GateLocation.X, GateLocation.Y);
+                    Gate2.SetLocation(GateLocation.X + 130, GateLocation.Y - 50);
+                    Gate3.SetLocation(GateLocation.X + 130, GateLocation.Y + 50);
+                    Gate4.SetLocation(GateLocation.X + 260, GateLocation.Y);
+                }
+                else if (Gate.GetType() == typeof(NORGate))
+                {
+                    TopInConnection = Gate.GetTopInConnection();
+                    BotInConnection = Gate.GetBotInConnection();
+                    OutConnections = Gate.GetOutConnections();
+                    GateLocation = Gate.Location;
+                    Gate.DeleteGate();
+                    NANDGate Gate1 = new NANDGate();
+                    NANDGate Gate2 = new NANDGate();
+                    NANDGate Gate3 = new NANDGate();
+                    NANDGate Gate4 = new NANDGate();
+                    if (TopInConnection != null)
+                    {
+                        Gate1.SetTopInConnection(TopInConnection);
+                        Gate1.SetBotInConnection(TopInConnection);
+                    }
+                    if (BotInConnection != null)
+                    {
+                        Gate2.SetTopInConnection(BotInConnection);
+                        Gate2.SetBotInConnection(BotInConnection);
+                    }
+                    Gate3.SetTopInConnection(Gate1);
+                    Gate3.SetBotInConnection(Gate2);
+                    Gate4.SetTopInConnection(Gate3);
+                    Gate4.SetBotInConnection(Gate3);
+                    Gate4.SetOutConnections(OutConnections);
+                    Gate1.SetLocation(GateLocation.X, GateLocation.Y - 50);
+                    Gate2.SetLocation(GateLocation.X, GateLocation.Y + 50);
+                    Gate3.SetLocation(GateLocation.X + 130, GateLocation.Y);
+                    Gate4.SetLocation(GateLocation.X + 260, GateLocation.Y);
+                }
             }
+            Invalidate();
         }
     }
 }
