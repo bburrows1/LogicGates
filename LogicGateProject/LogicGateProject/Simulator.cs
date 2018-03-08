@@ -57,6 +57,7 @@ namespace LogicGateProject
         private void Back_Click(object sender, EventArgs e)
         {
             this.Hide();
+            SetUpQuiz(false, false);
             if (PublicVariables.Menu1.GetLevel() == 3)
                 PublicVariables.Menu1.Show();
             else
@@ -849,6 +850,44 @@ namespace LogicGateProject
                 }
             }
             Invalidate();
+        }
+
+        private void ConvertButton_Click(object sender, EventArgs e)
+        {
+            ConvertButton.BackColor = Color.FromArgb(22, 58, 122);
+            CreateButton.BackColor = Color.FromArgb(28, 66, 130);
+        }
+
+        private void CreateButton_Click(object sender, EventArgs e)
+        {
+            CreateButton.BackColor = Color.FromArgb(22, 58, 122);
+            ConvertButton.BackColor = Color.FromArgb(28, 66, 130);
+        }
+
+        public void SetUpQuiz(bool IsQuiz, bool CircuitTo)
+        {
+            if (IsQuiz)
+            {
+                ConvertButton.Show();
+                CreateButton.Show();
+                Save.Hide();
+                LoadFile.Hide();
+                if (PublicVariables.Menu1.GetLevel() == 1)
+                {
+
+                }
+                else if (PublicVariables.Menu1.GetLevel() == 2)
+                {
+
+                }
+            }
+            else
+            {
+                ConvertButton.Hide();
+                CreateButton.Hide();
+                Save.Show();
+                LoadFile.Show();
+            }
         }
     }
 }

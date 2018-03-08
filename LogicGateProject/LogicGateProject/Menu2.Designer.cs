@@ -35,6 +35,10 @@
             this.ModePanel = new System.Windows.Forms.Panel();
             this.Quiz = new System.Windows.Forms.Button();
             this.Design = new System.Windows.Forms.Button();
+            this.TableToCircuit = new System.Windows.Forms.Button();
+            this.CircuitToTable = new System.Windows.Forms.Button();
+            this.ExpressionToCircuit = new System.Windows.Forms.Button();
+            this.CircuitToExpression = new System.Windows.Forms.Button();
             this.Header.SuspendLayout();
             this.ModePanel.SuspendLayout();
             this.SuspendLayout();
@@ -103,7 +107,6 @@
             // Quiz
             // 
             this.Quiz.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(61)))), ((int)(((byte)(66)))));
-            this.Quiz.Dock = System.Windows.Forms.DockStyle.Left;
             this.Quiz.FlatAppearance.BorderSize = 0;
             this.Quiz.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Quiz.Font = new System.Drawing.Font("Century Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -132,12 +135,80 @@
             this.Design.UseVisualStyleBackColor = false;
             this.Design.Click += new System.EventHandler(this.Design_Click);
             // 
+            // TableToCircuit
+            // 
+            this.TableToCircuit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(61)))), ((int)(((byte)(66)))));
+            this.TableToCircuit.FlatAppearance.BorderSize = 0;
+            this.TableToCircuit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.TableToCircuit.Font = new System.Drawing.Font("Century Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TableToCircuit.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.TableToCircuit.Location = new System.Drawing.Point(330, 95);
+            this.TableToCircuit.Name = "TableToCircuit";
+            this.TableToCircuit.Size = new System.Drawing.Size(330, 165);
+            this.TableToCircuit.TabIndex = 11;
+            this.TableToCircuit.Text = "Truth Table to Circuit";
+            this.TableToCircuit.UseVisualStyleBackColor = false;
+            this.TableToCircuit.Visible = false;
+            this.TableToCircuit.Click += new System.EventHandler(this.TableToCircuit_Click);
+            // 
+            // CircuitToTable
+            // 
+            this.CircuitToTable.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(61)))), ((int)(((byte)(66)))));
+            this.CircuitToTable.FlatAppearance.BorderSize = 0;
+            this.CircuitToTable.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.CircuitToTable.Font = new System.Drawing.Font("Century Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CircuitToTable.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.CircuitToTable.Location = new System.Drawing.Point(330, 260);
+            this.CircuitToTable.Name = "CircuitToTable";
+            this.CircuitToTable.Size = new System.Drawing.Size(330, 165);
+            this.CircuitToTable.TabIndex = 12;
+            this.CircuitToTable.Text = "Circuit to Truth Table";
+            this.CircuitToTable.UseVisualStyleBackColor = false;
+            this.CircuitToTable.Visible = false;
+            this.CircuitToTable.Click += new System.EventHandler(this.CircuitToTable_Click);
+            // 
+            // ExpressionToCircuit
+            // 
+            this.ExpressionToCircuit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(61)))), ((int)(((byte)(66)))));
+            this.ExpressionToCircuit.FlatAppearance.BorderSize = 0;
+            this.ExpressionToCircuit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ExpressionToCircuit.Font = new System.Drawing.Font("Century Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ExpressionToCircuit.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.ExpressionToCircuit.Location = new System.Drawing.Point(330, 95);
+            this.ExpressionToCircuit.Name = "ExpressionToCircuit";
+            this.ExpressionToCircuit.Size = new System.Drawing.Size(330, 165);
+            this.ExpressionToCircuit.TabIndex = 13;
+            this.ExpressionToCircuit.Text = "Expression to Circuit";
+            this.ExpressionToCircuit.UseVisualStyleBackColor = false;
+            this.ExpressionToCircuit.Visible = false;
+            this.ExpressionToCircuit.Click += new System.EventHandler(this.ExpressionToCircuit_Click);
+            // 
+            // CircuitToExpression
+            // 
+            this.CircuitToExpression.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(61)))), ((int)(((byte)(66)))));
+            this.CircuitToExpression.FlatAppearance.BorderSize = 0;
+            this.CircuitToExpression.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.CircuitToExpression.Font = new System.Drawing.Font("Century Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CircuitToExpression.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.CircuitToExpression.Location = new System.Drawing.Point(330, 260);
+            this.CircuitToExpression.Name = "CircuitToExpression";
+            this.CircuitToExpression.Size = new System.Drawing.Size(330, 165);
+            this.CircuitToExpression.TabIndex = 14;
+            this.CircuitToExpression.Text = "Circuit to Expression";
+            this.CircuitToExpression.UseVisualStyleBackColor = false;
+            this.CircuitToExpression.Visible = false;
+            this.CircuitToExpression.Click += new System.EventHandler(this.CircuitToExpression_Click);
+            // 
             // Menu2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(660, 425);
             this.Controls.Add(this.Quiz);
+            this.Controls.Add(this.CircuitToExpression);
+            this.Controls.Add(this.ExpressionToCircuit);
+            this.Controls.Add(this.CircuitToTable);
+            this.Controls.Add(this.TableToCircuit);
             this.Controls.Add(this.Design);
             this.Controls.Add(this.ModePanel);
             this.Controls.Add(this.Header);
@@ -161,5 +232,9 @@
         private System.Windows.Forms.Panel ModePanel;
         private System.Windows.Forms.Button Quiz;
         private System.Windows.Forms.Button Design;
+        private System.Windows.Forms.Button TableToCircuit;
+        private System.Windows.Forms.Button CircuitToTable;
+        private System.Windows.Forms.Button ExpressionToCircuit;
+        private System.Windows.Forms.Button CircuitToExpression;
     }
 }

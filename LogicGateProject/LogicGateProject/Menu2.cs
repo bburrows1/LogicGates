@@ -20,6 +20,7 @@ namespace LogicGateProject
         //Back
         private void Back_Click(object sender, EventArgs e)
         {
+            Quiz.BringToFront();
             this.Hide();
             PublicVariables.Menu1.Show();
         }
@@ -34,7 +35,7 @@ namespace LogicGateProject
             }
         }
 
-        //Design
+        //Design Mode
         private void Design_Click(object sender, EventArgs e)
         {
             this.Hide();
@@ -52,10 +53,47 @@ namespace LogicGateProject
             }
         }
 
+        //Quiz Mode
         private void Quiz_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            PublicVariables.Quiz.Show();
+            if (PublicVariables.Menu1.GetLevel() == 1)
+            {
+                TableToCircuit.BringToFront();
+                CircuitToTable.BringToFront();
+            }
+            else
+            {
+                CircuitToExpression.BringToFront();
+                ExpressionToCircuit.BringToFront();
+            }
+        }
+
+        private void ExpressionToCircuit_Click(object sender, EventArgs e)
+        {
+            PublicVariables.Simulator.SetUpQuiz(true, false);
+            Hide();
+            PublicVariables.Simulator.Show();
+        }
+
+        private void CircuitToExpression_Click(object sender, EventArgs e)
+        {
+            PublicVariables.Simulator.SetUpQuiz(true, true);
+            Hide();
+            PublicVariables.Simulator.Show();
+        }
+
+        private void CircuitToTable_Click(object sender, EventArgs e)
+        {
+            PublicVariables.Simulator.SetUpQuiz(true, true);
+            Hide();
+            PublicVariables.Simulator.Show();
+        }
+
+        private void TableToCircuit_Click(object sender, EventArgs e)
+        {
+            PublicVariables.Simulator.SetUpQuiz(true, false);
+            Hide();
+            PublicVariables.Simulator.Show();
         }
     }
 }

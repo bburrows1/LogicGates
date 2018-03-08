@@ -24,7 +24,6 @@ namespace LogicGateProject
         public static Menu1 Menu1 = null;
         public static Menu2 Menu2 = new Menu2();
         public static Simulator Simulator = new Simulator();
-        public static Quiz Quiz = new Quiz();
         public static TruthTable TruthTable = new TruthTable();
         public static ExpressionsTable ExpressionsTable = new ExpressionsTable();
 

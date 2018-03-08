@@ -9,7 +9,6 @@ E:\Users\Ben\Documents\Homework\Warwick homework\AComputing\C# Programs\LogicGat
 E:\Users\Ben\Documents\Homework\Warwick homework\AComputing\C# Programs\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.Simulator.resources
 E:\Users\Ben\Documents\Homework\Warwick homework\AComputing\C# Programs\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.Menu1.resources
 E:\Users\Ben\Documents\Homework\Warwick homework\AComputing\C# Programs\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.Menu2.resources
-E:\Users\Ben\Documents\Homework\Warwick homework\AComputing\C# Programs\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.Quiz.resources
 E:\Users\Ben\Documents\Homework\Warwick homework\AComputing\C# Programs\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.GCSEConvert.resources
 E:\Users\Ben\Documents\Homework\Warwick homework\AComputing\C# Programs\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.ANDGate.resources
 E:\Users\Ben\Documents\Homework\Warwick homework\AComputing\C# Programs\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.NANDGate.resources
