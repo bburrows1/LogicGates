@@ -51,8 +51,6 @@
             this.DesignerPanel = new System.Windows.Forms.Panel();
             this.DeleteAll = new System.Windows.Forms.Button();
             this.DeleteButton = new System.Windows.Forms.Button();
-            this.CreateButton = new System.Windows.Forms.Button();
-            this.ConvertButton = new System.Windows.Forms.Button();
             this.RightPanel.SuspendLayout();
             this.LeftPanel.SuspendLayout();
             this.Header.SuspendLayout();
@@ -291,8 +289,6 @@
             // Header
             // 
             this.Header.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(66)))), ((int)(((byte)(130)))));
-            this.Header.Controls.Add(this.CreateButton);
-            this.Header.Controls.Add(this.ConvertButton);
             this.Header.Controls.Add(this.Quit);
             this.Header.Controls.Add(this.LoadFile);
             this.Header.Controls.Add(this.Save);
@@ -422,33 +418,6 @@
             this.DeleteButton.UseVisualStyleBackColor = false;
             this.DeleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
             // 
-            // CreateButton
-            // 
-            this.CreateButton.FlatAppearance.BorderSize = 0;
-            this.CreateButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.CreateButton.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CreateButton.Location = new System.Drawing.Point(720, 0);
-            this.CreateButton.Name = "CreateButton";
-            this.CreateButton.Size = new System.Drawing.Size(160, 67);
-            this.CreateButton.TabIndex = 5;
-            this.CreateButton.Text = "Create Circuit";
-            this.CreateButton.UseVisualStyleBackColor = true;
-            this.CreateButton.Click += new System.EventHandler(this.CreateButton_Click);
-            // 
-            // ConvertButton
-            // 
-            this.ConvertButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(58)))), ((int)(((byte)(122)))));
-            this.ConvertButton.FlatAppearance.BorderSize = 0;
-            this.ConvertButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ConvertButton.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ConvertButton.Location = new System.Drawing.Point(560, 0);
-            this.ConvertButton.Name = "ConvertButton";
-            this.ConvertButton.Size = new System.Drawing.Size(160, 67);
-            this.ConvertButton.TabIndex = 6;
-            this.ConvertButton.Text = "Convert Circuit";
-            this.ConvertButton.UseVisualStyleBackColor = false;
-            this.ConvertButton.Click += new System.EventHandler(this.ConvertButton_Click);
-            // 
             // Simulator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -497,8 +466,6 @@
         private System.Windows.Forms.Panel DesignerPanel;
         private System.Windows.Forms.Button DeleteButton;
         private System.Windows.Forms.Button DeleteAll;
-        private System.Windows.Forms.Button CreateButton;
-        private System.Windows.Forms.Button ConvertButton;
     }
 }
 

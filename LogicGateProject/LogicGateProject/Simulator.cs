@@ -609,6 +609,8 @@ namespace LogicGateProject
                     return false;
                 }
             }
+            if (!IsInput)
+                return false;
             if (BracketsOpen != 0)
                 return false;
             return true;
@@ -852,41 +854,61 @@ namespace LogicGateProject
             Invalidate();
         }
 
-        private void ConvertButton_Click(object sender, EventArgs e)
-        {
-            ConvertButton.BackColor = Color.FromArgb(22, 58, 122);
-            CreateButton.BackColor = Color.FromArgb(28, 66, 130);
-        }
-
-        private void CreateButton_Click(object sender, EventArgs e)
-        {
-            CreateButton.BackColor = Color.FromArgb(22, 58, 122);
-            ConvertButton.BackColor = Color.FromArgb(28, 66, 130);
-        }
-
         public void SetUpQuiz(bool IsQuiz, bool CircuitTo)
         {
             if (IsQuiz)
             {
-                ConvertButton.Show();
-                CreateButton.Show();
                 Save.Hide();
                 LoadFile.Hide();
                 if (PublicVariables.Menu1.GetLevel() == 1)
                 {
+                    if (CircuitTo)
+                    {
+                        DeleteButton.Hide();
+                    }
+                    else
+                    {
 
+                    }
                 }
                 else if (PublicVariables.Menu1.GetLevel() == 2)
                 {
+                    if (CircuitTo)
+                    {
+                        DeleteButton.Hide();
+                    }
+                    else
+                    {
 
+                    }
                 }
             }
             else
             {
-                ConvertButton.Hide();
-                CreateButton.Hide();
                 Save.Show();
                 LoadFile.Show();
+                DeleteButton.Show();
+            }
+        }
+
+        public void GenerateCircuit()
+        {
+            if (PublicVariables.Menu1.GetLevel() == 1)
+            {
+                Random Random = new Random();
+                int NoInputs = Random.Next(2, 3);
+                int NoGates = Random.Next(2, 5);
+                Input Input1 = new Input();
+                Input Input2 = new Input();
+                if (NoInputs == 3)
+                {
+                    Input Input3 = new Input();
+                }
+
+            }
+            else
+            {
+
             }
         }
     }
