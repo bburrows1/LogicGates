@@ -43,23 +43,29 @@ namespace LogicGateProject
 
         private void InputButton_Click(object sender, EventArgs e)
         {
-            ToggleResult();
-            if (GetResult())
-                InputButton.BackColor = Color.Green;
-            else
-                InputButton.BackColor = Color.Red;
-            UpdateLogic();
+            if (!IsDisabled())
+            {
+                ToggleResult();
+                if (GetResult())
+                    InputButton.BackColor = Color.Green;
+                else
+                    InputButton.BackColor = Color.Red;
+                UpdateLogic();
+            }
         }
 
         private void ClockButton_Click(object sender, EventArgs e)
         {
-            string NewTimeString;
-            float NewTime;
-            do
+            if (!IsDisabled())
             {
-                NewTimeString = Interaction.InputBox("Select Interval (0 - 1000 Seconds)", "Timer Interval", GetWaitTime().ToString());
-            } while (!(float.TryParse(NewTimeString, out NewTime) && NewTime >= 0 && NewTime <= 1000));
-            SetWaitTime(NewTime);
+                string NewTimeString;
+                float NewTime;
+                do
+                {
+                    NewTimeString = Interaction.InputBox("Select Interval (0 - 1000 Seconds)", "Timer Interval", GetWaitTime().ToString());
+                } while (!(float.TryParse(NewTimeString, out NewTime) && NewTime >= 0 && NewTime <= 1000));
+                SetWaitTime(NewTime);
+            }
         }
 
         private void UpdateTimer(float NewTime)

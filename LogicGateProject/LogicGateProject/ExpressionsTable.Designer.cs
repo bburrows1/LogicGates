@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.Header = new System.Windows.Forms.Panel();
-            this.ListView = new System.Windows.Forms.ListView();
             this.Quit = new System.Windows.Forms.Button();
+            this.ListView = new System.Windows.Forms.ListView();
             this.Header.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -45,20 +45,6 @@
             this.Header.TabIndex = 4;
             this.Header.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Header_MouseDown);
             // 
-            // ListView
-            // 
-            this.ListView.BackColor = System.Drawing.Color.White;
-            this.ListView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ListView.FullRowSelect = true;
-            this.ListView.GridLines = true;
-            this.ListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.ListView.Location = new System.Drawing.Point(0, 62);
-            this.ListView.Name = "ListView";
-            this.ListView.Size = new System.Drawing.Size(456, 236);
-            this.ListView.TabIndex = 5;
-            this.ListView.UseCompatibleStateImageBehavior = false;
-            this.ListView.View = System.Windows.Forms.View.Details;
-            // 
             // Quit
             // 
             this.Quit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
@@ -72,6 +58,21 @@
             this.Quit.TabIndex = 6;
             this.Quit.UseVisualStyleBackColor = true;
             this.Quit.Click += new System.EventHandler(this.Quit_Click);
+            // 
+            // ListView
+            // 
+            this.ListView.BackColor = System.Drawing.Color.White;
+            this.ListView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ListView.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ListView.FullRowSelect = true;
+            this.ListView.GridLines = true;
+            this.ListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.ListView.Location = new System.Drawing.Point(0, 62);
+            this.ListView.Name = "ListView";
+            this.ListView.Size = new System.Drawing.Size(456, 236);
+            this.ListView.TabIndex = 5;
+            this.ListView.UseCompatibleStateImageBehavior = false;
+            this.ListView.View = System.Windows.Forms.View.Details;
             // 
             // ExpressionsTable
             // 

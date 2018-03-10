@@ -20,7 +20,7 @@ namespace LogicGateProject
         public void ResetTable()
         {
             ListView.Clear();
-            ListView.Columns.Add("Output", 45);
+            ListView.Columns.Add("Output", 60);
             ListView.Columns.Add("Expression", 400);
         }
 

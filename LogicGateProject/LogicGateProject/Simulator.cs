@@ -179,10 +179,16 @@ namespace LogicGateProject
             DeleteAllButton();
         }
 
-        //Delete all gates
+        //Delete all gates button
         private void DeleteAll_Click(object sender, EventArgs e)
         {
-            while(PublicVariables.Gates.Count != 0)
+            DeleteAllGates();
+        }
+
+        //Delete all gates
+        private void DeleteAllGates()
+        {
+            while (PublicVariables.Gates.Count != 0)
             {
                 PublicVariables.Gates[0].DeleteGate();
             }
@@ -299,7 +305,7 @@ namespace LogicGateProject
             OpenFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
             if (OpenFileDialog.ShowDialog() == DialogResult.OK)
             {
-                DeleteAll_Click(sender, e);
+                DeleteAllGates();
                 StreamReader Reader = new StreamReader(OpenFileDialog.OpenFile());
                 string Data = Reader.ReadLine();
                 string[] FirstLine = Data.Split(' ');
@@ -374,12 +380,12 @@ namespace LogicGateProject
         private void AddExpression_KeyPress(object sender, KeyPressEventArgs e)
         {
             Dictionary<string, LogicGates> Gates = new Dictionary<string, LogicGates>();
-            if (IsEnter && AddExpression.Text != "")
+            if (IsEnter && AddExpression.Text != "" && !LogicGates.IsDisabled())
             {
                 string Input = AddExpression.Text.Replace(" ", string.Empty);
                 if (CheckValidExpression(Input))
                 {
-                    DeleteAll_Click(sender, e);
+                    DeleteAllGates();
                     for (int i = 0; i < Input.Length; i++)
                     {
                         if (char.IsLetter(Input[i]) && !Gates.ContainsKey(Input[i].ToString()))
@@ -678,10 +684,16 @@ namespace LogicGateProject
             foreach (LogicGates Output in OutputGates)
             {
                 Output.CreateExpression(ref Expression);
+                if (Expression[0] == '(' && Expression[Expression.Length - 1] == ')')
+                {
+                    Expression = Expression.Remove(Expression.Length - 1, 1);
+                    Expression = Expression.Remove(0, 1);
+                }
                 PublicVariables.ExpressionsTable.AddToTable(Output.GetOutputID().ToString(), Expression);
                 Expression = "";
             }
             PublicVariables.ExpressionsTable.Show();
+            PublicVariables.ExpressionsTable.BringToFront();
         }
 
         public void AdjustLevel(int Level)
@@ -865,6 +877,8 @@ namespace LogicGateProject
                     if (CircuitTo)
                     {
                         DeleteButton.Hide();
+                        CreateCircuit();
+                        LogicGates.SetDisabled(true);
                     }
                     else
                     {
@@ -876,6 +890,8 @@ namespace LogicGateProject
                     if (CircuitTo)
                     {
                         DeleteButton.Hide();
+                        CreateCircuit();
+                        LogicGates.SetDisabled(true);
                     }
                     else
                     {
@@ -891,25 +907,141 @@ namespace LogicGateProject
             }
         }
 
-        public void GenerateCircuit()
+        Random Random = new Random();
+        public void CreateCircuit()
         {
+            Point[] GatePoints = { new Point(200, 200), new Point(200, 400), new Point(400, 200), new Point(400, 500), new Point(600, 400) };
+            List<LogicGates> InputGates = new List<LogicGates>();
+            List<LogicGates> Gates = new List<LogicGates>();
+            int NoGates;
+            DeleteAllGates();
+            if (PublicVariables.Menu1.GetLevel() == 1)
+                NoGates = Random.Next(2, 6);
+            else 
+                NoGates = Random.Next(3, 6);
+            Input Input1 = new Input();
+            InputGates.Add(Input1);
+            Input Input2 = new Input();
+            InputGates.Add(Input2);
+            Input Input3 = new Input();
+            InputGates.Add(Input3);
+            SetGateLocations();
+            for(int i = 0; i < NoGates; i++)
+            {
+                Gates.Add(CreateRandomGate());
+                Gates[i].SetLocation(GatePoints[i].X, GatePoints[i].Y);
+                if (i == 0 && Gates[i].GetType() == typeof(NOTGate))
+                {
+                    Gates[i].SetTopInConnection(Input1);
+                }
+                else if (i == 0)
+                {
+                    Gates[i].SetTopInConnection(Input1);
+                    Gates[i].SetBotInConnection(Input2);
+                }
+                else if (i == 1 && Gates[i].GetType() == typeof(NOTGate))
+                {
+                    Gates[i].SetTopInConnection(Input2);
+                }
+                else if (i == 1)
+                {
+                    Gates[i].SetTopInConnection(Input2);
+                    Gates[i].SetBotInConnection(Input3);
+                }
+                else if (i == 2 && Gates[i].GetType() == typeof(NOTGate))
+                {
+                    Gates[i].SetTopInConnection(Gates[0]);
+                }
+                else if (i == 2)
+                {
+                    Gates[i].SetTopInConnection(Gates[0]);
+                    Gates[i].SetBotInConnection(Gates[1]);
+                }
+                else if (i == 3 && Gates[i].GetType() == typeof(NOTGate))
+                {
+                    Gates[i].SetTopInConnection(Gates[1]);
+                }
+                else if (i == 3)
+                {
+                    Gates[i].SetTopInConnection(Gates[1]);
+                    Gates[i].SetBotInConnection(Input3);
+                }
+                else if (i == 4 && Gates[i].GetType() == typeof(NOTGate))
+                {
+                    if (Random.Next(0, 2) == 0)
+                    {
+                        Gates[i].SetTopInConnection(Gates[2]);
+                        Gates[i].SetLocation(530, 200);
+                    }
+                    else
+                    {
+                        Gates[i].SetTopInConnection(Gates[3]);
+                        Gates[i].SetLocation(530, 500);
+                    }
+                }
+                else if (i == 4)
+                {
+                    Gates[i].SetTopInConnection(Gates[2]);
+                    Gates[i].SetBotInConnection(Gates[3]);
+                }
+            }
+            for (int i = 0; i < InputGates.Count; i++)
+            {
+                if (InputGates[i].HasNoOutputs())
+                {
+                    InputGates[i].DeleteGate();
+                    InputGates.RemoveAt(i);
+                    i--;
+                }
+            }
+            List<LogicGates> ListOfGates = new List<LogicGates>();
+            foreach (LogicGates Gate in PublicVariables.Gates)
+                ListOfGates.Add(Gate);
+            foreach (LogicGates Gate in ListOfGates)
+            {
+                if (Gate.HasNoOutputs())
+                {
+                    Output Output = new Output();
+                    Output.SetTopInConnection(Gate);
+                    Output.SetLocation(Gate.Location.X + 130, Gate.Location.Y);
+                }
+            }
+            Invalidate();
+        }
+
+        public LogicGates CreateRandomGate()
+        {
+            int GateType;
             if (PublicVariables.Menu1.GetLevel() == 1)
             {
-                Random Random = new Random();
-                int NoInputs = Random.Next(2, 3);
-                int NoGates = Random.Next(2, 5);
-                Input Input1 = new Input();
-                Input Input2 = new Input();
-                if (NoInputs == 3)
-                {
-                    Input Input3 = new Input();
-                }
-
+                GateType = Random.Next(1, 4);
             }
             else
             {
-
+                GateType = Random.Next(1, 7);
             }
+            switch(GateType)
+            {
+                case 1:
+                    ANDGate ANDGate = new ANDGate();
+                    return ANDGate;
+                case 2:
+                    ORGate ORGate = new ORGate();
+                    return ORGate;
+                case 3:
+                    NOTGate NOTGate = new NOTGate();
+                    return NOTGate;
+                case 4:
+                    XORGate XORGate = new XORGate();
+                    return XORGate;
+                case 5:
+                    NANDGate NANDGate = new NANDGate();
+                    return NANDGate;
+                case 6:
+                    NORGate NORGate = new NORGate();
+                    return NORGate;
+            }
+            return null;
         }
     }
 }

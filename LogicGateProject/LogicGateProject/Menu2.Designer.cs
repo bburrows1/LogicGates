@@ -148,7 +148,6 @@
             this.TableToCircuit.TabIndex = 11;
             this.TableToCircuit.Text = "Truth Table to Circuit";
             this.TableToCircuit.UseVisualStyleBackColor = false;
-            this.TableToCircuit.Visible = false;
             this.TableToCircuit.Click += new System.EventHandler(this.TableToCircuit_Click);
             // 
             // CircuitToTable
@@ -164,7 +163,6 @@
             this.CircuitToTable.TabIndex = 12;
             this.CircuitToTable.Text = "Circuit to Truth Table";
             this.CircuitToTable.UseVisualStyleBackColor = false;
-            this.CircuitToTable.Visible = false;
             this.CircuitToTable.Click += new System.EventHandler(this.CircuitToTable_Click);
             // 
             // ExpressionToCircuit
@@ -180,7 +178,6 @@
             this.ExpressionToCircuit.TabIndex = 13;
             this.ExpressionToCircuit.Text = "Expression to Circuit";
             this.ExpressionToCircuit.UseVisualStyleBackColor = false;
-            this.ExpressionToCircuit.Visible = false;
             this.ExpressionToCircuit.Click += new System.EventHandler(this.ExpressionToCircuit_Click);
             // 
             // CircuitToExpression
@@ -196,7 +193,6 @@
             this.CircuitToExpression.TabIndex = 14;
             this.CircuitToExpression.Text = "Circuit to Expression";
             this.CircuitToExpression.UseVisualStyleBackColor = false;
-            this.CircuitToExpression.Visible = false;
             this.CircuitToExpression.Click += new System.EventHandler(this.CircuitToExpression_Click);
             // 
             // Menu2

@@ -12,6 +12,7 @@ namespace LogicGateProject
 {
     public class LogicGates : UserControl
     {
+        private static bool DisableEdit;
         private int ID;
         protected LogicGates TopInConnection;
         protected LogicGates BotInConnection;
@@ -25,6 +26,16 @@ namespace LogicGateProject
         private Point MouseDownLocation;
         private bool Traversed;
         private bool Result;
+
+        public static void SetDisabled(bool Disabled)
+        {
+            DisableEdit = Disabled;
+        }
+
+        public static bool IsDisabled()
+        {
+            return DisableEdit;
+        }
 
         public void CreateGate()
         {
@@ -56,7 +67,7 @@ namespace LogicGateProject
 
         public void MouseMoved(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
+            if (e.Button == MouseButtons.Left && !DisableEdit)
             {
                 if ((e.X + Left - MouseDownLocation.X) >= 0 && (e.X + Left - MouseDownLocation.X) <= 1009)
                 {
@@ -142,20 +153,23 @@ namespace LogicGateProject
 
         public void InputClick(object sender, EventArgs e)
         {
-            if (PublicVariables.InputGate != this)
+            if (!DisableEdit)
             {
-                PublicVariables.InputGate = this;
-            }
-            else
-            {
-                PublicVariables.InputGate = null;
-                return;
-            }
-            if (IsValidInput(PublicVariables.InputGate, PublicVariables.OutputGate, PublicVariables.IsTop))
-            {
-                PublicVariables.InputGate.RemoveConnection(PublicVariables.InputGate, PublicVariables.IsTop);
-                PublicVariables.InputGate.CreateConnection(PublicVariables.InputGate, PublicVariables.OutputGate, PublicVariables.IsTop);
-                PublicVariables.Simulator.Invalidate();
+                if (PublicVariables.InputGate != this)
+                {
+                    PublicVariables.InputGate = this;
+                }
+                else
+                {
+                    PublicVariables.InputGate = null;
+                    return;
+                }
+                if (IsValidInput(PublicVariables.InputGate, PublicVariables.OutputGate, PublicVariables.IsTop))
+                {
+                    PublicVariables.InputGate.RemoveConnection(PublicVariables.InputGate, PublicVariables.IsTop);
+                    PublicVariables.InputGate.CreateConnection(PublicVariables.InputGate, PublicVariables.OutputGate, PublicVariables.IsTop);
+                    PublicVariables.Simulator.Invalidate();
+                }
             }
         }
 
