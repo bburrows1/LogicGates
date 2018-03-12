@@ -51,6 +51,7 @@
             this.DesignerPanel = new System.Windows.Forms.Panel();
             this.DeleteAll = new System.Windows.Forms.Button();
             this.DeleteButton = new System.Windows.Forms.Button();
+            this.gcseCircuitToTable1 = new LogicGateProject.GCSECircuitToTable();
             this.RightPanel.SuspendLayout();
             this.LeftPanel.SuspendLayout();
             this.Header.SuspendLayout();
@@ -377,6 +378,7 @@
             // DesignerPanel
             // 
             this.DesignerPanel.BackColor = System.Drawing.Color.Transparent;
+            this.DesignerPanel.Controls.Add(this.gcseCircuitToTable1);
             this.DesignerPanel.Controls.Add(this.DeleteAll);
             this.DesignerPanel.Controls.Add(this.DeleteButton);
             this.DesignerPanel.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -417,6 +419,13 @@
             this.DeleteButton.TabIndex = 4;
             this.DeleteButton.UseVisualStyleBackColor = false;
             this.DeleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
+            // 
+            // gcseCircuitToTable1
+            // 
+            this.gcseCircuitToTable1.Location = new System.Drawing.Point(803, 519);
+            this.gcseCircuitToTable1.Name = "gcseCircuitToTable1";
+            this.gcseCircuitToTable1.Size = new System.Drawing.Size(337, 293);
+            this.gcseCircuitToTable1.TabIndex = 6;
             // 
             // Simulator
             // 
@@ -466,6 +475,7 @@
         private System.Windows.Forms.Panel DesignerPanel;
         private System.Windows.Forms.Button DeleteButton;
         private System.Windows.Forms.Button DeleteAll;
+        private GCSECircuitToTable gcseCircuitToTable1;
     }
 }
 

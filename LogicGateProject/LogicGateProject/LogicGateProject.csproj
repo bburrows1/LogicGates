@@ -59,17 +59,17 @@
     <Compile Include="ExpressionsTable.Designer.cs">
       <DependentUpon>ExpressionsTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="GCSECircuitToTable.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GCSECircuitToTable.Designer.cs">
+      <DependentUpon>GCSECircuitToTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Simulator.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Simulator.Designer.cs">
       <DependentUpon>Simulator.cs</DependentUpon>
-    </Compile>
-    <Compile Include="GCSEConvert.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="GCSEConvert.Designer.cs">
-      <DependentUpon>GCSEConvert.cs</DependentUpon>
     </Compile>
     <Compile Include="Input.cs">
       <SubType>UserControl</SubType>
@@ -143,11 +143,11 @@
     <EmbeddedResource Include="ExpressionsTable.resx">
       <DependentUpon>ExpressionsTable.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="GCSECircuitToTable.resx">
+      <DependentUpon>GCSECircuitToTable.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Simulator.resx">
       <DependentUpon>Simulator.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GCSEConvert.resx">
-      <DependentUpon>GCSEConvert.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Input.resx">
       <DependentUpon>Input.cs</DependentUpon>

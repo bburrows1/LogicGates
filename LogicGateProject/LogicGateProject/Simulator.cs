@@ -48,6 +48,7 @@ namespace LogicGateProject
             }
         }
 
+        //Adds a gate to display
         public void AddToDesignerPanel(LogicGates Gate)
         {
             DesignerPanel.Controls.Add(Gate);
@@ -879,6 +880,17 @@ namespace LogicGateProject
                         DeleteButton.Hide();
                         CreateCircuit();
                         LogicGates.SetDisabled(true);
+                        int Inputs = 0;
+                        int Outputs = 0;
+                        foreach (LogicGates Gate in PublicVariables.Gates)
+                        {
+                            if (Gate.GetType() == typeof(Input))
+                                Inputs++;
+                            else if (Gate.GetType() == typeof(Output))
+                                Outputs++; 
+                        }
+                        GCSECircuitToTable Question = new GCSECircuitToTable();
+                        Question.SetTable(Inputs, Outputs);
                     }
                     else
                     {
@@ -904,6 +916,7 @@ namespace LogicGateProject
                 Save.Show();
                 LoadFile.Show();
                 DeleteButton.Show();
+                LogicGates.SetDisabled(false);
             }
         }
 
