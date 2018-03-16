@@ -28,39 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.TableLayout = new System.Windows.Forms.TableLayoutPanel();
             this.QuestionPanel = new System.Windows.Forms.Panel();
             this.Question = new System.Windows.Forms.Label();
+            this.DataGridView = new System.Windows.Forms.DataGridView();
             this.QuestionPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DataGridView)).BeginInit();
             this.SuspendLayout();
-            // 
-            // TableLayout
-            // 
-            this.TableLayout.ColumnCount = 1;
-            this.TableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.TableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.TableLayout.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.TableLayout.Location = new System.Drawing.Point(0, 25);
-            this.TableLayout.Name = "TableLayout";
-            this.TableLayout.RowCount = 1;
-            this.TableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.TableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.TableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.TableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.TableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.TableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            this.TableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.TableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
-            this.TableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.TableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
-            this.TableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.TableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.TableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.TableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.TableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.TableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.TableLayout.Size = new System.Drawing.Size(566, 419);
-            this.TableLayout.TabIndex = 0;
             // 
             // QuestionPanel
             // 
@@ -83,24 +56,33 @@
             this.Question.TabIndex = 1;
             this.Question.Text = "Create the truth table for the circuit";
             // 
+            // DataGridView
+            // 
+            this.DataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DataGridView.Location = new System.Drawing.Point(0, 26);
+            this.DataGridView.Name = "DataGridView";
+            this.DataGridView.Size = new System.Drawing.Size(566, 418);
+            this.DataGridView.TabIndex = 2;
+            // 
             // GCSECircuitToTable
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.DataGridView);
             this.Controls.Add(this.QuestionPanel);
-            this.Controls.Add(this.TableLayout);
             this.Name = "GCSECircuitToTable";
             this.Size = new System.Drawing.Size(566, 444);
             this.QuestionPanel.ResumeLayout(false);
             this.QuestionPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DataGridView)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.TableLayoutPanel TableLayout;
         private System.Windows.Forms.Panel QuestionPanel;
         private System.Windows.Forms.Label Question;
+        private System.Windows.Forms.DataGridView DataGridView;
     }
 }

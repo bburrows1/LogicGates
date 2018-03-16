@@ -877,20 +877,21 @@ namespace LogicGateProject
                 {
                     if (CircuitTo)
                     {
+                        List<LogicGates> InputGates = new List<LogicGates>();
+                        List<LogicGates> OutputGates = new List<LogicGates>();
                         DeleteButton.Hide();
                         CreateCircuit();
                         LogicGates.SetDisabled(true);
-                        int Inputs = 0;
-                        int Outputs = 0;
                         foreach (LogicGates Gate in PublicVariables.Gates)
                         {
                             if (Gate.GetType() == typeof(Input))
-                                Inputs++;
+                                InputGates.Add(Gate);
                             else if (Gate.GetType() == typeof(Output))
-                                Outputs++; 
+                                OutputGates.Add(Gate);
                         }
                         GCSECircuitToTable Question = new GCSECircuitToTable();
-                        Question.SetTable(Inputs, Outputs);
+                        Question.SetTable(InputGates, OutputGates);
+                        DesignerPanel.Controls.Add(Question);
                     }
                     else
                     {
