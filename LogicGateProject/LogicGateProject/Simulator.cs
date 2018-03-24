@@ -873,6 +873,10 @@ namespace LogicGateProject
             {
                 Save.Hide();
                 LoadFile.Hide();
+                NANDSimplifcation.Hide();
+                CreateExpression.Hide();
+                StepByStep.Hide();
+                CreateTruthTable.Hide();
                 if (PublicVariables.Menu1.GetLevel() == 1)
                 {
                     if (CircuitTo)
@@ -917,8 +921,17 @@ namespace LogicGateProject
                 Save.Show();
                 LoadFile.Show();
                 DeleteButton.Show();
+                NANDSimplifcation.Show();
+                CreateExpression.Show();
+                StepByStep.Show();
+                CreateTruthTable.Show();
                 LogicGates.SetDisabled(false);
             }
+        }
+
+        public Point GetDesignerPanelSize()
+        {
+            return new Point(DesignerPanel.Width, DesignerPanel.Height);
         }
 
         Random Random = new Random();
@@ -930,7 +943,7 @@ namespace LogicGateProject
             int NoGates;
             DeleteAllGates();
             if (PublicVariables.Menu1.GetLevel() == 1)
-                NoGates = Random.Next(2, 6);
+                NoGates = Random.Next(2, 5);
             else 
                 NoGates = Random.Next(3, 6);
             Input Input1 = new Input();

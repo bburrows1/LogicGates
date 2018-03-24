@@ -67,3 +67,49 @@ C:\Users\Alison\Documents\Ben Project\LogicGates\LogicGateProject\LogicGateProje
 N:\B.Burrows\My Documents\Applications\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.ExpressionsTable.resources
 E:\Users\Ben\Documents\Homework\Warwick homework\AComputing\C# Programs\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.ExpressionsTable.resources
 E:\Users\Ben\Documents\Homework\Warwick homework\AComputing\C# Programs\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.GCSECircuitToTable.resources
+D:\LogicGates\LogicGateProject\LogicGateProject\bin\Debug\LogicGateProject.exe.config
+D:\LogicGates\LogicGateProject\LogicGateProject\bin\Debug\LogicGateProject.exe
+D:\LogicGates\LogicGateProject\LogicGateProject\bin\Debug\LogicGateProject.pdb
+D:\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.csprojResolveAssemblyReference.cache
+D:\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.ANDGate.resources
+D:\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.ExpressionsTable.resources
+D:\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.GCSECircuitToTable.resources
+D:\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.Simulator.resources
+D:\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.Input.resources
+D:\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.Menu1.resources
+D:\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.Menu2.resources
+D:\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.NANDGate.resources
+D:\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.NORGate.resources
+D:\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.NOTGate.resources
+D:\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.ORGate.resources
+D:\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.Output.resources
+D:\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.Properties.Resources.resources
+D:\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.TruthTable.resources
+D:\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.XORGate.resources
+D:\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.csproj.GenerateResource.Cache
+D:\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.csproj.CoreCompileInputs.cache
+D:\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.exe
+D:\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.pdb
+N:\B.Burrows\My Documents\Applications\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.ANDGate.resources
+N:\B.Burrows\My Documents\Applications\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.ExpressionsTable.resources
+N:\B.Burrows\My Documents\Applications\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.GCSECircuitToTable.resources
+N:\B.Burrows\My Documents\Applications\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.Simulator.resources
+N:\B.Burrows\My Documents\Applications\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.Input.resources
+N:\B.Burrows\My Documents\Applications\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.Menu1.resources
+N:\B.Burrows\My Documents\Applications\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.Menu2.resources
+N:\B.Burrows\My Documents\Applications\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.NANDGate.resources
+N:\B.Burrows\My Documents\Applications\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.NORGate.resources
+N:\B.Burrows\My Documents\Applications\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.NOTGate.resources
+N:\B.Burrows\My Documents\Applications\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.ORGate.resources
+N:\B.Burrows\My Documents\Applications\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.Output.resources
+N:\B.Burrows\My Documents\Applications\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.Properties.Resources.resources
+N:\B.Burrows\My Documents\Applications\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.TruthTable.resources
+N:\B.Burrows\My Documents\Applications\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.XORGate.resources
+N:\B.Burrows\My Documents\Applications\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.csproj.GenerateResource.Cache
+N:\B.Burrows\My Documents\Applications\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.csproj.CoreCompileInputs.cache
+N:\B.Burrows\My Documents\Applications\LogicGateProject\LogicGateProject\bin\Debug\LogicGateProject.exe.config
+N:\B.Burrows\My Documents\Applications\LogicGateProject\LogicGateProject\bin\Debug\LogicGateProject.exe
+N:\B.Burrows\My Documents\Applications\LogicGateProject\LogicGateProject\bin\Debug\LogicGateProject.pdb
+N:\B.Burrows\My Documents\Applications\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.exe
+N:\B.Burrows\My Documents\Applications\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.pdb
+N:\B.Burrows\My Documents\Applications\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.csprojResolveAssemblyReference.cache
