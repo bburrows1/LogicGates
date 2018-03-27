@@ -1,10 +1,14 @@
-48:LogicGateProject.Input 49:LogicGateProject.Input 50:LogicGateProject.ANDGate 51:LogicGateProject.ANDGate 52:LogicGateProject.NORGate 53:LogicGateProject.NORGate 54:LogicGateProject.Output 55:LogicGateProject.Output 56:LogicGateProject.NOTGate 
-48,0 142,null,null,0
-49,57 263,null,null,2
-50,325 122,56,49,
-51,276 353,49,48,
-52,560 143,50,53,
-53,552 335,52,51,
-54,861 149,52,null
-55,859 341,53,null
-56,158 31,48,null
+1:LogicGateProject.Input 2:LogicGateProject.Input 3:LogicGateProject.NANDGate 4:LogicGateProject.NANDGate 5:LogicGateProject.NANDGate 6:LogicGateProject.NANDGate 7:LogicGateProject.NANDGate 8:LogicGateProject.NANDGate 9:LogicGateProject.NANDGate 10:LogicGateProject.NANDGate 13:LogicGateProject.Output 14:LogicGateProject.Output 15:LogicGateProject.NOTGate 
+1,1 151,null,null,0
+2,1 380,null,null,2
+3,221 151,1,2,
+4,222 301,3,2,
+5,408 179,3,6,
+6,385 319,5,4,
+7,554 107,5,15,
+8,579 312,15,6,
+9,730 133,7,10,
+10,803 295,9,8,
+13,1009 139,9,null
+14,1009 301,10,null
+15,431 491,2,null
