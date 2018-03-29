@@ -1,6 +1,6 @@
 ﻿namespace LogicGateProject
 {
-    partial class GCSECircuitToTable
+    partial class GCSEQuiz
     {
         /// <summary> 
         /// Required designer variable.
@@ -120,8 +120,9 @@
             this.ResultLabel.Name = "ResultLabel";
             this.ResultLabel.Size = new System.Drawing.Size(0, 21);
             this.ResultLabel.TabIndex = 2;
+            this.ResultLabel.Visible = false;
             // 
-            // GCSECircuitToTable
+            // GCSEQuiz
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -129,7 +130,7 @@
             this.Controls.Add(this.SubmitButton);
             this.Controls.Add(this.DataGridView);
             this.Controls.Add(this.QuestionPanel);
-            this.Name = "GCSECircuitToTable";
+            this.Name = "GCSEQuiz";
             this.Size = new System.Drawing.Size(181, 282);
             this.QuestionPanel.ResumeLayout(false);
             this.QuestionPanel.PerformLayout();

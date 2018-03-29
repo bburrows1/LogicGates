@@ -59,11 +59,11 @@
     <Compile Include="ExpressionsTable.Designer.cs">
       <DependentUpon>ExpressionsTable.cs</DependentUpon>
     </Compile>
-    <Compile Include="GCSECircuitToTable.cs">
+    <Compile Include="GCSEQuiz.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="GCSECircuitToTable.Designer.cs">
-      <DependentUpon>GCSECircuitToTable.cs</DependentUpon>
+    <Compile Include="GCSEQuiz.Designer.cs">
+      <DependentUpon>GCSEQuiz.cs</DependentUpon>
     </Compile>
     <Compile Include="Simulator.cs">
       <SubType>Form</SubType>
@@ -143,8 +143,8 @@
     <EmbeddedResource Include="ExpressionsTable.resx">
       <DependentUpon>ExpressionsTable.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GCSECircuitToTable.resx">
-      <DependentUpon>GCSECircuitToTable.cs</DependentUpon>
+    <EmbeddedResource Include="GCSEQuiz.resx">
+      <DependentUpon>GCSEQuiz.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Simulator.resx">
       <DependentUpon>Simulator.cs</DependentUpon>

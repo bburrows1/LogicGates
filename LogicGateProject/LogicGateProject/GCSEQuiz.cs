@@ -10,17 +10,15 @@ using System.Windows.Forms;
 
 namespace LogicGateProject
 {
-    public partial class GCSECircuitToTable : UserControl
+    public partial class GCSEQuiz : UserControl
     {
         private List<LogicGates> Inputs;
         private List<LogicGates> Outputs;
-        public GCSECircuitToTable()
+        private bool TableToCircuit = false;
+
+        public GCSEQuiz(List<LogicGates> PassedInputs, List<LogicGates> PassedOutputs)
         {
             InitializeComponent();
-        }
-
-        public void SetTable(List<LogicGates> PassedInputs, List<LogicGates> PassedOutputs)
-        {
             Inputs = PassedInputs;
             Outputs = PassedOutputs;
             DataGridView.ColumnCount = Inputs.Count + Outputs.Count;
@@ -53,21 +51,30 @@ namespace LogicGateProject
                     DataGridView.Rows[i].Cells[j].Style.BackColor = Color.Red;
                 }
             }
+            SizeControl();
+        }
+
+        private void SizeControl()
+        {
             SubmitButton.Location = new Point(75, (Convert.ToInt32(Math.Pow(2.0, Inputs.Count))) * 22 + DataGridView.Location.Y + 26);
             SubmitButton.BringToFront();
             Width = 165;
             Height = Question.Height + (Convert.ToInt32(Math.Pow(2.0, Inputs.Count))) * 22 + 26 + SubmitButton.Height;
             Location = new Point(PublicVariables.Simulator.GetDesignerPanelSize().X - Width, PublicVariables.Simulator.GetDesignerPanelSize().Y - Height);
+            ResultLabel.Location = new Point(0, (Convert.ToInt32(Math.Pow(2.0, Inputs.Count))) * 22 + DataGridView.Location.Y + 26);
         }
 
         private void DataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0 && e.ColumnIndex >= Inputs.Count)
+            if (!TableToCircuit)
             {
-                if (DataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.BackColor == Color.Red)
-                    DataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.BackColor = Color.Green;
-                else
-                    DataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.BackColor = Color.Red;
+                if (e.RowIndex >= 0 && e.ColumnIndex >= Inputs.Count)
+                {
+                    if (DataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.BackColor == Color.Red)
+                        DataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.BackColor = Color.Green;
+                    else
+                        DataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.BackColor = Color.Red;
+                }
             }
         }
 
@@ -78,7 +85,50 @@ namespace LogicGateProject
 
         private void SubmitButton_Click(object sender, EventArgs e)
         {
-            if (SubmitButton.Text == "Submit")
+            if (!TableToCircuit)
+            {
+                if (SubmitButton.Text == "Submit")
+                {
+                    if (CompleteTable())
+                        ResultLabel.Text = "Correct!";
+                    else
+                        ResultLabel.Text = "Incorrect";
+                    ResultLabel.Show();
+                    SubmitButton.Text = "Next";
+                    LogicGates.SetDisabled(false);
+                }
+                else
+                {
+                    Hide();
+                    PublicVariables.Simulator.SetUpQuiz(true, true);
+                    Dispose();
+                }
+            }
+            else
+            {
+                if (SubmitButton.Text == "Submit")
+                {
+                    Inputs = PublicVariables.Simulator.GetInputList();
+                    Outputs = PublicVariables.Simulator.GetOutputList();
+                    if (CompleteTable())
+                        ResultLabel.Text = "Correct!";
+                    else
+                        ResultLabel.Text = "Incorrect";
+                    ResultLabel.Show();
+                    SubmitButton.Text = "Next";
+                }
+                else
+                {
+                    Hide();
+                    PublicVariables.Simulator.SetUpQuiz(true, false);
+                    Dispose();
+                }
+            }
+        }
+
+        public bool CompleteTable()
+        {
+            if (Inputs.Count > 0 && Outputs.Count > 0)
             {
                 bool Correct = true;
                 for (int i = 0; i < Convert.ToInt32(Math.Pow(2.0, Inputs.Count)); i++)
@@ -109,20 +159,16 @@ namespace LogicGateProject
                         }
                     }
                 }
-                ResultLabel.Location = new Point(0, (Convert.ToInt32(Math.Pow(2.0, Inputs.Count))) * 22 + DataGridView.Location.Y + 26);
-                if (Correct)
-                    ResultLabel.Text = "Correct!";
-                else
-                    ResultLabel.Text = "Incorrect";
-                SubmitButton.Text = "Next";
-                LogicGates.SetDisabled(false);
+                return Correct;
             }
             else
-            {
-                Hide();
-                PublicVariables.Simulator.SetUpQuiz(true, true);
-                Dispose();
-            }
+                return false;
+        }
+
+        public void SetTableToCircuit()
+        {
+            TableToCircuit = true;
+            Question.Text = "Create a circuit to \nmatch this table";
         }
     }
 }

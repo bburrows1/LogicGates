@@ -57,7 +57,7 @@ namespace LogicGateProject
         //Back
         private void Back_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            Hide();
             SetUpQuiz(false, false);
             if (PublicVariables.Menu1.GetLevel() == 3)
                 PublicVariables.Menu1.Show();
@@ -277,7 +277,7 @@ namespace LogicGateProject
             SaveFileDialog SaveFileDialog = new SaveFileDialog();
             SaveFileDialog.InitialDirectory = Application.StartupPath + "\\Saves";
             SaveFileDialog.DefaultExt = "txt";
-            SaveFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
+            SaveFileDialog.Filter = "Text files (*.txt)|*.txt";
             if (SaveFileDialog.ShowDialog() == DialogResult.OK)
             {
                 string Data = "";
@@ -303,76 +303,83 @@ namespace LogicGateProject
             OpenFileDialog OpenFileDialog = new OpenFileDialog();
             OpenFileDialog.InitialDirectory = Application.StartupPath + "\\Saves";
             OpenFileDialog.DefaultExt = "txt";
-            OpenFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
+            OpenFileDialog.Filter = "Text files (*.txt)|*.txt";
             if (OpenFileDialog.ShowDialog() == DialogResult.OK)
             {
-                DeleteAllGates();
-                StreamReader Reader = new StreamReader(OpenFileDialog.OpenFile());
-                string Data = Reader.ReadLine();
-                string[] FirstLine = Data.Split(' ');
-                Array.Resize(ref FirstLine, FirstLine.Length - 1);
-                foreach (string Line in FirstLine) 
+                try
                 {
-                    string[] Info = Line.Split(':');
-                    switch(Info[1])
+                    DeleteAllGates();
+                    StreamReader Reader = new StreamReader(OpenFileDialog.OpenFile());
+                    string Data = Reader.ReadLine();
+                    string[] FirstLine = Data.Split(' ');
+                    Array.Resize(ref FirstLine, FirstLine.Length - 1);
+                    foreach (string Line in FirstLine)
                     {
-                        case "LogicGateProject.Input":
-                            Input Input = new Input();
-                            Input.SetID(int.Parse(Info[0]));
-                            Gates.Add(int.Parse(Input.GetID()), Input);
-                            break;
-                        case "LogicGateProject.Output":
-                            Output Output = new Output();
-                            Output.SetID(int.Parse(Info[0]));
-                            Gates.Add(int.Parse(Output.GetID()), Output);
-                            break;
-                        case "LogicGateProject.ANDGate":
-                            ANDGate ANDGate = new ANDGate();
-                            ANDGate.SetID(int.Parse(Info[0]));
-                            Gates.Add(int.Parse(ANDGate.GetID()), ANDGate);
-                            break;
-                        case "LogicGateProject.ORGate":
-                            ORGate ORGate = new ORGate();
-                            ORGate.SetID(int.Parse(Info[0]));
-                            Gates.Add(int.Parse(ORGate.GetID()), ORGate);
-                            break;
-                        case "LogicGateProject.NOTGate":
-                            NOTGate NOTGate = new NOTGate();
-                            NOTGate.SetID(int.Parse(Info[0]));
-                            Gates.Add(int.Parse(NOTGate.GetID()), NOTGate);
-                            break;
-                        case "LogicGateProject.XORGate":
-                            XORGate XORGate = new XORGate();
-                            XORGate.SetID(int.Parse(Info[0]));
-                            Gates.Add(int.Parse(XORGate.GetID()), XORGate);
-                            break;
-                        case "LogicGateProject.NANDGate":
-                            NANDGate NANDGate = new NANDGate();
-                            NANDGate.SetID(int.Parse(Info[0]));
-                            Gates.Add(int.Parse(NANDGate.GetID()), NANDGate);
-                            break;
-                        case "LogicGateProject.NORGate":
-                            NORGate NORGate = new NORGate();
-                            NORGate.SetID(int.Parse(Info[0]));
-                            Gates.Add(int.Parse(NORGate.GetID()), NORGate);
-                            break;
+                        string[] Info = Line.Split(':');
+                        switch (Info[1])
+                        {
+                            case "LogicGateProject.Input":
+                                Input Input = new Input();
+                                Input.SetID(int.Parse(Info[0]));
+                                Gates.Add(int.Parse(Input.GetID()), Input);
+                                break;
+                            case "LogicGateProject.Output":
+                                Output Output = new Output();
+                                Output.SetID(int.Parse(Info[0]));
+                                Gates.Add(int.Parse(Output.GetID()), Output);
+                                break;
+                            case "LogicGateProject.ANDGate":
+                                ANDGate ANDGate = new ANDGate();
+                                ANDGate.SetID(int.Parse(Info[0]));
+                                Gates.Add(int.Parse(ANDGate.GetID()), ANDGate);
+                                break;
+                            case "LogicGateProject.ORGate":
+                                ORGate ORGate = new ORGate();
+                                ORGate.SetID(int.Parse(Info[0]));
+                                Gates.Add(int.Parse(ORGate.GetID()), ORGate);
+                                break;
+                            case "LogicGateProject.NOTGate":
+                                NOTGate NOTGate = new NOTGate();
+                                NOTGate.SetID(int.Parse(Info[0]));
+                                Gates.Add(int.Parse(NOTGate.GetID()), NOTGate);
+                                break;
+                            case "LogicGateProject.XORGate":
+                                XORGate XORGate = new XORGate();
+                                XORGate.SetID(int.Parse(Info[0]));
+                                Gates.Add(int.Parse(XORGate.GetID()), XORGate);
+                                break;
+                            case "LogicGateProject.NANDGate":
+                                NANDGate NANDGate = new NANDGate();
+                                NANDGate.SetID(int.Parse(Info[0]));
+                                Gates.Add(int.Parse(NANDGate.GetID()), NANDGate);
+                                break;
+                            case "LogicGateProject.NORGate":
+                                NORGate NORGate = new NORGate();
+                                NORGate.SetID(int.Parse(Info[0]));
+                                Gates.Add(int.Parse(NORGate.GetID()), NORGate);
+                                break;
+                        }
                     }
+                    while ((Data = Reader.ReadLine()) != null)
+                    {
+                        string[] Line = Data.Split(',');
+                        string[] Location = Line[1].Split(' ');
+                        Gates[int.Parse(Line[0])].SetLocation(int.Parse(Location[0]), int.Parse(Location[1]));
+                        if (Line[2] != "null")
+                            Gates[int.Parse(Line[0])].SetTopInConnection(Gates[int.Parse(Line[2])]);
+                        if (Line[3] != "null")
+                            Gates[int.Parse(Line[0])].SetBotInConnection(Gates[int.Parse(Line[3])]);
+                        if (Gates[int.Parse(Line[0])] is Input)
+                            Gates[int.Parse(Line[0])].SetWaitTime(float.Parse(Line[4]));
+                    }
+                    Reader.Dispose();
+                    Reader.Close();
+                    Invalidate();
                 }
-                while ((Data = Reader.ReadLine()) != null)
+                catch
                 {
-                    string[] Line = Data.Split(',');
-                    string[] Location = Line[1].Split(' ');
-                    Gates[int.Parse(Line[0])].SetLocation(int.Parse(Location[0]), int.Parse(Location[1]));
-                    if (Line[2] != "null")
-                        Gates[int.Parse(Line[0])].SetTopInConnection(Gates[int.Parse(Line[2])]);
-                    if (Line[3] != "null")
-                        Gates[int.Parse(Line[0])].SetBotInConnection(Gates[int.Parse(Line[3])]);
-                    if (Gates[int.Parse(Line[0])] is Input)
-                        Gates[int.Parse(Line[0])].SetWaitTime(float.Parse(Line[4]));
+                    MessageBox.Show("Invalid File", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                Reader.Dispose();
-                Reader.Close();
-                Invalidate();
             }
         }
 
@@ -380,79 +387,105 @@ namespace LogicGateProject
 
         private void AddExpression_KeyPress(object sender, KeyPressEventArgs e)
         {
-            Dictionary<string, LogicGates> Gates = new Dictionary<string, LogicGates>();
             if (IsEnter && AddExpression.Text != "" && !LogicGates.IsDisabled())
             {
-                string Input = AddExpression.Text.Replace(" ", string.Empty);
-                if (CheckValidExpression(Input))
+                CreateCircuitFromExpression();
+            }
+        }
+
+        public void CreateCircuitFromExpression()
+        {
+            Dictionary<string, LogicGates> Gates = new Dictionary<string, LogicGates>();
+            string Input = AddExpression.Text.Replace(" ", string.Empty);
+            if (CheckValidExpression(Input))
+            {
+                DeleteAllGates();
+                for (int i = 0; i < Input.Length; i++)
                 {
-                    DeleteAllGates();
-                    for (int i = 0; i < Input.Length; i++)
+                    if (char.IsLetter(Input[i]) && !Gates.ContainsKey(Input[i].ToString()))
                     {
-                        if (char.IsLetter(Input[i]) && !Gates.ContainsKey(Input[i].ToString()))
-                        {
-                            Gates.Add(Input[i].ToString(), CreateGate(Gates, Input[i].ToString()));
-                        }
+                        Gates.Add(Input[i].ToString(), CreateGate(Gates, Input[i].ToString()));
                     }
-                    if (Input.Length > 1)
+                }
+                if (Input.Length > 1)
+                {
+                    for (int Back = 0; Back < Input.Length; Back++)
                     {
-                        for (int Back = 0; Back < Input.Length; Back++)
+                        if (Back + 1 < Input.Length)
                         {
-                            if (Back + 1 < Input.Length)
+                            if (char.IsLetter(Input[Back]) && Input[Back + 1] == '\'')
                             {
-                                if (char.IsLetter(Input[Back]) && Input[Back + 1] == '\'')
-                                {
-                                    Gates.Add(PublicVariables.ID.ToString(), CreateGate(Gates, Input.Substring(Back, 2)));
-                                    Input = Input.Remove(Back, 2);
-                                    Input = Input.Insert(Back, (PublicVariables.ID - 1).ToString());
-                                    Back--;
-                                    continue;
-                                }
-                                if (char.IsDigit(Input[Back]) && Input[Back + 1] == '\'')
-                                {
-                                    string Number = GetNumber(Input, Back);
-                                    Back = Back + 1 - Number.Length;
-                                    Gates.Add(PublicVariables.ID.ToString(), CreateGate(Gates, Input.Substring(Back, Number.Length + 1)));
-                                    Input = Input.Remove(Back, Number.Length + 1);
-                                    Input = Input.Insert(Back, (PublicVariables.ID - 1).ToString());
-                                    Back--;
-                                    continue;
-                                }
+                                Gates.Add(PublicVariables.ID.ToString(), CreateGate(Gates, Input.Substring(Back, 2)));
+                                Input = Input.Remove(Back, 2);
+                                Input = Input.Insert(Back, (PublicVariables.ID - 1).ToString());
+                                Back--;
+                                continue;
                             }
-                            if (Input[Back] == ')')
+                            if (char.IsDigit(Input[Back]) && Input[Back + 1] == '\'')
                             {
-                                int Front = Back;
-                                while (Input[Front] != '(')
-                                {
-                                    Front--;
-                                }
-                                Input = Input.Remove(Back, 1);
-                                Input = Input.Remove(Front, 1);
-                                string Expression = CompleteExpression(ref Gates, Input.Substring(Front, Back - Front - 1));
-                                Input = Input.Remove(Front, Back - Front - 1);
-                                Input = Input.Insert(Front, Expression);
-                                Back = Front - 1;
+                                string Number = GetNumber(Input, Back);
+                                Back = Back + 1 - Number.Length;
+                                Gates.Add(PublicVariables.ID.ToString(), CreateGate(Gates, Input.Substring(Back, Number.Length + 1)));
+                                Input = Input.Remove(Back, Number.Length + 1);
+                                Input = Input.Insert(Back, (PublicVariables.ID - 1).ToString());
+                                Back--;
                                 continue;
                             }
                         }
-                        Input = CompleteExpression(ref Gates, Input);
-                    }
-                    List<LogicGates> ListOfGates = new List<LogicGates>();
-                    foreach (LogicGates Gate in PublicVariables.Gates)
-                        ListOfGates.Add(Gate);
-                    foreach (LogicGates Gate in ListOfGates)
-                    {
-                        if (Gate.HasNoOutputs())
+                        if (Input[Back] == ')')
                         {
-                            Output Output = new Output();
-                            Output.SetTopInConnection(Gate);
+                            int Front = Back;
+                            while (Input[Front] != '(')
+                            {
+                                Front--;
+                            }
+                            Input = Input.Remove(Back, 1);
+                            Input = Input.Remove(Front, 1);
+                            string Expression = CompleteExpression(ref Gates, Input.Substring(Front, Back - Front - 1));
+                            Input = Input.Remove(Front, Back - Front - 1);
+                            Input = Input.Insert(Front, Expression);
+                            Back = Front - 1;
+                            continue;
                         }
                     }
-                    SetGateLocations();
+                    Input = CompleteExpression(ref Gates, Input);
                 }
-                else
-                    MessageBox.Show("Invalid Input\nPlease use the form A.(B + C)' (Use % for XOR)", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                List<LogicGates> ListOfGates = new List<LogicGates>();
+                foreach (LogicGates Gate in PublicVariables.Gates)
+                    ListOfGates.Add(Gate);
+                foreach (LogicGates Gate in ListOfGates)
+                {
+                    if (Gate.HasNoOutputs())
+                    {
+                        Output Output = new Output();
+                        Output.SetTopInConnection(Gate);
+                    }
+                    if (Gate.GetType() == typeof(NOTGate))
+                    {
+                        if (Gate.GetTopInConnection().GetType() == typeof(ANDGate))
+                        {
+                            NANDGate NewGate = new NANDGate();
+                            NewGate.SetTopInConnection(Gate.GetTopInConnection().GetTopInConnection());
+                            NewGate.SetBotInConnection(Gate.GetTopInConnection().GetBotInConnection());
+                            NewGate.SetOutConnections(Gate.GetOutConnections());
+                            Gate.GetTopInConnection().DeleteGate();
+                            Gate.DeleteGate();
+                        }
+                        else if (Gate.GetTopInConnection().GetType() == typeof(ORGate))
+                        {
+                            NORGate NewGate = new NORGate();
+                            NewGate.SetTopInConnection(Gate.GetTopInConnection().GetTopInConnection());
+                            NewGate.SetBotInConnection(Gate.GetTopInConnection().GetBotInConnection());
+                            NewGate.SetOutConnections(Gate.GetOutConnections());
+                            Gate.GetTopInConnection().DeleteGate();
+                            Gate.DeleteGate();
+                        }
+                    }
+                }
+                SetGateLocations();
             }
+            else
+                MessageBox.Show("Invalid Input\nPlease use the form A.(B + C)' (Use % for XOR)", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         public string CompleteExpression(ref Dictionary<string, LogicGates> Gates, string Input)
@@ -712,18 +745,18 @@ namespace LogicGateProject
             {
                 NANDSimplifcation.Hide();
                 CreateExpression.Show();
-                AddXOR.Show();
                 AddNAND.Show();
                 AddNOR.Show();
+                AddXOR.Show();
                 AddExpression.Show();
             }
             if (Level == 3)
             {
                 NANDSimplifcation.Show();
                 CreateExpression.Show();
-                AddXOR.Show();
                 AddNAND.Show();
                 AddNOR.Show();
+                AddXOR.Show();
                 AddExpression.Show();
             }
         }
@@ -867,66 +900,212 @@ namespace LogicGateProject
             Invalidate();
         }
 
+        public GCSEQuiz Question;
+        private List<Type> OriginalConnections;
         public void SetUpQuiz(bool IsQuiz, bool CircuitTo)
         {
             if (IsQuiz)
             {
-                Save.Hide();
                 LoadFile.Hide();
+                Save.Hide();
                 NANDSimplifcation.Hide();
                 CreateExpression.Hide();
                 StepByStep.Hide();
                 CreateTruthTable.Hide();
                 if (PublicVariables.Menu1.GetLevel() == 1)
                 {
+                    CreateCircuit();
+                    Question = new GCSEQuiz(GetInputList(), GetOutputList());
                     if (CircuitTo)
                     {
-                        List<LogicGates> InputGates = new List<LogicGates>();
-                        List<LogicGates> OutputGates = new List<LogicGates>();
                         DeleteButton.Hide();
-                        CreateCircuit();
                         LogicGates.SetDisabled(true);
-                        foreach (LogicGates Gate in PublicVariables.Gates)
-                        {
-                            if (Gate.GetType() == typeof(Input))
-                                InputGates.Add(Gate);
-                            else if (Gate.GetType() == typeof(Output))
-                                OutputGates.Add(Gate);
-                        }
-                        GCSECircuitToTable Question = new GCSECircuitToTable();
-                        Question.SetTable(InputGates, OutputGates);
-                        DesignerPanel.Controls.Add(Question);
                     }
                     else
                     {
-
+                        Question.CompleteTable();
+                        Question.SetTableToCircuit();
+                        DeleteAllGates();
                     }
+                    DesignerPanel.Controls.Add(Question);
                 }
                 else if (PublicVariables.Menu1.GetLevel() == 2)
                 {
+                    QuestionLabel.Show();
+                    SubmitButton.Show();
+                    ResultLabel.Hide();
                     if (CircuitTo)
                     {
+                        QuestionLabel.Text = "Enter the expression of the circuit";
+                        AddExpression.Text = "INPUT BOOLEAN EXPRESSION E.G. A.(B + C)' (USE % FOR XOR)";
+                        AddExpression.ForeColor = Color.Gray;
                         DeleteButton.Hide();
                         CreateCircuit();
                         LogicGates.SetDisabled(true);
+                        OriginalConnections = GetCircuitConnections();
                     }
                     else
                     {
-
+                        QuestionLabel.Text = "Create a circuit for this expression";
+                        string Expression = "";
+                        CreateCircuit();
+                        foreach (LogicGates Output in GetOutputList())
+                        {
+                            Output.CreateExpression(ref Expression);
+                            if (Expression[0] == '(' && Expression[Expression.Length - 1] == ')')
+                            {
+                                Expression = Expression.Remove(Expression.Length - 1, 1);
+                                Expression = Expression.Remove(0, 1);
+                            }
+                        }
+                        AddExpression.Text = Expression;
+                        AddExpression.ForeColor = Color.Black;
+                        AddExpression.ReadOnly = true;
+                        DeleteAllGates();
                     }
                 }
             }
             else
             {
-                Save.Show();
+                if (Question != null)
+                    Question.Dispose();
+                QuestionLabel.Hide();
+                SubmitButton.Hide();
+                ResultLabel.Hide();
                 LoadFile.Show();
+                Save.Show();
                 DeleteButton.Show();
                 NANDSimplifcation.Show();
                 CreateExpression.Show();
                 StepByStep.Show();
                 CreateTruthTable.Show();
+                AddExpression.ReadOnly = false;
                 LogicGates.SetDisabled(false);
             }
+        }
+
+        private void SubmitButton_Click(object sender, EventArgs e)
+        {
+            if (QuestionLabel.Text == "Enter the expression of the circuit")
+            {
+                if (SubmitButton.Text == "Submit")
+                {
+                    string Input = AddExpression.Text.Replace(" ", string.Empty);
+                    if (CheckValidExpression(Input))
+                    {
+                        CreateCircuitFromExpression();
+                        if (IsCorrectExpression())
+                            ResultLabel.Text = "Correct!";
+                        else
+                            ResultLabel.Text = "Incorrect";
+                        ResultLabel.Show();
+                        SubmitButton.Text = "Next";
+                        LogicGates.SetDisabled(false);
+                    }
+                    else
+                        MessageBox.Show("Invalid Input\nPlease use the form A.(B + C)' (Use % for XOR)", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    SubmitButton.Text = "Submit";
+                    SetUpQuiz(true, true);
+                }
+            }
+            else
+            {
+                if (SubmitButton.Text == "Submit")
+                {
+                    string Expression = "";
+                    foreach (LogicGates Output in GetOutputList())
+                    {
+                        Output.CreateExpression(ref Expression);
+                        if (Expression[0] == '(' && Expression[Expression.Length - 1] == ')')
+                        {
+                            Expression = Expression.Remove(Expression.Length - 1, 1);
+                            Expression = Expression.Remove(0, 1);
+                        }
+                    }
+                    if (Expression == AddExpression.Text)
+                        ResultLabel.Text = "Correct!";
+                    else
+                        ResultLabel.Text = "Incorrect";
+                    AddExpression.Text = Expression;
+                    ResultLabel.Show();
+                    SubmitButton.Text = "Next";
+                    CreateCircuitFromExpression();
+                }
+                else
+                {
+                    SubmitButton.Text = "Submit";
+                    SetUpQuiz(true, false);
+                }
+            }
+        }
+
+        public bool IsCorrectExpression()
+        {
+            List<Type> CreatedConnections = GetCircuitConnections();
+            for (int i = 0; i < CreatedConnections.Count; i += 2)
+            {
+                for (int j = 0; j < OriginalConnections.Count - 1; j += 2)
+                {
+                    if (OriginalConnections[j] == CreatedConnections[i] && OriginalConnections[j + 1] == CreatedConnections[i + 1])
+                    {
+                        OriginalConnections.RemoveRange(j, 2);
+                        break;
+                    }
+                    else if (OriginalConnections[j] == CreatedConnections[i + 1] && OriginalConnections[j + 1] == CreatedConnections[i])
+                    {
+                        OriginalConnections.RemoveRange(j, 2);
+                        break;
+                    }
+                    else if (j == OriginalConnections.Count - 2)
+                        return false;
+                }
+            }
+            if (OriginalConnections.Count == 0)
+                return true;
+            else
+                return false;
+        }
+
+        public List<Type> GetCircuitConnections()
+        {
+            List<Type> ConnectionList = new List<Type>();
+            foreach(LogicGates Gate in PublicVariables.Gates)
+            {
+                if (Gate.GetTopInConnection() != null)
+                    ConnectionList.Add(Gate.GetTopInConnection().GetType());
+                else
+                    ConnectionList.Add(null);
+                if (Gate.GetBotInConnection() != null)
+                    ConnectionList.Add(Gate.GetBotInConnection().GetType());
+                else
+                    ConnectionList.Add(null);
+            }
+            return ConnectionList;
+        }
+
+        public List<LogicGates> GetInputList()
+        {
+            List<LogicGates> InputGates = new List<LogicGates>();
+            foreach (LogicGates Gate in PublicVariables.Gates)
+            {
+                if (Gate.GetType() == typeof(Input))
+                    InputGates.Add(Gate);
+            }
+            return InputGates;
+        }
+
+        public List<LogicGates> GetOutputList()
+        {
+            List<LogicGates> OutputGates = new List<LogicGates>();
+            foreach (LogicGates Gate in PublicVariables.Gates)
+            {
+                if (Gate.GetType() == typeof(Output))
+                    OutputGates.Add(Gate);
+            }
+            return OutputGates;
         }
 
         public Point GetDesignerPanelSize()
@@ -937,7 +1116,7 @@ namespace LogicGateProject
         Random Random = new Random();
         public void CreateCircuit()
         {
-            Point[] GatePoints = { new Point(200, 200), new Point(200, 400), new Point(400, 200), new Point(400, 500), new Point(600, 400) };
+            Point[] GatePoints = { new Point(200, 200), new Point(200, 400), new Point(400, 200), new Point(400, 500) };
             List<LogicGates> InputGates = new List<LogicGates>();
             List<LogicGates> Gates = new List<LogicGates>();
             int NoGates;
@@ -945,7 +1124,7 @@ namespace LogicGateProject
             if (PublicVariables.Menu1.GetLevel() == 1)
                 NoGates = Random.Next(2, 5);
             else 
-                NoGates = Random.Next(3, 6);
+                NoGates = Random.Next(3, 5);
             Input Input1 = new Input();
             InputGates.Add(Input1);
             Input Input2 = new Input();
@@ -993,24 +1172,6 @@ namespace LogicGateProject
                     Gates[i].SetTopInConnection(Gates[1]);
                     Gates[i].SetBotInConnection(Input3);
                 }
-                else if (i == 4 && Gates[i].GetType() == typeof(NOTGate))
-                {
-                    if (Random.Next(0, 2) == 0)
-                    {
-                        Gates[i].SetTopInConnection(Gates[2]);
-                        Gates[i].SetLocation(530, 200);
-                    }
-                    else
-                    {
-                        Gates[i].SetTopInConnection(Gates[3]);
-                        Gates[i].SetLocation(530, 500);
-                    }
-                }
-                else if (i == 4)
-                {
-                    Gates[i].SetTopInConnection(Gates[2]);
-                    Gates[i].SetBotInConnection(Gates[3]);
-                }
             }
             for (int i = 0; i < InputGates.Count; i++)
             {
@@ -1024,13 +1185,82 @@ namespace LogicGateProject
             List<LogicGates> ListOfGates = new List<LogicGates>();
             foreach (LogicGates Gate in PublicVariables.Gates)
                 ListOfGates.Add(Gate);
+            List<LogicGates> NoOutputs = new List<LogicGates>();
             foreach (LogicGates Gate in ListOfGates)
             {
                 if (Gate.HasNoOutputs())
                 {
+                    if (PublicVariables.Menu1.GetLevel() == 1)
+                    {
+                        Output Output = new Output();
+                        Output.SetTopInConnection(Gate);
+                        Output.SetLocation(Gate.Location.X + 130, Gate.Location.Y);
+                    }
+                    else
+                    {
+                        NoOutputs.Add(Gate);
+                    }
+
+                }
+            }
+            if (PublicVariables.Menu1.GetLevel() == 2)
+            {
+                if (NoOutputs.Count == 2)
+                {
+                    LogicGates FinalGate = CreateRandomGate();
+                    while (FinalGate.GetType() == typeof(NOTGate))
+                    {
+                        FinalGate.DeleteGate();
+                        FinalGate = CreateRandomGate();
+                    }
+                    FinalGate.SetTopInConnection(NoOutputs[0]);
+                    FinalGate.SetBotInConnection(NoOutputs[1]);
+                    FinalGate.SetLocation(600, 400);
                     Output Output = new Output();
-                    Output.SetTopInConnection(Gate);
-                    Output.SetLocation(Gate.Location.X + 130, Gate.Location.Y);
+                    Output.SetTopInConnection(FinalGate);
+                    Output.SetLocation(FinalGate.Location.X + 130, FinalGate.Location.Y);
+                }
+                else
+                {
+                    Output Output = new Output();
+                    Output.SetTopInConnection(NoOutputs[0]);
+                    Output.SetLocation(NoOutputs[0].Location.X + 130, NoOutputs[0].Location.Y);
+                }
+            }
+            ListOfGates.Clear();
+            foreach (LogicGates Gate in PublicVariables.Gates)
+                ListOfGates.Add(Gate);
+            foreach (LogicGates Gate in ListOfGates)
+            {
+                if (Gate.GetType() == typeof(NOTGate))
+                {
+                    if (Gate.GetTopInConnection().GetType() == typeof(ANDGate))
+                    {
+                        NANDGate NewGate = new NANDGate();
+                        NewGate.SetTopInConnection(Gate.GetTopInConnection().GetTopInConnection());
+                        NewGate.SetBotInConnection(Gate.GetTopInConnection().GetBotInConnection());
+                        foreach (KeyValuePair<LogicGates,int> Output in NewGate.GetTopInConnection().GetOutConnections())
+                        {
+                            if (Output.Key.GetTopInConnection() == null)
+                                Output.Key.SetTopInConnection(NewGate);
+                            if (Output.Key.GetBotInConnection() == null)
+                                Output.Key.SetBotInConnection(NewGate);
+                        }
+                        NewGate.SetOutConnections(Gate.GetOutConnections());
+                        NewGate.SetLocation(Gate.Location.X, Gate.Location.Y);
+                        Gate.GetTopInConnection().DeleteGate();
+                        Gate.DeleteGate();
+                    }
+                    else if (Gate.GetTopInConnection().GetType() == typeof(ORGate))
+                    {
+                        NORGate NewGate = new NORGate();
+                        NewGate.SetTopInConnection(Gate.GetTopInConnection().GetTopInConnection());
+                        NewGate.SetBotInConnection(Gate.GetTopInConnection().GetBotInConnection());
+                        NewGate.SetOutConnections(Gate.GetOutConnections());
+                        NewGate.SetLocation(Gate.Location.X, Gate.Location.Y);
+                        Gate.GetTopInConnection().DeleteGate();
+                        Gate.DeleteGate();
+                    }
                 }
             }
             Invalidate();

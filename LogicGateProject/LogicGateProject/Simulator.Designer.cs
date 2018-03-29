@@ -43,6 +43,9 @@
             this.AddAND = new System.Windows.Forms.Button();
             this.AddInput = new System.Windows.Forms.Button();
             this.Header = new System.Windows.Forms.Panel();
+            this.ResultLabel = new System.Windows.Forms.Label();
+            this.SubmitButton = new System.Windows.Forms.Button();
+            this.QuestionLabel = new System.Windows.Forms.Label();
             this.Quit = new System.Windows.Forms.Button();
             this.LoadFile = new System.Windows.Forms.Button();
             this.Save = new System.Windows.Forms.Button();
@@ -289,6 +292,9 @@
             // Header
             // 
             this.Header.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(66)))), ((int)(((byte)(130)))));
+            this.Header.Controls.Add(this.ResultLabel);
+            this.Header.Controls.Add(this.SubmitButton);
+            this.Header.Controls.Add(this.QuestionLabel);
             this.Header.Controls.Add(this.Quit);
             this.Header.Controls.Add(this.LoadFile);
             this.Header.Controls.Add(this.Save);
@@ -299,6 +305,46 @@
             this.Header.Size = new System.Drawing.Size(1441, 67);
             this.Header.TabIndex = 1;
             this.Header.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Header_MouseDown);
+            // 
+            // ResultLabel
+            // 
+            this.ResultLabel.AutoSize = true;
+            this.ResultLabel.BackColor = System.Drawing.Color.Gray;
+            this.ResultLabel.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ResultLabel.Location = new System.Drawing.Point(823, 43);
+            this.ResultLabel.Name = "ResultLabel";
+            this.ResultLabel.Size = new System.Drawing.Size(93, 24);
+            this.ResultLabel.TabIndex = 6;
+            this.ResultLabel.Text = "Correct!";
+            this.ResultLabel.Visible = false;
+            // 
+            // SubmitButton
+            // 
+            this.SubmitButton.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.SubmitButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.SubmitButton.FlatAppearance.BorderSize = 0;
+            this.SubmitButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.SubmitButton.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SubmitButton.Location = new System.Drawing.Point(694, 37);
+            this.SubmitButton.Name = "SubmitButton";
+            this.SubmitButton.Size = new System.Drawing.Size(90, 30);
+            this.SubmitButton.TabIndex = 5;
+            this.SubmitButton.Text = "Submit";
+            this.SubmitButton.UseVisualStyleBackColor = false;
+            this.SubmitButton.Visible = false;
+            this.SubmitButton.Click += new System.EventHandler(this.SubmitButton_Click);
+            // 
+            // QuestionLabel
+            // 
+            this.QuestionLabel.AutoSize = true;
+            this.QuestionLabel.BackColor = System.Drawing.Color.Gray;
+            this.QuestionLabel.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.QuestionLabel.Location = new System.Drawing.Point(299, 43);
+            this.QuestionLabel.Name = "QuestionLabel";
+            this.QuestionLabel.Size = new System.Drawing.Size(344, 24);
+            this.QuestionLabel.TabIndex = 4;
+            this.QuestionLabel.Text = "Enter the expression of the circuit";
+            this.QuestionLabel.Visible = false;
             // 
             // Quit
             // 
@@ -435,6 +481,7 @@
             this.RightPanel.ResumeLayout(false);
             this.LeftPanel.ResumeLayout(false);
             this.Header.ResumeLayout(false);
+            this.Header.PerformLayout();
             this.DesignerPanel.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -466,6 +513,9 @@
         private System.Windows.Forms.Panel DesignerPanel;
         private System.Windows.Forms.Button DeleteButton;
         private System.Windows.Forms.Button DeleteAll;
+        private System.Windows.Forms.Label QuestionLabel;
+        private System.Windows.Forms.Label ResultLabel;
+        private System.Windows.Forms.Button SubmitButton;
     }
 }
 
