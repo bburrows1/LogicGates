@@ -47,8 +47,8 @@
             this.SubmitButton = new System.Windows.Forms.Button();
             this.QuestionLabel = new System.Windows.Forms.Label();
             this.Quit = new System.Windows.Forms.Button();
-            this.LoadFile = new System.Windows.Forms.Button();
-            this.Save = new System.Windows.Forms.Button();
+            this.LoadButton = new System.Windows.Forms.Button();
+            this.SaveButton = new System.Windows.Forms.Button();
             this.Back = new System.Windows.Forms.Button();
             this.AddExpression = new System.Windows.Forms.TextBox();
             this.DesignerPanel = new System.Windows.Forms.Panel();
@@ -296,8 +296,8 @@
             this.Header.Controls.Add(this.SubmitButton);
             this.Header.Controls.Add(this.QuestionLabel);
             this.Header.Controls.Add(this.Quit);
-            this.Header.Controls.Add(this.LoadFile);
-            this.Header.Controls.Add(this.Save);
+            this.Header.Controls.Add(this.LoadButton);
+            this.Header.Controls.Add(this.SaveButton);
             this.Header.Controls.Add(this.Back);
             this.Header.Dock = System.Windows.Forms.DockStyle.Top;
             this.Header.Location = new System.Drawing.Point(0, 0);
@@ -360,33 +360,33 @@
             this.Quit.UseVisualStyleBackColor = true;
             this.Quit.Click += new System.EventHandler(this.Quit_Click);
             // 
-            // LoadFile
+            // LoadButton
             // 
-            this.LoadFile.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.LoadFile.Dock = System.Windows.Forms.DockStyle.Left;
-            this.LoadFile.FlatAppearance.BorderSize = 0;
-            this.LoadFile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.LoadFile.Image = global::LogicGateProject.Properties.Resources.Load;
-            this.LoadFile.Location = new System.Drawing.Point(128, 0);
-            this.LoadFile.Name = "LoadFile";
-            this.LoadFile.Size = new System.Drawing.Size(64, 67);
-            this.LoadFile.TabIndex = 2;
-            this.LoadFile.UseVisualStyleBackColor = true;
-            this.LoadFile.Click += new System.EventHandler(this.LoadFile_Click);
+            this.LoadButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.LoadButton.Dock = System.Windows.Forms.DockStyle.Left;
+            this.LoadButton.FlatAppearance.BorderSize = 0;
+            this.LoadButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.LoadButton.Image = global::LogicGateProject.Properties.Resources.Load;
+            this.LoadButton.Location = new System.Drawing.Point(128, 0);
+            this.LoadButton.Name = "LoadButton";
+            this.LoadButton.Size = new System.Drawing.Size(64, 67);
+            this.LoadButton.TabIndex = 2;
+            this.LoadButton.UseVisualStyleBackColor = true;
+            this.LoadButton.Click += new System.EventHandler(this.LoadFile_Click);
             // 
-            // Save
+            // SaveButton
             // 
-            this.Save.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.Save.Dock = System.Windows.Forms.DockStyle.Left;
-            this.Save.FlatAppearance.BorderSize = 0;
-            this.Save.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Save.Image = global::LogicGateProject.Properties.Resources.Save;
-            this.Save.Location = new System.Drawing.Point(64, 0);
-            this.Save.Name = "Save";
-            this.Save.Size = new System.Drawing.Size(64, 67);
-            this.Save.TabIndex = 1;
-            this.Save.UseVisualStyleBackColor = true;
-            this.Save.Click += new System.EventHandler(this.Save_Click);
+            this.SaveButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.SaveButton.Dock = System.Windows.Forms.DockStyle.Left;
+            this.SaveButton.FlatAppearance.BorderSize = 0;
+            this.SaveButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.SaveButton.Image = global::LogicGateProject.Properties.Resources.Save;
+            this.SaveButton.Location = new System.Drawing.Point(64, 0);
+            this.SaveButton.Name = "SaveButton";
+            this.SaveButton.Size = new System.Drawing.Size(64, 67);
+            this.SaveButton.TabIndex = 1;
+            this.SaveButton.UseVisualStyleBackColor = true;
+            this.SaveButton.Click += new System.EventHandler(this.Save_Click);
             // 
             // Back
             // 
@@ -506,8 +506,8 @@
         private System.Windows.Forms.Button AddInput;
         private System.Windows.Forms.TextBox AddExpression;
         private System.Windows.Forms.Button Quit;
-        private System.Windows.Forms.Button LoadFile;
-        private System.Windows.Forms.Button Save;
+        private System.Windows.Forms.Button LoadButton;
+        private System.Windows.Forms.Button SaveButton;
         private System.Windows.Forms.Button Back;
         private System.Windows.Forms.Button NANDSimplifcation;
         private System.Windows.Forms.Panel DesignerPanel;

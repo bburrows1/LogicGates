@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace LogicGateProject
 {
@@ -14,6 +15,8 @@ namespace LogicGateProject
     {
         private List<LogicGates> Inputs;
         private List<LogicGates> Outputs;
+        private int InputCount;
+        private int OutputCount;
         private bool TableToCircuit = false;
 
         public GCSEQuiz(List<LogicGates> PassedInputs, List<LogicGates> PassedOutputs)
@@ -21,6 +24,8 @@ namespace LogicGateProject
             InitializeComponent();
             Inputs = PassedInputs;
             Outputs = PassedOutputs;
+            InputCount = PassedInputs.Count;
+            OutputCount = PassedOutputs.Count;
             DataGridView.ColumnCount = Inputs.Count + Outputs.Count;
             for (int i = 0; i < Inputs.Count; i++)
             {
@@ -89,7 +94,7 @@ namespace LogicGateProject
             {
                 if (SubmitButton.Text == "Submit")
                 {
-                    if (CompleteTable())
+                    if (CompleteTable(true))
                         ResultLabel.Text = "Correct!";
                     else
                         ResultLabel.Text = "Incorrect";
@@ -110,10 +115,13 @@ namespace LogicGateProject
                 {
                     Inputs = PublicVariables.Simulator.GetInputList();
                     Outputs = PublicVariables.Simulator.GetOutputList();
-                    if (CompleteTable())
+                    if (CompleteTable(true))
                         ResultLabel.Text = "Correct!";
                     else
                         ResultLabel.Text = "Incorrect";
+                    Stream Load = File.Open("Quiz.txt", FileMode.Open);
+                    PublicVariables.Simulator.LoadFile(Load);
+                    Load.Dispose();
                     ResultLabel.Show();
                     SubmitButton.Text = "Next";
                 }
@@ -126,9 +134,9 @@ namespace LogicGateProject
             }
         }
 
-        public bool CompleteTable()
+        public bool CompleteTable(bool Check)
         {
-            if (Inputs.Count > 0 && Outputs.Count > 0)
+            if (Inputs.Count == InputCount && Outputs.Count == OutputCount)
             {
                 bool Correct = true;
                 for (int i = 0; i < Convert.ToInt32(Math.Pow(2.0, Inputs.Count)); i++)
@@ -149,13 +157,17 @@ namespace LogicGateProject
                     {
                         if (DataGridView.Rows[i].Cells[x + Inputs.Count].Style.BackColor == Color.Green && !Outputs[x].GetResult())
                         {
-                            Correct = false;
-                            DataGridView.Rows[i].Cells[x + Inputs.Count].Style.BackColor = Color.Red;
+                            if (Check)
+                                Correct = false;
+                            else
+                                DataGridView.Rows[i].Cells[x + Inputs.Count].Style.BackColor = Color.Red;
                         }
                         else if (DataGridView.Rows[i].Cells[x + Inputs.Count].Style.BackColor == Color.Red && Outputs[x].GetResult())
                         {
-                            Correct = false;
-                            DataGridView.Rows[i].Cells[x + Inputs.Count].Style.BackColor = Color.Green;
+                            if (Check)
+                                Correct = false;
+                            else
+                                DataGridView.Rows[i].Cells[x + Inputs.Count].Style.BackColor = Color.Green;
                         }
                     }
                 }

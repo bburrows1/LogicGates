@@ -280,106 +280,116 @@ namespace LogicGateProject
             SaveFileDialog.Filter = "Text files (*.txt)|*.txt";
             if (SaveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                string Data = "";
-                StreamWriter Writer = new StreamWriter(SaveFileDialog.OpenFile());
-                foreach (LogicGates Gate in PublicVariables.Gates)
-                {
-                    Data += Gate.GetID() + ":" + Gate.GetType().ToString() + " ";
-                }
-                Data.TrimEnd(' ');
-                Writer.WriteLine(Data);
-                foreach (LogicGates Gate in PublicVariables.Gates)
-                {
-                    Writer.WriteLine(Gate.GetSaveData());
-                }
-                Writer.Dispose();
-                Writer.Close();
+                SaveFile(SaveFileDialog.OpenFile());
             }
+        }
+
+        public void SaveFile(Stream SaveLocation)
+        {
+            string Data = "";
+            StreamWriter Writer = new StreamWriter(SaveLocation);
+            foreach (LogicGates Gate in PublicVariables.Gates)
+            {
+                Data += Gate.GetID() + ":" + Gate.GetType().ToString() + " ";
+            }
+            Data.TrimEnd(' ');
+            Writer.WriteLine(Data);
+            foreach (LogicGates Gate in PublicVariables.Gates)
+            {
+                string temp = Gate.GetSaveData();
+                Writer.WriteLine(Gate.GetSaveData());
+            }
+            Writer.Close();
+            Writer.Dispose();
         }
 
         private void LoadFile_Click(object sender, EventArgs e)
         {
-            Dictionary<int, LogicGates> Gates = new Dictionary<int, LogicGates>();
             OpenFileDialog OpenFileDialog = new OpenFileDialog();
             OpenFileDialog.InitialDirectory = Application.StartupPath + "\\Saves";
             OpenFileDialog.DefaultExt = "txt";
             OpenFileDialog.Filter = "Text files (*.txt)|*.txt";
             if (OpenFileDialog.ShowDialog() == DialogResult.OK)
             {
-                try
+                LoadFile(OpenFileDialog.OpenFile());
+            }
+        }
+
+        public void LoadFile(Stream LoadLocation)
+        {
+            try
+            {
+                Dictionary<int, LogicGates> Gates = new Dictionary<int, LogicGates>();
+                DeleteAllGates();
+                StreamReader Reader = new StreamReader(LoadLocation);
+                string Data = Reader.ReadLine();
+                string[] FirstLine = Data.Split(' ');
+                Array.Resize(ref FirstLine, FirstLine.Length - 1);
+                foreach (string Line in FirstLine)
                 {
-                    DeleteAllGates();
-                    StreamReader Reader = new StreamReader(OpenFileDialog.OpenFile());
-                    string Data = Reader.ReadLine();
-                    string[] FirstLine = Data.Split(' ');
-                    Array.Resize(ref FirstLine, FirstLine.Length - 1);
-                    foreach (string Line in FirstLine)
+                    string[] Info = Line.Split(':');
+                    switch (Info[1])
                     {
-                        string[] Info = Line.Split(':');
-                        switch (Info[1])
-                        {
-                            case "LogicGateProject.Input":
-                                Input Input = new Input();
-                                Input.SetID(int.Parse(Info[0]));
-                                Gates.Add(int.Parse(Input.GetID()), Input);
-                                break;
-                            case "LogicGateProject.Output":
-                                Output Output = new Output();
-                                Output.SetID(int.Parse(Info[0]));
-                                Gates.Add(int.Parse(Output.GetID()), Output);
-                                break;
-                            case "LogicGateProject.ANDGate":
-                                ANDGate ANDGate = new ANDGate();
-                                ANDGate.SetID(int.Parse(Info[0]));
-                                Gates.Add(int.Parse(ANDGate.GetID()), ANDGate);
-                                break;
-                            case "LogicGateProject.ORGate":
-                                ORGate ORGate = new ORGate();
-                                ORGate.SetID(int.Parse(Info[0]));
-                                Gates.Add(int.Parse(ORGate.GetID()), ORGate);
-                                break;
-                            case "LogicGateProject.NOTGate":
-                                NOTGate NOTGate = new NOTGate();
-                                NOTGate.SetID(int.Parse(Info[0]));
-                                Gates.Add(int.Parse(NOTGate.GetID()), NOTGate);
-                                break;
-                            case "LogicGateProject.XORGate":
-                                XORGate XORGate = new XORGate();
-                                XORGate.SetID(int.Parse(Info[0]));
-                                Gates.Add(int.Parse(XORGate.GetID()), XORGate);
-                                break;
-                            case "LogicGateProject.NANDGate":
-                                NANDGate NANDGate = new NANDGate();
-                                NANDGate.SetID(int.Parse(Info[0]));
-                                Gates.Add(int.Parse(NANDGate.GetID()), NANDGate);
-                                break;
-                            case "LogicGateProject.NORGate":
-                                NORGate NORGate = new NORGate();
-                                NORGate.SetID(int.Parse(Info[0]));
-                                Gates.Add(int.Parse(NORGate.GetID()), NORGate);
-                                break;
-                        }
+                        case "LogicGateProject.Input":
+                            Input Input = new Input();
+                            Input.SetID(int.Parse(Info[0]));
+                            Gates.Add(int.Parse(Input.GetID()), Input);
+                            break;
+                        case "LogicGateProject.Output":
+                            Output Output = new Output();
+                            Output.SetID(int.Parse(Info[0]));
+                            Gates.Add(int.Parse(Output.GetID()), Output);
+                            break;
+                        case "LogicGateProject.ANDGate":
+                            ANDGate ANDGate = new ANDGate();
+                            ANDGate.SetID(int.Parse(Info[0]));
+                            Gates.Add(int.Parse(ANDGate.GetID()), ANDGate);
+                            break;
+                        case "LogicGateProject.ORGate":
+                            ORGate ORGate = new ORGate();
+                            ORGate.SetID(int.Parse(Info[0]));
+                            Gates.Add(int.Parse(ORGate.GetID()), ORGate);
+                            break;
+                        case "LogicGateProject.NOTGate":
+                            NOTGate NOTGate = new NOTGate();
+                            NOTGate.SetID(int.Parse(Info[0]));
+                            Gates.Add(int.Parse(NOTGate.GetID()), NOTGate);
+                            break;
+                        case "LogicGateProject.XORGate":
+                            XORGate XORGate = new XORGate();
+                            XORGate.SetID(int.Parse(Info[0]));
+                            Gates.Add(int.Parse(XORGate.GetID()), XORGate);
+                            break;
+                        case "LogicGateProject.NANDGate":
+                            NANDGate NANDGate = new NANDGate();
+                            NANDGate.SetID(int.Parse(Info[0]));
+                            Gates.Add(int.Parse(NANDGate.GetID()), NANDGate);
+                            break;
+                        case "LogicGateProject.NORGate":
+                            NORGate NORGate = new NORGate();
+                            NORGate.SetID(int.Parse(Info[0]));
+                            Gates.Add(int.Parse(NORGate.GetID()), NORGate);
+                            break;
                     }
-                    while ((Data = Reader.ReadLine()) != null)
-                    {
-                        string[] Line = Data.Split(',');
-                        string[] Location = Line[1].Split(' ');
-                        Gates[int.Parse(Line[0])].SetLocation(int.Parse(Location[0]), int.Parse(Location[1]));
-                        if (Line[2] != "null")
-                            Gates[int.Parse(Line[0])].SetTopInConnection(Gates[int.Parse(Line[2])]);
-                        if (Line[3] != "null")
-                            Gates[int.Parse(Line[0])].SetBotInConnection(Gates[int.Parse(Line[3])]);
-                        if (Gates[int.Parse(Line[0])] is Input)
-                            Gates[int.Parse(Line[0])].SetWaitTime(float.Parse(Line[4]));
-                    }
-                    Reader.Dispose();
-                    Reader.Close();
-                    Invalidate();
                 }
-                catch
+                while ((Data = Reader.ReadLine()) != null)
                 {
-                    MessageBox.Show("Invalid File", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    string[] Line = Data.Split(',');
+                    string[] Location = Line[1].Split(' ');
+                    Gates[int.Parse(Line[0])].SetLocation(int.Parse(Location[0]), int.Parse(Location[1]));
+                    if (Line[2] != "null")
+                        Gates[int.Parse(Line[0])].SetTopInConnection(Gates[int.Parse(Line[2])]);
+                    if (Line[3] != "null")
+                        Gates[int.Parse(Line[0])].SetBotInConnection(Gates[int.Parse(Line[3])]);
+                    if (Gates[int.Parse(Line[0])] is Input)
+                        Gates[int.Parse(Line[0])].SetWaitTime(float.Parse(Line[4]));
                 }
+                Reader.Dispose();
+                Invalidate();
+            }
+            catch
+            {
+                MessageBox.Show("Invalid File", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -387,7 +397,7 @@ namespace LogicGateProject
 
         private void AddExpression_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (IsEnter && AddExpression.Text != "" && !LogicGates.IsDisabled())
+            if (IsEnter && AddExpression.Text != "" && !LogicGates.IsDisabled() && )
             {
                 CreateCircuitFromExpression();
             }
@@ -906,8 +916,8 @@ namespace LogicGateProject
         {
             if (IsQuiz)
             {
-                LoadFile.Hide();
-                Save.Hide();
+                LoadButton.Hide();
+                SaveButton.Hide();
                 NANDSimplifcation.Hide();
                 CreateExpression.Hide();
                 StepByStep.Hide();
@@ -923,7 +933,11 @@ namespace LogicGateProject
                     }
                     else
                     {
-                        Question.CompleteTable();
+                        Stream Save = File.Open("Quiz.txt", FileMode.OpenOrCreate);
+                        Save.SetLength(0);
+                        SaveFile(Save);
+                        Save.Dispose();
+                        Question.CompleteTable(false);
                         Question.SetTableToCircuit();
                         DeleteAllGates();
                     }
@@ -933,6 +947,7 @@ namespace LogicGateProject
                 {
                     QuestionLabel.Show();
                     SubmitButton.Show();
+                    SubmitButton.Text = "Submit";
                     ResultLabel.Hide();
                     if (CircuitTo)
                     {
@@ -972,8 +987,8 @@ namespace LogicGateProject
                 QuestionLabel.Hide();
                 SubmitButton.Hide();
                 ResultLabel.Hide();
-                LoadFile.Show();
-                Save.Show();
+                LoadButton.Show();
+                SaveButton.Show();
                 DeleteButton.Show();
                 NANDSimplifcation.Show();
                 CreateExpression.Show();

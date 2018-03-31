@@ -359,7 +359,7 @@ namespace LogicGateProject
             else
                 Data += "null,";
             if (BotInConnection != null)
-                Data += BotInConnection.GetID() + ",";
+                Data += BotInConnection.GetID();
             else
                 Data += "null";
             return Data;
