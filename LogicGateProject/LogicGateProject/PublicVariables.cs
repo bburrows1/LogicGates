@@ -30,6 +30,8 @@ namespace LogicGateProject
         //Ensures each gate has a unique ID
         public static List<LogicGates> Gates = new List<LogicGates>();
         public static int ID = 1;
+
+        //Gives new input gates the smallest ID available
         public static int GetInputID()
         {
             List<int> Ids = new List<int>();
@@ -46,6 +48,7 @@ namespace LogicGateProject
             return NewID;
         }
 
+        //Gives new output gates the smallest ID available
         public static int GetOutputID()
         {
             List<int> Ids = new List<int>();

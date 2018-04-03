@@ -21,8 +21,9 @@ namespace LogicGateProject
         private void Back_Click(object sender, EventArgs e)
         {
             Quiz.BringToFront();
-            this.Hide();
+            Hide();
             PublicVariables.Menu1.Show();
+            PublicVariables.Menu1.BringToFront();
         }
 
         //Quit
@@ -35,25 +36,26 @@ namespace LogicGateProject
             }
         }
 
-        //Design Mode
+        //Design mode
         private void Design_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            Hide();
+            PublicVariables.Simulator.AdjustLevel(PublicVariables.Menu1.GetLevel());
             PublicVariables.Simulator.Show();
         }
 
-        //Allows Form to move
+        //Allows form to move
         private void Header_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
                 PublicVariables.ReleaseCapture();
                 PublicVariables.SendMessage(Handle, PublicVariables.WM_NCLBUTTONDOWN, PublicVariables.HT_CAPTION, 0);
-                PublicVariables.Menu1.Location = this.Location;
+                PublicVariables.Menu1.Location = Location;
             }
         }
 
-        //Quiz Mode
+        //Choose Quiz Mode
         private void Quiz_Click(object sender, EventArgs e)
         {
             if (PublicVariables.Menu1.GetLevel() == 1)
@@ -68,6 +70,7 @@ namespace LogicGateProject
             }
         }
 
+        //Shows expression to circuit button
         private void ExpressionToCircuit_Click(object sender, EventArgs e)
         {
             PublicVariables.Simulator.SetUpQuiz(true, false);
@@ -75,6 +78,7 @@ namespace LogicGateProject
             PublicVariables.Simulator.Show();
         }
 
+        //Shows circuit to expression button
         private void CircuitToExpression_Click(object sender, EventArgs e)
         {
             PublicVariables.Simulator.SetUpQuiz(true, true);
@@ -82,6 +86,7 @@ namespace LogicGateProject
             PublicVariables.Simulator.Show();
         }
 
+        //Shows circuit to truth table button
         private void CircuitToTable_Click(object sender, EventArgs e)
         {
             PublicVariables.Simulator.SetUpQuiz(true, true);
@@ -89,6 +94,7 @@ namespace LogicGateProject
             PublicVariables.Simulator.Show();
         }
 
+        //Shows truth table to circuit button
         private void TableToCircuit_Click(object sender, EventArgs e)
         {
             PublicVariables.Simulator.SetUpQuiz(true, false);

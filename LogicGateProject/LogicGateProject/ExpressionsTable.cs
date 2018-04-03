@@ -17,6 +17,7 @@ namespace LogicGateProject
             InitializeComponent();
         }
 
+        //Empties Table
         public void ResetTable()
         {
             ListView.Clear();
@@ -24,17 +25,20 @@ namespace LogicGateProject
             ListView.Columns.Add("Expression", 400);
         }
 
+        //Adds a new expression to table
         public void AddToTable(string GateID, string Expression)
         {
             string[] Items = { GateID, Expression };
             ListView.Items.Add(new ListViewItem(Items));
         }
 
+        //Quit
         private void Quit_Click(object sender, EventArgs e)
         {
             Hide();
         }
 
+        //Move Form
         private void Header_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)

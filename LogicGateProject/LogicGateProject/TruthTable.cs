@@ -17,6 +17,7 @@ namespace LogicGateProject
             InitializeComponent();
         }
 
+        //Clears the table then adds correct columns and rows
         public void ResetTable(List<LogicGates> Inputs, List<LogicGates> Outputs)
         {
             ListView.Clear();
@@ -30,16 +31,19 @@ namespace LogicGateProject
             }
         }
 
+        //Adds new item to table
         public void AddToTable(List<string> Inputs)
         {
             ListView.Items.Add(new ListViewItem(Inputs.ToArray()));
         }
 
+        //Quit
         private void Quit_Click(object sender, EventArgs e)
         {
             Hide();
         }
 
+        //Move Form
         private void Header_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)

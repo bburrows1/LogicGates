@@ -12,39 +12,42 @@ namespace LogicGateProject
 {
     public class LogicGates : UserControl
     {
-        private static bool DisableEdit;
-        private int ID;
-        protected LogicGates TopInConnection;
-        protected LogicGates BotInConnection;
-        protected List<LogicGates> OutConnections = new List<LogicGates>();
+        private static bool DisableEdit; //Prevents user editting circuit
+        private int ID; //Unique ID for each gate
+        protected LogicGates TopInConnection; //Input for top connection
+        protected LogicGates BotInConnection; //Input for bottom connection
+        protected List<LogicGates> OutConnections = new List<LogicGates>(); //List of all outputs
+        //Location of origins for lines within designer
         private Point TopInLocation;
         private Point BotInLocation;
         private Point OutLocation;
+        //Location of origins for lines within gate
         protected Point TopInMarker;
         protected Point BotInMarker;
         protected Point OutMarker;
-        private Point MouseDownLocation;
-        private bool Traversed;
-        private bool Result;
+        private Point MouseDownLocation; //Position Gate is moved from
+        private bool Traversed; //Checks if lines for this gate have been drawn
+        private bool Result; //Logic result of the gate
 
         public static void SetDisabled(bool Disabled)
         {
             DisableEdit = Disabled;
         }
 
-        public static bool IsDisabled()
+        public static bool GetDisabled()
         {
             return DisableEdit;
         }
 
+        //Sets ID and default values
         public void CreateGate()
         {
             PublicVariables.Gates.Add(this);
             ID = PublicVariables.ID;
             PublicVariables.ID++;
-            BackColor = System.Drawing.Color.Transparent;
-            Location = new System.Drawing.Point(0, 0);
-            Size = new System.Drawing.Size(131, 93);
+            BackColor = Color.Transparent;
+            Location = new Point(0, 0);
+            Size = new Size(131, 93);
         }
 
         public string GetID()
@@ -52,6 +55,7 @@ namespace LogicGateProject
             return ID.ToString();
         }
 
+        //Deletes or moves gate
         public void Down(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -65,6 +69,7 @@ namespace LogicGateProject
             }
         }
 
+        //Moves gate
         public void MouseMoved(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left && !DisableEdit)
@@ -83,6 +88,7 @@ namespace LogicGateProject
             }
         }
 
+        //Keeps locations syncronised
         public void UpdateLocations()
         {
             TopInLocation = new Point(Location.X + TopInMarker.X, Location.Y + TopInMarker.Y);
@@ -90,8 +96,10 @@ namespace LogicGateProject
             OutLocation = new Point(Location.X + OutMarker.X, Location.Y + OutMarker.Y);
         }
 
+        //Deletes Gate
         public void DeleteGate()
         {
+            //Removes gates connections
             if (TopInConnection != null)
             {
                 TopInConnection.OutConnections.Remove(this);
@@ -117,6 +125,7 @@ namespace LogicGateProject
                 Output.UpdateLogic();
             }
             OutConnections.Clear();
+            //Deletes gate
             PublicVariables.Delete = false;
             PublicVariables.Simulator.DeleteAllButton();
             PublicVariables.Gates.Remove(this);
@@ -129,6 +138,7 @@ namespace LogicGateProject
             Dispose();
         }
 
+        //Checks two gates can be connected for input
         public bool IsValidInput(LogicGates Input, LogicGates Output, bool IsTop)
         {
             if (Output != null && Input != Output)
@@ -151,6 +161,7 @@ namespace LogicGateProject
             return false;
         }
 
+        //Input connection button clicked
         public void InputClick(object sender, EventArgs e)
         {
             if (!DisableEdit)
@@ -173,6 +184,7 @@ namespace LogicGateProject
             }
         }
 
+        //Checks if two gates can be connected for output
         public bool IsValidOutput(LogicGates Input, LogicGates Output)
         {
             if (Input != null && Input != Output)
@@ -185,6 +197,7 @@ namespace LogicGateProject
             return false;
         }
 
+        //Output connection button clicked
         public void OutputClick(object sender, EventArgs e)
         {
             if (PublicVariables.OutputGate != this)
@@ -204,6 +217,7 @@ namespace LogicGateProject
             }
         }
 
+        //Creates a connection between two gates
         private void CreateConnection(LogicGates Input, LogicGates Output, bool IsTop)
         {
             if (IsTop)
@@ -221,6 +235,7 @@ namespace LogicGateProject
             PublicVariables.Simulator.Invalidate();
         }
 
+        //Removes connection between two gates
         private void RemoveConnection(LogicGates Input, bool IsTop)
         {
             if (IsTop)
@@ -251,6 +266,7 @@ namespace LogicGateProject
             Traversed = false;
         }
 
+        //Adds gate's connections to be drawn
         public void Traverse()
         {
             Traversed = true;
@@ -288,6 +304,7 @@ namespace LogicGateProject
             }
         }
 
+        //Gate reevaluates its logic, different for every gate
         public virtual void UpdateLogic()
         {
         }
@@ -315,11 +332,13 @@ namespace LogicGateProject
             UpdateOutputs();
         }
 
+        //Checks if gate is completly connected
         public virtual bool CheckConnected()
         {
             return (TopInConnection != null && BotInConnection != null);
         }
 
+        //Gate tells its outputs to update their logic
         public void UpdateOutputs()
         {
             foreach (LogicGates Output in OutConnections)
@@ -328,6 +347,7 @@ namespace LogicGateProject
             }
         }
 
+        //Checks if there has been an update to the result
         public void CheckUpdate(bool Result)
         {
             if (Result != GetResult())
@@ -346,9 +366,9 @@ namespace LogicGateProject
 
         public virtual void UpdateStep()
         {
-
         }
 
+        //Gets the properties of the gate so they can be saved
         public virtual string GetSaveData()
         {
             string Data = "";
@@ -397,6 +417,7 @@ namespace LogicGateProject
             return BotInConnection;
         }
 
+        //Creates a dictionary of outputs, Key: Output Gate, Value: 0 = Top Input, 1 = Bot Input, 2 = Both Inputs
         public void SetOutConnections(Dictionary<LogicGates, int> Gates)
         {
             foreach (KeyValuePair<LogicGates, int> Gate in Gates)
@@ -439,6 +460,7 @@ namespace LogicGateProject
         public virtual void CreateExpression(ref string Expression)
         {
         }
+
         public virtual bool CheckForLoop()
         {
             if (OutConnections.Contains(TopInConnection) || OutConnections.Contains(BotInConnection))
@@ -451,6 +473,7 @@ namespace LogicGateProject
             return 0;
         }
 
+        //Checks if a gate has no outputs
         public bool HasNoOutputs()
         {
             if (OutConnections.Count == 0)
@@ -463,13 +486,13 @@ namespace LogicGateProject
 
     public partial class Input : LogicGates
     {
-        private int InputGateID;
-        private float WaitTime;
+        private int InputGateID; //Used to identify each input gate
+        private float WaitTime; //Stores the time interval between switching on a clock
 
         public void SetInputID()
         {
             InputGateID = PublicVariables.GetInputID();
-            IDLabel.Text = PublicVariables.NumberToCharacter(InputGateID).ToString();
+            IDLabel.Text = PublicVariables.NumberToCharacter(InputGateID).ToString(); //Uses letter as ID to distinguish from outputs
         }
 
         public override int GetInputID()
@@ -483,11 +506,13 @@ namespace LogicGateProject
             IDLabel.Text = PublicVariables.NumberToCharacter(InputGateID).ToString();
         }
 
+        //Locations for lines
         public void SetMarkers()
         {
             OutMarker = new Point(130, 37);
         }
 
+        //Tells all outputs to update
         public override void UpdateLogic()
         {
             UpdateOutputs();
@@ -527,6 +552,7 @@ namespace LogicGateProject
             return Data;
         }
 
+        //Adds gate's InputID as a letter to the expression
         public override void CreateExpression(ref string Expression)
         {
             Expression += PublicVariables.NumberToCharacter(InputGateID).ToString();
@@ -535,7 +561,7 @@ namespace LogicGateProject
 
     public partial class Output : LogicGates
     {
-        private int OutputGateID;
+        private int OutputGateID; //Used to identify all output gates
 
         public void SetOutputID()
         {
@@ -548,6 +574,7 @@ namespace LogicGateProject
             return OutputGateID;
         }
 
+        //Locations for Lines
         public void SetMarkers()
         {
             TopInMarker = new Point(5, 37);
@@ -558,6 +585,7 @@ namespace LogicGateProject
             return (TopInConnection != null);
         }
 
+        //Gets output from input gate
         public override void UpdateLogic()
         {
             if (TopInConnection != null)
@@ -585,6 +613,7 @@ namespace LogicGateProject
             return OutputGateID;
         }
 
+        //Gets the expression from its input gate
         public override void CreateExpression(ref string Expression)
         {
             TopInConnection.CreateExpression(ref Expression);
@@ -600,6 +629,7 @@ namespace LogicGateProject
             OutMarker = new Point(125, 45);
         }
 
+        //Checks logic with AND
         public override void UpdateLogic()
         {
             if (CheckConnected())
@@ -612,6 +642,7 @@ namespace LogicGateProject
             UpdateStep();
         }
 
+        //Colours connection buttons with their result
         public override void UpdateStep()
         {
             if (PublicVariables.Step)
@@ -643,6 +674,7 @@ namespace LogicGateProject
             }
         }
 
+        //Adds to Expression
         public override void CreateExpression(ref string Expression)
         {
             if (CheckConnected() && !CheckForLoop())
