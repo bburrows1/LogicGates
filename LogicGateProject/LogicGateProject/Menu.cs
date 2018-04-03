@@ -34,7 +34,6 @@ namespace LogicGateProject
             Level = 1;
             PublicVariables.Menu1 = this;
             this.Hide();
-            PublicVariables.Simulator.AdjustLevel(Level);
             PublicVariables.Menu2.Location = this.Location;
             PublicVariables.Menu2.Show();
         }
@@ -45,7 +44,6 @@ namespace LogicGateProject
             Level = 2;
             PublicVariables.Menu1 = this;
             this.Hide();
-            PublicVariables.Simulator.AdjustLevel(Level);
             PublicVariables.Menu2.Location = this.Location;
             PublicVariables.Menu2.Show();
         }

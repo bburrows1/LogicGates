@@ -41,9 +41,10 @@ namespace LogicGateProject
             OutputClick(sender, e);
         }
 
+        //Toggles result
         private void InputButton_Click(object sender, EventArgs e)
         {
-            if (!IsDisabled())
+            if (!GetDisabled())
             {
                 ToggleResult();
                 if (GetResult())
@@ -54,9 +55,10 @@ namespace LogicGateProject
             }
         }
 
+        //Gets time for clock toggle
         private void ClockButton_Click(object sender, EventArgs e)
         {
-            if (!IsDisabled())
+            if (!GetDisabled())
             {
                 string NewTimeString;
                 float NewTime;
@@ -68,6 +70,7 @@ namespace LogicGateProject
             }
         }
 
+        //Sets timer for Clock
         private void UpdateTimer(float NewTime)
         {
             if (NewTime == 0)
@@ -79,6 +82,7 @@ namespace LogicGateProject
             }
         }
 
+        //Toggles on timer
         private void Timer_Tick(object sender, EventArgs e)
         {
             InputButton_Click(sender, e);

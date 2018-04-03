@@ -60,9 +60,16 @@ namespace LogicGateProject
             Hide();
             SetUpQuiz(false, false);
             if (PublicVariables.Menu1.GetLevel() == 3)
+            {
                 PublicVariables.Menu1.Show();
+                PublicVariables.Menu1.BringToFront();
+            }
             else
+            {
                 PublicVariables.Menu2.Show();
+                PublicVariables.Menu2.BringToFront();
+            }
+
         }
 
         //Allow form to move
@@ -116,6 +123,7 @@ namespace LogicGateProject
             Output Output = new Output();
         }
 
+        //Redraws the designer
         private void DesignerPanel_Paint(object sender, PaintEventArgs e)
         {
             //Create a list of lines to be drawn
@@ -252,6 +260,7 @@ namespace LogicGateProject
             }
         }
 
+        //Adds the data to the truth table form
         private void AddToList(List<LogicGates> InputGates, List<LogicGates> OutputGates)
         {
             List<string> Results = new List<string>();
@@ -272,6 +281,7 @@ namespace LogicGateProject
             PublicVariables.TruthTable.AddToTable(Results);
         }
 
+        //Save button
         private void Save_Click(object sender, EventArgs e)
         {
             SaveFileDialog SaveFileDialog = new SaveFileDialog();
@@ -284,6 +294,7 @@ namespace LogicGateProject
             }
         }
 
+        //Saves the current circuit
         public void SaveFile(Stream SaveLocation)
         {
             string Data = "";
@@ -303,6 +314,7 @@ namespace LogicGateProject
             Writer.Dispose();
         }
 
+        //Load button
         private void LoadFile_Click(object sender, EventArgs e)
         {
             OpenFileDialog OpenFileDialog = new OpenFileDialog();
@@ -315,6 +327,7 @@ namespace LogicGateProject
             }
         }
 
+        //Loads a choosen text file
         public void LoadFile(Stream LoadLocation)
         {
             try
@@ -393,16 +406,19 @@ namespace LogicGateProject
             }
         }
 
+        //Records if enter button was pressed
         private bool IsEnter;
 
+        //Checks if circuit should be created
         private void AddExpression_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (IsEnter && AddExpression.Text != "" && !LogicGates.IsDisabled() && )
+            if (IsEnter && AddExpression.Text != "" && !LogicGates.GetDisabled() && !Quiz)
             {
                 CreateCircuitFromExpression();
             }
         }
 
+        //Creates a circuit from an expression
         public void CreateCircuitFromExpression()
         {
             Dictionary<string, LogicGates> Gates = new Dictionary<string, LogicGates>();
@@ -498,6 +514,7 @@ namespace LogicGateProject
                 MessageBox.Show("Invalid Input\nPlease use the form A.(B + C)' (Use % for XOR)", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
+        //Creates circuit using correct order of operation
         public string CompleteExpression(ref Dictionary<string, LogicGates> Gates, string Input)
         {
             char[] Signs = { '.', '%', '+' };
@@ -531,6 +548,7 @@ namespace LogicGateProject
             return Input;
         }
 
+        //Gets an individual expression
         public string GetExpression(string Input, int SignIndex, string SignValue)
         {
             string Left = "";
@@ -546,6 +564,7 @@ namespace LogicGateProject
             return Left + SignValue + Right;
         }
 
+        //Creates the gate for individual expressions
         public LogicGates CreateGate(Dictionary<string, LogicGates> InputGates, string Expression)
         {
             if (Expression.Length == 1)
@@ -588,6 +607,7 @@ namespace LogicGateProject
             return null;
         }
 
+        //Gets the number for a gate
         public string GetNumber(string Input, int Back)
         {
             string Number = "";
@@ -609,6 +629,7 @@ namespace LogicGateProject
             return Number;
         }
 
+        //Records if Enter was pressed
         private void AddExpression_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -619,6 +640,7 @@ namespace LogicGateProject
                 IsEnter = false;
         }
 
+        //Checks an input expression is valid
         private bool CheckValidExpression(string Input)
         {
             bool IsInput = false;
@@ -666,11 +688,13 @@ namespace LogicGateProject
             return true;
         }
 
+        //Brings focus to designer so expression bar clears when empty
         private void DesignerPanel_MouseClick(object sender, MouseEventArgs e)
         {
             DesignerPanel.Focus();
         }
 
+        //Spreads all gates out on the designer
         public void SetGateLocations()
         {
             List<LogicGates> InputGates = new List<LogicGates>();
@@ -713,6 +737,7 @@ namespace LogicGateProject
             }
         }
 
+        //Create Expression button
         private void CreateExpression_Click(object sender, EventArgs e)
         {
             List<LogicGates> OutputGates = new List<LogicGates>();
@@ -740,6 +765,7 @@ namespace LogicGateProject
             PublicVariables.ExpressionsTable.BringToFront();
         }
 
+        //Changes button visibilty on level
         public void AdjustLevel(int Level)
         {
             if (Level == 1)
@@ -771,6 +797,7 @@ namespace LogicGateProject
             }
         }
 
+        //NAND Simplifcation button
         private void NANDSimplifcation_Click(object sender, EventArgs e)
         {
             List<LogicGates> Gates = new List<LogicGates>();
@@ -910,10 +937,15 @@ namespace LogicGateProject
             Invalidate();
         }
 
-        public GCSEQuiz Question;
-        private List<Type> OriginalConnections;
+        
+        public GCSEQuiz Question; //Identifies user control for GCSE questions
+        private List<Type> OriginalConnections; //Records all connections in a circuit to make sure that a recreated circuit is the same
+        private bool Quiz; //Shows if the form is in Quiz Mode
+        private string Expression; //The expression for the random circuit
+        //Sets up the quiz to the chosen level
         public void SetUpQuiz(bool IsQuiz, bool CircuitTo)
         {
+            Quiz = IsQuiz;
             if (IsQuiz)
             {
                 LoadButton.Hide();
@@ -922,15 +954,19 @@ namespace LogicGateProject
                 CreateExpression.Hide();
                 StepByStep.Hide();
                 CreateTruthTable.Hide();
+
+                //GCSE
                 if (PublicVariables.Menu1.GetLevel() == 1)
                 {
                     CreateCircuit();
                     Question = new GCSEQuiz(GetInputList(), GetOutputList());
+                    //Circuit to Truth Table
                     if (CircuitTo)
                     {
                         DeleteButton.Hide();
                         LogicGates.SetDisabled(true);
                     }
+                    //Truth Table to Circuit
                     else
                     {
                         Stream Save = File.Open("Quiz.txt", FileMode.OpenOrCreate);
@@ -943,13 +979,16 @@ namespace LogicGateProject
                     }
                     DesignerPanel.Controls.Add(Question);
                 }
+
+                //A-Level
                 else if (PublicVariables.Menu1.GetLevel() == 2)
                 {
                     QuestionLabel.Show();
                     SubmitButton.Show();
                     SubmitButton.Text = "Submit";
                     ResultLabel.Hide();
-                    if (CircuitTo)
+                    //Circuit to Expression
+                    if (CircuitTo) 
                     {
                         QuestionLabel.Text = "Enter the expression of the circuit";
                         AddExpression.Text = "INPUT BOOLEAN EXPRESSION E.G. A.(B + C)' (USE % FOR XOR)";
@@ -957,8 +996,24 @@ namespace LogicGateProject
                         DeleteButton.Hide();
                         CreateCircuit();
                         LogicGates.SetDisabled(true);
+                        Stream Save = File.Open("Quiz.txt", FileMode.OpenOrCreate);
+                        Save.SetLength(0);
+                        SaveFile(Save);
+                        Save.Dispose();
+                        string LocalExpression = "";
+                        foreach (LogicGates Output in GetOutputList())
+                        {
+                            Output.CreateExpression(ref LocalExpression);
+                            if (LocalExpression[0] == '(' && LocalExpression[LocalExpression.Length - 1] == ')')
+                            {
+                                LocalExpression = LocalExpression.Remove(LocalExpression.Length - 1, 1);
+                                LocalExpression = LocalExpression.Remove(0, 1);
+                            }
+                        }
+                        Expression = LocalExpression;
                         OriginalConnections = GetCircuitConnections();
                     }
+                    //Expression to Circuit
                     else
                     {
                         QuestionLabel.Text = "Create a circuit for this expression";
@@ -976,10 +1031,15 @@ namespace LogicGateProject
                         AddExpression.Text = Expression;
                         AddExpression.ForeColor = Color.Black;
                         AddExpression.ReadOnly = true;
+                        Stream Save = File.Open("Quiz.txt", FileMode.OpenOrCreate);
+                        Save.SetLength(0);
+                        SaveFile(Save);
+                        Save.Dispose();
                         DeleteAllGates();
                     }
                 }
             }
+            //Reset the form to design mode
             else
             {
                 if (Question != null)
@@ -999,9 +1059,11 @@ namespace LogicGateProject
             }
         }
 
+        //A-Level quiz submit button clicked
         private void SubmitButton_Click(object sender, EventArgs e)
         {
-            if (QuestionLabel.Text == "Enter the expression of the circuit")
+            // Circuit to Expression
+            if (QuestionLabel.Text == "Enter the expression of the circuit") 
             {
                 if (SubmitButton.Text == "Submit")
                 {
@@ -1015,6 +1077,10 @@ namespace LogicGateProject
                             ResultLabel.Text = "Incorrect";
                         ResultLabel.Show();
                         SubmitButton.Text = "Next";
+                        Stream Load = File.Open("Quiz.txt", FileMode.Open);
+                        LoadFile(Load);
+                        Load.Dispose();
+                        AddExpression.Text = Expression;
                         LogicGates.SetDisabled(false);
                     }
                     else
@@ -1026,6 +1092,7 @@ namespace LogicGateProject
                     SetUpQuiz(true, true);
                 }
             }
+            //Expression to Circuit
             else
             {
                 if (SubmitButton.Text == "Submit")
@@ -1044,10 +1111,11 @@ namespace LogicGateProject
                         ResultLabel.Text = "Correct!";
                     else
                         ResultLabel.Text = "Incorrect";
-                    AddExpression.Text = Expression;
                     ResultLabel.Show();
                     SubmitButton.Text = "Next";
-                    CreateCircuitFromExpression();
+                    Stream Load = File.Open("Quiz.txt", FileMode.Open);
+                    LoadFile(Load);
+                    Load.Dispose();
                 }
                 else
                 {
@@ -1057,6 +1125,7 @@ namespace LogicGateProject
             }
         }
 
+        //Checks if the expression input is correct
         public bool IsCorrectExpression()
         {
             List<Type> CreatedConnections = GetCircuitConnections();
@@ -1084,6 +1153,7 @@ namespace LogicGateProject
                 return false;
         }
 
+        //Creates a List of the circuit connections
         public List<Type> GetCircuitConnections()
         {
             List<Type> ConnectionList = new List<Type>();
@@ -1101,6 +1171,7 @@ namespace LogicGateProject
             return ConnectionList;
         }
 
+        //Gets a list of all the inputs in the designer
         public List<LogicGates> GetInputList()
         {
             List<LogicGates> InputGates = new List<LogicGates>();
@@ -1112,6 +1183,7 @@ namespace LogicGateProject
             return InputGates;
         }
 
+        //Gets a list of all the outputs in the designer
         public List<LogicGates> GetOutputList()
         {
             List<LogicGates> OutputGates = new List<LogicGates>();
@@ -1123,15 +1195,17 @@ namespace LogicGateProject
             return OutputGates;
         }
 
+        //Gets the designer size
         public Point GetDesignerPanelSize()
         {
             return new Point(DesignerPanel.Width, DesignerPanel.Height);
         }
 
+        //Creates a random circuit
         Random Random = new Random();
         public void CreateCircuit()
         {
-            Point[] GatePoints = { new Point(200, 200), new Point(200, 400), new Point(400, 200), new Point(400, 500) };
+            Point[] GatePoints = { new Point(200, 200), new Point(200, 400), new Point(400, 200), new Point(400, 500) }; //Positions for gates
             List<LogicGates> InputGates = new List<LogicGates>();
             List<LogicGates> Gates = new List<LogicGates>();
             int NoGates;
@@ -1147,7 +1221,7 @@ namespace LogicGateProject
             Input Input3 = new Input();
             InputGates.Add(Input3);
             SetGateLocations();
-            for(int i = 0; i < NoGates; i++)
+            for (int i = 0; i < NoGates; i++)
             {
                 Gates.Add(CreateRandomGate());
                 Gates[i].SetLocation(GatePoints[i].X, GatePoints[i].Y);
@@ -1197,6 +1271,8 @@ namespace LogicGateProject
                     i--;
                 }
             }
+
+            //Adds outputs to all gates with no outputs
             List<LogicGates> ListOfGates = new List<LogicGates>();
             foreach (LogicGates Gate in PublicVariables.Gates)
                 ListOfGates.Add(Gate);
@@ -1218,7 +1294,8 @@ namespace LogicGateProject
 
                 }
             }
-            if (PublicVariables.Menu1.GetLevel() == 2)
+            //Makes sure all circuits have only one output so they are valid expressions
+            if (PublicVariables.Menu1.GetLevel() == 2 && Quiz) 
             {
                 if (NoOutputs.Count == 2)
                 {
@@ -1242,6 +1319,7 @@ namespace LogicGateProject
                     Output.SetLocation(NoOutputs[0].Location.X + 130, NoOutputs[0].Location.Y);
                 }
             }
+            //Replaces all AND or OR gates followed by a not with a NAND or NOR gate
             ListOfGates.Clear();
             foreach (LogicGates Gate in PublicVariables.Gates)
                 ListOfGates.Add(Gate);
@@ -1271,8 +1349,15 @@ namespace LogicGateProject
                         NORGate NewGate = new NORGate();
                         NewGate.SetTopInConnection(Gate.GetTopInConnection().GetTopInConnection());
                         NewGate.SetBotInConnection(Gate.GetTopInConnection().GetBotInConnection());
-                        NewGate.SetOutConnections(Gate.GetOutConnections());
-                        NewGate.SetLocation(Gate.Location.X, Gate.Location.Y);
+                        Dictionary<LogicGates, int> GateConnections = Gate.GetTopInConnection().GetOutConnections();
+                        Dictionary<LogicGates, int> NotConnections = Gate.GetOutConnections();
+                        foreach (KeyValuePair<LogicGates, int> Output in GateConnections)
+                        {
+                            if (!(Output.Key == Gate))
+                                NotConnections.Add(Output.Key, Output.Value);
+                        }
+                        NewGate.SetOutConnections(NotConnections);
+                        NewGate.SetLocation((Gate.Location.X + Gate.GetTopInConnection().Location.X)/2, (Gate.Location.Y + Gate.GetTopInConnection().Location.Y) / 2);
                         Gate.GetTopInConnection().DeleteGate();
                         Gate.DeleteGate();
                     }
@@ -1281,6 +1366,7 @@ namespace LogicGateProject
             Invalidate();
         }
 
+        //Creates a random gate
         public LogicGates CreateRandomGate()
         {
             int GateType;

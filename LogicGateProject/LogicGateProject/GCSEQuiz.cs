@@ -19,6 +19,7 @@ namespace LogicGateProject
         private int OutputCount;
         private bool TableToCircuit = false;
 
+        //Creates grid with correct cells
         public GCSEQuiz(List<LogicGates> PassedInputs, List<LogicGates> PassedOutputs)
         {
             InitializeComponent();
@@ -59,6 +60,7 @@ namespace LogicGateProject
             SizeControl();
         }
 
+        //Positions Quiz
         private void SizeControl()
         {
             SubmitButton.Location = new Point(75, (Convert.ToInt32(Math.Pow(2.0, Inputs.Count))) * 22 + DataGridView.Location.Y + 26);
@@ -69,6 +71,7 @@ namespace LogicGateProject
             ResultLabel.Location = new Point(0, (Convert.ToInt32(Math.Pow(2.0, Inputs.Count))) * 22 + DataGridView.Location.Y + 26);
         }
 
+        //Toggles cells on click
         private void DataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (!TableToCircuit)
@@ -83,13 +86,16 @@ namespace LogicGateProject
             }
         }
 
+        //Prevents highlighting cells
         private void DataGridView_SelectionChanged(object sender, EventArgs e)
         {
             DataGridView.ClearSelection();
         }
 
+        //Submits answers
         private void SubmitButton_Click(object sender, EventArgs e)
         {
+            //Truth Table to circuit
             if (!TableToCircuit)
             {
                 if (SubmitButton.Text == "Submit")
@@ -109,6 +115,7 @@ namespace LogicGateProject
                     Dispose();
                 }
             }
+            //Circuit to Truth Table
             else
             {
                 if (SubmitButton.Text == "Submit")
@@ -134,6 +141,7 @@ namespace LogicGateProject
             }
         }
 
+        //Creats correct truth table for circuit in designer, returns if correct table created
         public bool CompleteTable(bool Check)
         {
             if (Inputs.Count == InputCount && Outputs.Count == OutputCount)
@@ -177,6 +185,7 @@ namespace LogicGateProject
                 return false;
         }
 
+        //Sets object to Truth Table to Circuit
         public void SetTableToCircuit()
         {
             TableToCircuit = true;
