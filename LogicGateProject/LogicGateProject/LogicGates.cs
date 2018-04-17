@@ -616,7 +616,12 @@ namespace LogicGateProject
         //Gets the expression from its input gate
         public override void CreateExpression(ref string Expression)
         {
-            TopInConnection.CreateExpression(ref Expression);
+            if (CheckConnected())
+            {
+                TopInConnection.CreateExpression(ref Expression);
+            }
+            else
+                Expression = "Invalid Circuit";
         }
     }
 
@@ -684,6 +689,8 @@ namespace LogicGateProject
                 Expression += ".";
                 BotInConnection.CreateExpression(ref Expression);
                 Expression += ")";
+                if (Expression.StartsWith("Invalid Circuit"))
+                    Expression = "Invalid Circuit";
             }
             else
                 Expression = "Invalid Circuit";
@@ -751,6 +758,8 @@ namespace LogicGateProject
                 Expression += "+";
                 BotInConnection.CreateExpression(ref Expression);
                 Expression += ")";
+                if (Expression.StartsWith("Invalid Circuit"))
+                    Expression = "Invalid Circuit";
             }
             else
                 Expression = "Invalid Circuit";
@@ -811,6 +820,8 @@ namespace LogicGateProject
             {
                 TopInConnection.CreateExpression(ref Expression);
                 Expression += "'";
+                if (Expression.StartsWith("Invalid Circuit"))
+                    Expression = "Invalid Circuit";
             }
             else
                 Expression = "Invalid Circuit";
@@ -878,6 +889,8 @@ namespace LogicGateProject
                 Expression += "%";
                 BotInConnection.CreateExpression(ref Expression);
                 Expression += ")";
+                if (Expression.StartsWith("Invalid Circuit"))
+                    Expression = "Invalid Circuit";
             }
             else
                 Expression = "Invalid Circuit";
@@ -945,6 +958,8 @@ namespace LogicGateProject
                 Expression += ".";
                 BotInConnection.CreateExpression(ref Expression);
                 Expression += ")'";
+                if (Expression.StartsWith("Invalid Circuit"))
+                    Expression = "Invalid Circuit";
             }
             else
                 Expression = "Invalid Circuit";
@@ -1012,6 +1027,8 @@ namespace LogicGateProject
                 Expression += "+";
                 BotInConnection.CreateExpression(ref Expression);
                 Expression += ")'";
+                if (Expression.StartsWith("Invalid Circuit"))
+                    Expression = "Invalid Circuit";
             }
             else
                 Expression = "Invalid Circuit";
