@@ -29,7 +29,7 @@ namespace LogicGateProject
         //Quit
         private void Quit_Click(object sender, EventArgs e)
         {
-            DialogResult dialog = MessageBox.Show("Do you really weant to close the program?\nUnsaved circuits will be lost.", "Exit", MessageBoxButtons.YesNo);
+            DialogResult dialog = MessageBox.Show("Do you really want to close the program?\nUnsaved circuits will be lost.", "Exit", MessageBoxButtons.YesNo);
             if (dialog == DialogResult.Yes)
             {
                 Application.Exit();

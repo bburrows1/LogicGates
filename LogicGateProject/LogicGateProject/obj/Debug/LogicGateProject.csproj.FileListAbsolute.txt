@@ -23,7 +23,6 @@ N:\B.Burrows\My Documents\Applications\LogicGates\LogicGateProject\LogicGateProj
 N:\B.Burrows\My Documents\Applications\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.csprojResolveAssemblyReference.cache
 N:\B.Burrows\My Documents\Applications\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.ANDGate.resources
 N:\B.Burrows\My Documents\Applications\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.Simulator.resources
-N:\B.Burrows\My Documents\Applications\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.GCSEConvert.resources
 N:\B.Burrows\My Documents\Applications\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.Input.resources
 N:\B.Burrows\My Documents\Applications\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.Menu1.resources
 N:\B.Burrows\My Documents\Applications\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.Menu2.resources
@@ -33,7 +32,6 @@ N:\B.Burrows\My Documents\Applications\LogicGates\LogicGateProject\LogicGateProj
 N:\B.Burrows\My Documents\Applications\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.ORGate.resources
 N:\B.Burrows\My Documents\Applications\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.Output.resources
 N:\B.Burrows\My Documents\Applications\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.Properties.Resources.resources
-N:\B.Burrows\My Documents\Applications\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.Quiz.resources
 N:\B.Burrows\My Documents\Applications\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.XORGate.resources
 N:\B.Burrows\My Documents\Applications\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.csproj.GenerateResource.Cache
 N:\B.Burrows\My Documents\Applications\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.csproj.CoreCompileInputs.cache
@@ -113,3 +111,4 @@ N:\B.Burrows\My Documents\Applications\LogicGateProject\LogicGateProject\obj\Deb
 N:\B.Burrows\My Documents\Applications\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.pdb
 N:\B.Burrows\My Documents\Applications\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.csprojResolveAssemblyReference.cache
 E:\Users\Ben\Documents\Homework\Warwick homework\AComputing\C# Programs\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.GCSEQuiz.resources
+N:\B.Burrows\My Documents\Applications\LogicGates\LogicGateProject\LogicGateProject\obj\Debug\LogicGateProject.GCSEQuiz.resources
