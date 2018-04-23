@@ -40,7 +40,6 @@ namespace LogicGateProject
         private void Design_Click(object sender, EventArgs e)
         {
             Hide();
-            PublicVariables.Simulator.AdjustLevel(PublicVariables.Menu1.GetLevel());
             PublicVariables.Simulator.Show();
         }
 
