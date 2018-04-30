@@ -1337,13 +1337,19 @@ namespace LogicGateProject
                         NewGate.SetBotInConnection(Gate.GetTopInConnection().GetBotInConnection());
                         foreach (KeyValuePair<LogicGates,int> Output in NewGate.GetTopInConnection().GetOutConnections())
                         {
-                            if (Output.Key.GetTopInConnection() == null)
+                            if (Output.Key.GetTopInConnection() == null && Output.Key.GetTopInConnection() != Gate)
                                 Output.Key.SetTopInConnection(NewGate);
-                            if (Output.Key.GetBotInConnection() == null)
+                            if (Output.Key.GetBotInConnection() == null && Output.Key.GetTopInConnection() != Gate)
                                 Output.Key.SetBotInConnection(NewGate);
                         }
-                        NewGate.SetOutConnections(Gate.GetOutConnections());
-                        NewGate.SetLocation(Gate.Location.X, Gate.Location.Y);
+                        foreach (KeyValuePair<LogicGates, int> Output in Gate.GetOutConnections())
+                        {
+                            if (Output.Key.GetTopInConnection() == null && Output.Key.GetTopInConnection() != Gate)
+                                Output.Key.SetTopInConnection(NewGate);
+                            if (Output.Key.GetBotInConnection() == null && Output.Key.GetTopInConnection() != Gate)
+                                Output.Key.SetBotInConnection(NewGate);
+                        }
+                        NewGate.SetLocation((Gate.Location.X + Gate.GetTopInConnection().Location.X)/2, (Gate.Location.Y + Gate.GetTopInConnection().Location.Y) / 2);
                         Gate.GetTopInConnection().DeleteGate();
                         Gate.DeleteGate();
                     }
