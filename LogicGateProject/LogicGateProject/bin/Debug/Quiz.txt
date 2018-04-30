@@ -1,8 +1,10 @@
-1:LogicGateProject.Input 2:LogicGateProject.Input 4:LogicGateProject.NANDGate 5:LogicGateProject.NOTGate 6:LogicGateProject.NOTGate 7:LogicGateProject.ORGate 8:LogicGateProject.Output 
+1:LogicGateProject.Input 2:LogicGateProject.Input 3:LogicGateProject.Input 4:LogicGateProject.ORGate 5:LogicGateProject.NOTGate 6:LogicGateProject.NOTGate 7:LogicGateProject.ANDGate 8:LogicGateProject.Output 9:LogicGateProject.Output 
 1,0 157,null,null,0
 2,0 360,null,null,0
+3,0 563,null,null,0
 4,200 200,1,2
 5,200 400,2,null
 6,400 200,4,null
-7,600 400,5,6
-8,730 400,7,null
+7,400 500,5,3
+8,530 200,6,null
+9,530 500,7,null

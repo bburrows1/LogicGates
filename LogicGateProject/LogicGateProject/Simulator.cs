@@ -1323,46 +1323,49 @@ namespace LogicGateProject
                 }
             }
             //Replaces all AND or OR gates followed by a not with a NAND or NOR gate
-            ListOfGates.Clear();
-            foreach (LogicGates Gate in PublicVariables.Gates)
-                ListOfGates.Add(Gate);
-            foreach (LogicGates Gate in ListOfGates)
+            if (PublicVariables.Menu1.GetLevel() == 2)
             {
-                if (Gate.GetType() == typeof(NOTGate))
+                ListOfGates.Clear();
+                foreach (LogicGates Gate in PublicVariables.Gates)
+                    ListOfGates.Add(Gate);
+                foreach (LogicGates Gate in ListOfGates)
                 {
-                    if (Gate.GetTopInConnection().GetType() == typeof(ANDGate))
+                    if (Gate.GetType() == typeof(NOTGate))
                     {
-                        NANDGate NewGate = new NANDGate();
-                        NewGate.SetTopInConnection(Gate.GetTopInConnection().GetTopInConnection());
-                        NewGate.SetBotInConnection(Gate.GetTopInConnection().GetBotInConnection());
-                        foreach (KeyValuePair<LogicGates,int> Output in NewGate.GetTopInConnection().GetOutConnections())
+                        if (Gate.GetTopInConnection().GetType() == typeof(ANDGate))
                         {
-                            if (Output.Key.GetTopInConnection() == null)
-                                Output.Key.SetTopInConnection(NewGate);
-                            if (Output.Key.GetBotInConnection() == null)
-                                Output.Key.SetBotInConnection(NewGate);
+                            NANDGate NewGate = new NANDGate();
+                            NewGate.SetTopInConnection(Gate.GetTopInConnection().GetTopInConnection());
+                            NewGate.SetBotInConnection(Gate.GetTopInConnection().GetBotInConnection());
+                            Dictionary<LogicGates, int> GateConnections = Gate.GetTopInConnection().GetOutConnections();
+                            Dictionary<LogicGates, int> NotConnections = Gate.GetOutConnections();
+                            foreach (KeyValuePair<LogicGates, int> Output in GateConnections)
+                            {
+                                if (!(Output.Key == Gate))
+                                    NotConnections.Add(Output.Key, Output.Value);
+                            }
+                            NewGate.SetOutConnections(NotConnections);
+                            NewGate.SetLocation((Gate.Location.X + Gate.GetTopInConnection().Location.X) / 2, (Gate.Location.Y + Gate.GetTopInConnection().Location.Y) / 2);
+                            Gate.GetTopInConnection().DeleteGate();
+                            Gate.DeleteGate();
                         }
-                        NewGate.SetOutConnections(Gate.GetOutConnections());
-                        NewGate.SetLocation(Gate.Location.X, Gate.Location.Y);
-                        Gate.GetTopInConnection().DeleteGate();
-                        Gate.DeleteGate();
-                    }
-                    else if (Gate.GetTopInConnection().GetType() == typeof(ORGate))
-                    {
-                        NORGate NewGate = new NORGate();
-                        NewGate.SetTopInConnection(Gate.GetTopInConnection().GetTopInConnection());
-                        NewGate.SetBotInConnection(Gate.GetTopInConnection().GetBotInConnection());
-                        Dictionary<LogicGates, int> GateConnections = Gate.GetTopInConnection().GetOutConnections();
-                        Dictionary<LogicGates, int> NotConnections = Gate.GetOutConnections();
-                        foreach (KeyValuePair<LogicGates, int> Output in GateConnections)
+                        else if (Gate.GetTopInConnection().GetType() == typeof(ORGate))
                         {
-                            if (!(Output.Key == Gate))
-                                NotConnections.Add(Output.Key, Output.Value);
+                            NORGate NewGate = new NORGate();
+                            NewGate.SetTopInConnection(Gate.GetTopInConnection().GetTopInConnection());
+                            NewGate.SetBotInConnection(Gate.GetTopInConnection().GetBotInConnection());
+                            Dictionary<LogicGates, int> GateConnections = Gate.GetTopInConnection().GetOutConnections();
+                            Dictionary<LogicGates, int> NotConnections = Gate.GetOutConnections();
+                            foreach (KeyValuePair<LogicGates, int> Output in GateConnections)
+                            {
+                                if (!(Output.Key == Gate))
+                                    NotConnections.Add(Output.Key, Output.Value);
+                            }
+                            NewGate.SetOutConnections(NotConnections);
+                            NewGate.SetLocation((Gate.Location.X + Gate.GetTopInConnection().Location.X) / 2, (Gate.Location.Y + Gate.GetTopInConnection().Location.Y) / 2);
+                            Gate.GetTopInConnection().DeleteGate();
+                            Gate.DeleteGate();
                         }
-                        NewGate.SetOutConnections(NotConnections);
-                        NewGate.SetLocation((Gate.Location.X + Gate.GetTopInConnection().Location.X)/2, (Gate.Location.Y + Gate.GetTopInConnection().Location.Y) / 2);
-                        Gate.GetTopInConnection().DeleteGate();
-                        Gate.DeleteGate();
                     }
                 }
             }
