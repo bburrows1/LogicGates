@@ -509,6 +509,9 @@ namespace LogicGateProject
                     }
                 }
                 SetGateLocations();
+                AddExpression.Text = "INPUT BOOLEAN EXPRESSION E.G. A.(B + C)' (USE % FOR XOR)";
+                AddExpression.ForeColor = Color.Gray;
+                DesignerPanel.Focus();
             }
             else
                 MessageBox.Show("Invalid Input\nPlease use the form A.(B + C)' (Use % for XOR)", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);

@@ -16,7 +16,6 @@ namespace LogicGateProject
         public Menu1()
         {
             InitializeComponent();
-            PublicVariables.Menu1 = this;
         }
 
         //Quit
@@ -33,9 +32,9 @@ namespace LogicGateProject
         private void GCSEButton_Click(object sender, EventArgs e)
         {
             Level = 1;
-            PublicVariables.Simulator.AdjustLevel(PublicVariables.Menu1.GetLevel());
-            Hide();
-            PublicVariables.Menu2.Location = Location;
+            PublicVariables.Menu1 = this;
+            this.Hide();
+            PublicVariables.Menu2.Location = this.Location;
             PublicVariables.Menu2.Show();
         }
 
@@ -43,9 +42,9 @@ namespace LogicGateProject
         private void AlevelButton_Click(object sender, EventArgs e)
         {
             Level = 2;
-            PublicVariables.Simulator.AdjustLevel(PublicVariables.Menu1.GetLevel());
-            Hide();
-            PublicVariables.Menu2.Location = Location;
+            PublicVariables.Menu1 = this;
+            this.Hide();
+            PublicVariables.Menu2.Location = this.Location;
             PublicVariables.Menu2.Show();
         }
 
@@ -53,8 +52,8 @@ namespace LogicGateProject
         private void FurtherButton_Click(object sender, EventArgs e)
         {
             Level = 3;
-            PublicVariables.Simulator.AdjustLevel(PublicVariables.Menu1.GetLevel());
-            Hide();
+            PublicVariables.Menu1 = this;
+            this.Hide();
             PublicVariables.Simulator.AdjustLevel(Level);
             PublicVariables.Simulator.Show();
         }
@@ -66,7 +65,7 @@ namespace LogicGateProject
             {
                 PublicVariables.ReleaseCapture();
                 PublicVariables.SendMessage(Handle, PublicVariables.WM_NCLBUTTONDOWN, PublicVariables.HT_CAPTION, 0);
-                PublicVariables.Menu2.Location = Location;
+                PublicVariables.Menu2.Location = this.Location;
             }
         }
 
