@@ -167,15 +167,13 @@ namespace LogicGateProject
                         {
                             if (Check)
                                 Correct = false;
-                            else
-                                DataGridView.Rows[i].Cells[x + Inputs.Count].Style.BackColor = Color.Red;
+                            DataGridView.Rows[i].Cells[x + Inputs.Count].Style.BackColor = Color.Red;
                         }
                         else if (DataGridView.Rows[i].Cells[x + Inputs.Count].Style.BackColor == Color.Red && Outputs[x].GetResult())
                         {
                             if (Check)
                                 Correct = false;
-                            else
-                                DataGridView.Rows[i].Cells[x + Inputs.Count].Style.BackColor = Color.Green;
+                            DataGridView.Rows[i].Cells[x + Inputs.Count].Style.BackColor = Color.Green;
                         }
                     }
                 }

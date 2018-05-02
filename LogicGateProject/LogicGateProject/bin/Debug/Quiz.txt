@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 1:LogicGateProject.Input 2:LogicGateProject.Input 3:LogicGateProject.Input 5:LogicGateProject.ORGate 8:LogicGateProject.ORGate 9:LogicGateProject.Output 10:LogicGateProject.NANDGate 
 1,0 157,null,null,0
 2,0 360,null,null,0
@@ -6,3 +7,13 @@
 8,600 400,5,null
 9,730 400,8,null
 10,300 200,1,2
+=======
+1:LogicGateProject.Input 2:LogicGateProject.Input 3:LogicGateProject.Input 4:LogicGateProject.ANDGate 5:LogicGateProject.ANDGate 6:LogicGateProject.Output 7:LogicGateProject.Output 
+1,0 157,null,null,0
+2,0 360,null,null,0
+3,0 563,null,null,0
+4,200 200,1,2
+5,200 400,2,3
+6,330 200,4,null
+7,330 400,5,null
+>>>>>>> master
